@@ -14,6 +14,6 @@ Desarrollar una aplicación de gestión para un gimnasio de CrossFit que facilit
 - [ ] Diseñar la base de datos y la arquitectura del sistema.
 - [ ] Implementar la aplicación utilizando tecnologías modernas (por ejemplo, Kotlin con Android Studio, Spring Boot, Firebase, Worker de Cloudflare o framework web).
 - [ ] Realizar pruebas funcionales y de usabilidad.
-•    Evaluar la mejora de eficiencia frente al sistema manual actual.
-•    Mejorar la experiencia de Usuario e interfaz de la aplicación.
+- [ ] Evaluar la mejora de eficiencia frente al sistema manual actual.
+- [ ] Mejorar la experiencia de Usuario e interfaz de la aplicación.
 
