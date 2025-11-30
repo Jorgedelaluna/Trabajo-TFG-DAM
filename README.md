@@ -1,12 +1,15 @@
-Proyecto TFG - DAM
+# Proyecto TFG - DAM
 
 
-<h1>Titulo<h1>
+## Titulo del Proyecto
+
+CrossFit Manager App
+
+### Descripción del proyecto<h2>
 
 
-<h2>Descripción del proyecto<h2>
+### Objetivos
 
-
-<h2>Objetivos<h2>
+- [ ] xx
 
 
