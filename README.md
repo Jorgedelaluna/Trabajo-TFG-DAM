@@ -10,10 +10,24 @@ Desarrollar una aplicación de gestión para un gimnasio de CrossFit que facilit
 
 ### Objetivos
 
-- [ ] Analizar los requisitos funcionales y técnicos necesarios para la gestión de un gimnasio de CrossFit.
-- [ ] Diseñar la base de datos y la arquitectura del sistema.
-- [ ] Implementar la aplicación utilizando tecnologías modernas.
+- [x] Analizar los requisitos funcionales y técnicos necesarios para la gestión de un gimnasio de CrossFit.
+- [x] Diseñar la base de datos y la arquitectura del sistema.
+- [x] Implementar la aplicación utilizando tecnologías modernas.
 - [ ] Realizar pruebas funcionales y de usabilidad.
 - [ ] Evaluar la mejora de eficiencia frente al sistema manual actual.
 - [ ] Mejorar la experiencia de Usuario e interfaz de la aplicación.
+
+### Desarrollo de Entidades para el Back End y la Base de datos
+
+- Usuarios.
+- Clases.
+- Coaches.
+- Wods.
+- Ejercicios.
+- Wod_ejercicios.
+- Resultados.
+- Pr_resultados.
+- Inscripciones.
+- Pagos.
+
 
