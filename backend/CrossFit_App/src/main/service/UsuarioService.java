@@ -27,37 +27,37 @@ public class UsuarioService {
         this.usuarioMapper = usuarioMapper;
     }
 
-    // Registro de usuario
+    // <-- Registro de usuario -->
     public Usuario registrarUsuario(UsuarioRegistroDTO dto) {
 
-        // Convertir DTO → entidad
+        // <-- Convertir DTO → entidad -->
         Usuario usuario = usuarioMapper.toEntity(dto);
 
-        // Encriptar contraseña
+        // <-- Encriptar contraseña -->
         usuario.setPasswordHash(passwordEncoder.encode(dto.getPassword()));
 
-        // Estado de cuota por defecto
+        // <-- Estado de cuota por defecto -->
         usuario.setEstadoCuota(EstadoCuota.PENDIENTE);
 
         return usuarioRepository.save(usuario);
     }
 
-    // Validar contraseña
+    // <-- Validar contraseña -->
     public boolean validarPassword(String rawPassword, String encodedPassword) {
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 
-    // Buscar por email
+    // <-- Buscar por email -->
     public Optional<Usuario> buscarPorEmail(String email) {
         return usuarioRepository.findByEmail(email);
     }
 
-    // Listar todos
+    // <-- Listar todos -->
     public List<Usuario> listarUsuarios() {
         return usuarioRepository.findAll();
     }
 
-    // Actualizar estado de cuota
+    // <-- Actualizar estado de cuota -->
     public Usuario actualizarEstadoCuota(Long id, EstadoCuota estado) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
@@ -66,7 +66,7 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    // Buscar por ID (muy útil para otros servicios)
+    // <-- Buscar por ID (muy útil para otros servicios) -->
     public Usuario buscarPorId(Long id) {
         return usuarioRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));

@@ -7,15 +7,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "clases")
-public class Clase implements Serializable {
+@Table(name = "wods")
+public class Wod implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,25 +28,19 @@ public class Clase implements Serializable {
 
     private String descripcion;
 
-    @Column(name = "fecha_hora", nullable = false)
-    private LocalDateTime fechaHora;
-
-    @Column(name = "aforo_maximo", nullable = false)
-    private Integer aforoMaximo;
+    @Column(nullable = false)
+    private LocalDate fecha;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "clase", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Inscripcion> inscripciones;
+    @OneToMany(mappedBy = "wod", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<WodEjercicio> ejercicios;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "wod", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Resultado> resultados;
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "coach_id")
     private Coach coach;
-
-    @PrePersist
-    public void prePersist() {
-        if (fechaHora == null) {
-            fechaHora = LocalDateTime.now();
-        }
-    }
 }

@@ -1,5 +1,6 @@
 package com.tfg.crossfit.mapper;
 
+import com.tfg.crossfit.config.CentralConfig;
 import com.tfg.crossfit.dto.UsuarioRegistroDTO;
 import com.tfg.crossfit.dto.UsuarioRespuestaDTO;
 import com.tfg.crossfit.model.Usuario;
