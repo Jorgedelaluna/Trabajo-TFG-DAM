@@ -1,0 +1,54 @@
+/* HERO */
+.hero-section {
+  background: url("https://images.unsplash.com/photo-1517964105217-8b2e0b0b0f63?auto=format&fit=crop&w=1400&q=80")
+    center/cover no-repeat;
+  height: 30vh;
+  position: relative;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* ANIMACIONES */
+.fade-in {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.fade-in-up {
+  animation: fadeInUp 1.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px) }
+  to { opacity: 1; transform: translateY(0) }
+}
+
+/* CARDS */
+.hover-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* CARRUSEL */
+.carousel-img {
+  max-height: 450px;
+  object-fit: cover;
+}

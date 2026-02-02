@@ -1,0 +1,8 @@
+SET FOREIGN_KEY_CHECKS = 0;
+DELETE FROM estadisticas;
+DELETE FROM pagos;
+DELETE FROM inscripciones;
+DELETE FROM clases;
+DELETE FROM coaches;
+DELETE FROM usuarios;
+SET FOREIGN_KEY_CHECKS = 1;
