@@ -1,0 +1,77 @@
+package com.tfg.crossfit.mapper;
+
+import com.tfg.crossfit.dto.ResultadoDTO;
+import com.tfg.crossfit.model.Resultado;
+import com.tfg.crossfit.model.Usuario;
+import com.tfg.crossfit.model.Wod;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2026-02-02T00:19:39+0100",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
+)
+@Component
+public class ResultadoMapperImpl implements ResultadoMapper {
+
+    @Override
+    public ResultadoDTO toDTO(Resultado entity) {
+        if ( entity == null ) {
+            return null;
+        }
+
+        ResultadoDTO resultadoDTO = new ResultadoDTO();
+
+        resultadoDTO.setUsuarioId( entityUsuarioId( entity ) );
+        resultadoDTO.setWodId( entityWodId( entity ) );
+        resultadoDTO.setId( entity.getId() );
+
+        return resultadoDTO;
+    }
+
+    @Override
+    public Resultado toEntity(ResultadoDTO dto) {
+        if ( dto == null ) {
+            return null;
+        }
+
+        Resultado resultado = new Resultado();
+
+        resultado.setUsuario( mapUsuario( dto.getUsuarioId() ) );
+        resultado.setWod( mapWod( dto.getWodId() ) );
+        resultado.setId( dto.getId() );
+
+        return resultado;
+    }
+
+    private Long entityUsuarioId(Resultado resultado) {
+        if ( resultado == null ) {
+            return null;
+        }
+        Usuario usuario = resultado.getUsuario();
+        if ( usuario == null ) {
+            return null;
+        }
+        Long id = usuario.getId();
+        if ( id == null ) {
+            return null;
+        }
+        return id;
+    }
+
+    private Long entityWodId(Resultado resultado) {
+        if ( resultado == null ) {
+            return null;
+        }
+        Wod wod = resultado.getWod();
+        if ( wod == null ) {
+            return null;
+        }
+        Long id = wod.getId();
+        if ( id == null ) {
+            return null;
+        }
+        return id;
+    }
+}
