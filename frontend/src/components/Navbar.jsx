@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../authTemp/AuthContext";
 
 function Navbar() {
-  const { token, rol, logout } = useAuth();
+  const { token, usuario, logout } = useAuth();
+  const rol = usuario?.rol; // Extrae el rol del usuario logueado
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">

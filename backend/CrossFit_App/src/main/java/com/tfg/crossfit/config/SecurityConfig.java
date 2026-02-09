@@ -32,6 +32,7 @@ public class SecurityConfig {
                     corsConfig.setAllowedOrigins(List.of("http://localhost:3000")); // tu frontend
                     corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     corsConfig.setAllowedHeaders(List.of("*"));
+                    corsConfig.setExposedHeaders(List.of("*"));
                     corsConfig.setAllowCredentials(true);
                     return corsConfig;
                 }))

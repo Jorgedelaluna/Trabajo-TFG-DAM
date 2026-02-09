@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/Home.css";
+import "../../css/Home.css";
 
 function Home() {
   return (
@@ -12,7 +12,7 @@ function Home() {
           <p className="lead mt-3">
             Gestiona tu box, tus atletas y tus clases con la energía del CrossFit.
           </p>
-          <a href="/auth" className="btn btn-primary btn-lg mt-3 shadow">
+          <a href="/login" className="btn btn-primary btn-lg mt-3 shadow">
             Comienza ahora ⚡
           </a>
         </div>
@@ -24,7 +24,7 @@ function Home() {
 
           <div className="carousel-item active">
             <img
-              src="https://images.unsplash.com/photo-1517964105217-8b2e0b0b0f63?auto=format&fit=crop&w=1400&q=80"
+              src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fa1%2F94%2Fe8%2Fa194e8ba5223ba2ce8df100dd477831f.jpg&f=1&nofb=1&ipt=6c2a5e71cd80e8106a69be3a26b163046a96c5acb14a0abe096b480390becda7"
               className="d-block w-100"
               alt="CrossFit"
             />
@@ -32,7 +32,7 @@ function Home() {
 
           <div className="carousel-item">
             <img
-              src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1400&q=80"
+              src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperset.com%2Fw%2Ffull%2F0%2Ff%2Ff%2F52689.jpg&f=1&nofb=1&ipt=89a6c40caa1a4e1fc2dc28ca80a3a3cbc408d8c378a2cfe2310fd332ce0bc823"
               className="d-block w-100"
               alt="Entrenamiento"
             />
@@ -40,7 +40,7 @@ function Home() {
 
           <div className="carousel-item">
             <img
-              src="https://images.unsplash.com/photo-1518611012118-f0c5d1f0b4f8?auto=format&fit=crop&w=1400&q=80"
+              src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flookaside.fbsbx.com%2Flookaside%2Fcrawler%2Fmedia%2F%3Fmedia_id%3D488972699896865&f=1&nofb=1&ipt=5abb25599b2cfd68967627eacde042cc6027d6f772212696fece72d940cedfbc"
               className="d-block w-100"
               alt="Box"
             />
@@ -105,6 +105,7 @@ function Home() {
       </div>
 
       {/* CTA FINAL */}
+
       <section className="text-center py-5 bg-light mt-5 fade-in-up">
         <h2 className="fw-bold">Entrena. Mejora. Supera tus límites.🚀</h2>
         <p className="mt-3">
@@ -113,7 +114,7 @@ function Home() {
         <p className="mt-3">
           Únete a la comunidad CrossFit y lleva tu rendimiento al siguiente nivel.
         </p>
-        <a href="/auth" className="btn btn-success btn-lg mt-2">
+        <a href="/registro" className="btn btn-primary btn-lg mt-2">
           Crear cuenta 💚
         </a>
       </section>
