@@ -31,25 +31,25 @@ export default function LoginPage() {
       const data = await response.json();
       localStorage.setItem("token", data.token);
       setSuccess("Login correcto. Token guardado.");
-
     } catch (err) {
       setError("Error de conexión con el servidor");
     }
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
-      <div className="card shadow p-4" style={{ width: "100%", maxWidth: "400px" }}>
-        
-        <h3 className="text-center mb-4">Iniciar sesión</h3>
+    <section className="auth-section d-flex justify-content-center align-items-center">
+      <div className="card auth-card shadow p-4">
+
+        <h3 className="text-center mb-4 fw-bold">Iniciar sesión</h3>
 
         <form onSubmit={handleSubmit}>
+
           <div className="mb-3">
-            <label className="form-label">Correo electrónico</label>
+            <label className="form-label fw-semibold">Correo electrónico</label>
             <input
               type="email"
               name="email"
-              className="form-control"
+              className="form-control form-control-lg"
               placeholder="tuemail@ejemplo.com"
               value={form.email}
               onChange={handleChange}
@@ -58,11 +58,11 @@ export default function LoginPage() {
           </div>
 
           <div className="mb-3">
-            <label className="form-label">Contraseña</label>
+            <label className="form-label fw-semibold">Contraseña</label>
             <input
               type="password"
               name="password"
-              className="form-control"
+              className="form-control form-control-lg"
               placeholder="••••••••"
               value={form.password}
               onChange={handleChange}
@@ -70,7 +70,7 @@ export default function LoginPage() {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary w-100">
+          <button type="submit" className="btn btn-primary btn-lg w-100 mt-2">
             Entrar
           </button>
         </form>
@@ -80,11 +80,12 @@ export default function LoginPage() {
 
         <p className="text-center mt-3">
           ¿No tienes cuenta?
-          <Link to="/registro" className="text-primary fw-bold ms-1">
+          <Link to="/registro" className="fw-bold ms-1 text-primary">
             Regístrate
           </Link>
         </p>
+
       </div>
-    </div>
+    </section>
   );
 }

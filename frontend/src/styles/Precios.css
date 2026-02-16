@@ -1,0 +1,57 @@
+
+/* =========================================
+   PRECIOS PAGE
+========================================= */
+.precios-section {
+  padding-top: 120px;
+  padding-bottom: 80px;
+  color: white;
+}
+
+.precios-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+  padding: 40px 30px;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  transition: 0.3s ease;
+}
+
+.precios-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--brand-yellow);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+.precios-icon {
+  font-size: 60px;
+  width: 100px;
+  height: 100px;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.precios-container {
+  border: 2px solid var(--brand-yellow);
+  transform: scale(1.05);
+}
+
+.precio-popular {
+  background: var(--white);
+  color: black;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+}

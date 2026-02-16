@@ -1,0 +1,40 @@
+
+/* =========================================
+   CLASES PAGE
+   ========================================= */
+.clases-section {
+  padding-top: 120px;
+  padding-bottom: 80px;
+  color: white;
+}
+
+/* TARJETAS */
+.clases-card {
+  border-radius: 12px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.clases-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+.clases-card img {
+  height: 220px;
+  object-fit: cover;
+}
+
+/* TABLA */
+.clases-table th {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.clases-table td {
+  vertical-align: middle;
+  font-size: 1.05rem;
+}
+
