@@ -6,7 +6,7 @@ export default function PreciosPage() {
     <section className="precios-section d-flex align-items-center">
       <div className="container">
 
-        <h1 className="fw-bold text-center mb-3 text-light">Bonos y Créditos</h1>
+        <h1 className="fw-bold text-center mb-3 text-light">Planes y Precios</h1>
         <p className="text-center text-light opacity-75 mb-5">
           Elige el plan que mejor se adapte a tu ritmo y objetivos.
         </p>

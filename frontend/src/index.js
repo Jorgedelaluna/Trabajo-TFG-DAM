@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import "./css/Index.css";
+import "./styles/Home.css";
 import App from "./App";
 import { AuthProvider } from "./authTemp/AuthContext";
 import reportWebVitals from "./reportWebVitals";

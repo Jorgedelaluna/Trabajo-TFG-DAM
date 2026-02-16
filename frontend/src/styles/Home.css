@@ -6,7 +6,7 @@
   position: relative;
   height: 100vh;
   padding-top: 0;
-  background: linear-gradient(to bottom, var(--brand-black), var(--grey-dark));
+  background: transparent;
 }
 
 .hero-section::before {
@@ -74,7 +74,6 @@
   box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
-
 /* =========================================
    FINAL CTA SECTION
 ========================================= */
@@ -105,7 +104,6 @@
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.15);
-
   box-shadow: 0 10px 40px rgba(0,0,0,0.4);
 }
 
