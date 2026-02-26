@@ -1,38 +1,44 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../authTemp/AuthContext";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    setSuccess("");
 
     try {
-      const response = await fetch("http://localhost:8080/usuarios/login", {
+      const res = await fetch("http://localhost:8080/usuarios/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form)
       });
 
-      if (!response.ok) {
-        const msg = await response.text();
-        setError(msg || "Error en el login");
+      if (!res.ok) {
+        // No mostramos mensajes sensibles del backend
+        setError("Credenciales incorrectas");
         return;
       }
 
-      const data = await response.json();
-      localStorage.setItem("token", data.token);
-      setSuccess("Login correcto. Token guardado.");
+      const data = await res.json();
+
+      // Guardamos token y usuario en el contexto
+      login(data.token, data.usuario);
+
+      // Redirigimos al dashboard
+      navigate("/dashboard");
     } catch (err) {
-      setError("Error de conexión con el servidor");
+      setError("No se pudo conectar con el servidor");
     }
   };
 
@@ -43,7 +49,6 @@ export default function LoginPage() {
         <h3 className="text-center mb-4 fw-bold">Iniciar sesión</h3>
 
         <form onSubmit={handleSubmit}>
-
           <div className="mb-3">
             <label className="form-label fw-semibold">Correo electrónico</label>
             <input
@@ -76,7 +81,6 @@ export default function LoginPage() {
         </form>
 
         {error && <div className="alert alert-danger mt-3">{error}</div>}
-        {success && <div className="alert alert-success mt-3">{success}</div>}
 
         <p className="text-center mt-3">
           ¿No tienes cuenta?

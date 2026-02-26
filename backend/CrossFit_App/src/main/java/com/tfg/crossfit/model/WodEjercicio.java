@@ -12,7 +12,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "wod_ejercicios")
+@Table(name = "wod_ejercicio")
 public class WodEjercicio implements Serializable {
 
     private static final long serialVersionUID = 1L;

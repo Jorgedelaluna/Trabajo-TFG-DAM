@@ -22,7 +22,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "estadisticas")
+@Table(name = "estadistica")
 public class Estadistica implements Serializable {
 
     @Id
@@ -30,8 +30,7 @@ public class Estadistica implements Serializable {
     @Column(name = "id_estadistica")
     private Long id;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 

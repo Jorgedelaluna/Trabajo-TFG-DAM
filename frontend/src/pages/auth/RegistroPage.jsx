@@ -1,13 +1,22 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../authTemp/AuthContext";
 
 export default function RegistroPage() {
-  const [form, setForm] = useState({ nombre: "", email: "", password: "" });
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
+  const [form, setForm] = useState({
+    nombre: "",
+    email: "",
+    password: ""
+  });
+
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
@@ -16,22 +25,30 @@ export default function RegistroPage() {
     setSuccess("");
 
     try {
-      const response = await fetch("http://localhost:8080/usuarios/registro", {
+      const res = await fetch("http://localhost:8080/usuarios/registro", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form)
       });
 
-      if (!response.ok) {
-        const msg = await response.text();
-        setError(msg || "Error en el registro");
+      if (!res.ok) {
+        // No mostramos mensajes sensibles del backend
+        setError("No se pudo completar el registro");
         return;
       }
 
-      setSuccess("Usuario registrado correctamente. Ahora puedes iniciar sesión.");
+      const data = await res.json();
+
+      // Si quieres login automático:
+      // login(data.token, data.usuario);
+
+      setSuccess("Registro completado. Redirigiendo…");
+
+      // Redirigir al login tras un pequeño delay
+      setTimeout(() => navigate("/login"), 1200);
 
     } catch (err) {
-      setError("Error de conexión con el servidor");
+      setError("No se pudo conectar con el servidor");
     }
   };
 
@@ -39,11 +56,11 @@ export default function RegistroPage() {
     <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
       <div className="card shadow p-4" style={{ width: "100%", maxWidth: "400px" }}>
         
-        <h3 className="text-center mb-4">Registrarse</h3>
+        <h3 className="text-center mb-4 fw-bold">Registrarse</h3>
 
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label className="form-label">Nombre</label>
+            <label className="form-label fw-semibold">Nombre</label>
             <input
               type="text"
               name="nombre"
@@ -56,7 +73,7 @@ export default function RegistroPage() {
           </div>
 
           <div className="mb-3">
-            <label className="form-label">Correo electrónico</label>
+            <label className="form-label fw-semibold">Correo electrónico</label>
             <input
               type="email"
               name="email"
@@ -69,7 +86,7 @@ export default function RegistroPage() {
           </div>
 
           <div className="mb-3">
-            <label className="form-label">Contraseña</label>
+            <label className="form-label fw-semibold">Contraseña</label>
             <input
               type="password"
               name="password"

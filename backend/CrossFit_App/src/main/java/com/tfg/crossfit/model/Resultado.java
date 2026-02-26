@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "resultados")
+@Table(name = "resultado")
 public class Resultado implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,11 +32,20 @@ public class Resultado implements Serializable {
     @JoinColumn(name = "wod_id", nullable = false)
     private Wod wod;
 
-    @Column(nullable = false)
+    @Column(name = "tipo", nullable = false)
     private String tipoResultado; // tiempo, reps, rounds, peso
 
     @Column(nullable = false)
     private Double valor; // segundos, kg, reps, etc.
+
+    @Column(name = "tiempo_final")
+    private Double tiempoFinal; // tiempo total en segundos (For Time)
+
+    @Column(name = "rondas")
+    private Integer rondas; // rondas completadas (AMRAP)
+
+    @Column(name = "peso_usado")
+    private Double pesoUsado; // peso utilizado
 
     @Column(name = "fecha_registro", nullable = false)
     private LocalDateTime fechaRegistro;

@@ -32,7 +32,9 @@ export default function App() {
 
       <Routes>
 
-        {/* RUTAS PÚBLICAS */}
+        {/* ============================
+            RUTAS PÚBLICAS
+        ============================ */}
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/clases" element={<ClasesPage />} />
@@ -42,20 +44,79 @@ export default function App() {
           <Route path="/registro" element={<RegistroPage />} />
         </Route>
 
-        {/* RUTAS PRIVADAS */}
-        <Route element={<PrivateLayout />}>
-          <Route path="/usuarios" element={ <ProtectedRoute roles={["ADMIN"]}> <UsuarioListaPage /> </ProtectedRoute>} />
-          <Route path="/usuarios/:id" element={ <ProtectedRoute roles={["ADMIN"]}> <UsuarioDetallePage /> </ProtectedRoute>} />
-          <Route path="/clases-admin" element={ <ProtectedRoute roles={["ADMIN", "COACH"]}> <ClaseListaPage /> </ProtectedRoute>} />
-          <Route path="/clases-admin/:id" element={ <ProtectedRoute roles={["ADMIN", "COACH"]}> <ClaseDetallePage /> </ProtectedRoute>} />
-          <Route path="/reservas" element={ <ProtectedRoute roles={["USER", "COACH", "ADMIN"]}> <ReservaListaPage /> </ProtectedRoute>} />
-          <Route path="/perfil" element={ <ProtectedRoute roles={["USER", "COACH", "ADMIN"]}><PerfilPage /></ProtectedRoute>}/>
+        {/* ============================
+            RUTAS PRIVADAS (todas requieren login)
+        ============================ */}
+        <Route
+          element={
+            <ProtectedRoute roles={["ADMIN", "COACH", "USER"]}>
+              <PrivateLayout />
+            </ProtectedRoute>
+          }
+        >
+
+          {/* ADMIN */}
+          <Route
+            path="/usuarios"
+            element={
+              <ProtectedRoute roles={["ADMIN"]}>
+                <UsuarioListaPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/usuarios/:id"
+            element={
+              <ProtectedRoute roles={["ADMIN"]}>
+                <UsuarioDetallePage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* ADMIN + COACH */}
+          <Route
+            path="/clases-admin"
+            element={
+              <ProtectedRoute roles={["ADMIN", "COACH"]}>
+                <ClaseListaPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/clases-admin/:id"
+            element={
+              <ProtectedRoute roles={["ADMIN", "COACH"]}>
+                <ClaseDetallePage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* USER + COACH + ADMIN */}
+          <Route
+            path="/reservas"
+            element={
+              <ProtectedRoute roles={["USER", "COACH", "ADMIN"]}>
+                <ReservaListaPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/perfil"
+            element={
+              <ProtectedRoute roles={["USER", "COACH", "ADMIN"]}>
+                <PerfilPage />
+              </ProtectedRoute>
+            }
+          />
+
         </Route>
 
       </Routes>
 
-        {/* FOOTER ÚNICO (si quieres que esté siempre) */}
-        <Footer />
+      <Footer />
 
     </BrowserRouter>
   );

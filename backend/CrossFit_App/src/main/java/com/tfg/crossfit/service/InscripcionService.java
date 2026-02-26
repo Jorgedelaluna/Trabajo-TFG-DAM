@@ -12,35 +12,41 @@ import java.util.List;
 public class InscripcionService {
 
     private final InscripcionRepository inscripcionRepository;
+    private final EstadisticaService estadisticaService;
 
-    public InscripcionService(InscripcionRepository inscripcionRepository) {
+    public InscripcionService(InscripcionRepository inscripcionRepository,
+                              EstadisticaService estadisticaService) {
         this.inscripcionRepository = inscripcionRepository;
+        this.estadisticaService = estadisticaService;
     }
 
     public Inscripcion inscribir(Usuario usuario, Clase clase) {
 
-        // 1. Evitar doble inscripción
+        // -- 1. Evitar doble inscripción
         if (inscripcionRepository.existsByUsuarioAndClase(usuario, clase)) {
             throw new IllegalStateException("El usuario ya está inscrito en esta clase");
         }
 
-        // 2. Validar aforo
+        // -- 2. Validar aforo
         long inscritos = inscripcionRepository.countByClase(clase);
         if (inscritos >= clase.getAforoMaximo()) {
             throw new IllegalStateException("La clase está completa");
         }
 
-        // 3. Validar fecha de la clase
+        // -- 3. Validar fecha de la clase
         if (clase.getFechaHora().isBefore(LocalDateTime.now())) {
             throw new IllegalStateException("No se puede inscribir en una clase pasada");
         }
 
-        // 4. Crear inscripción
+        // -- 4. Crear inscripción
         Inscripcion inscripcion = new Inscripcion();
         inscripcion.setUsuario(usuario);
         inscripcion.setClase(clase);
         inscripcion.setEstado(EstadoInscripcion.INSCRITO);
         inscripcion.setFechaInscripcion(LocalDateTime.now());
+
+        // -- 5. Actualizar estadísticas
+        estadisticaService.incrementarReservas(usuario);
 
         return inscripcionRepository.save(inscripcion);
     }
@@ -54,6 +60,10 @@ public class InscripcionService {
         }
 
         inscripcion.setEstado(EstadoInscripcion.CANCELADO);
+
+        // -- Actualizar estadísticas
+        estadisticaService.incrementarCancelaciones(inscripcion.getUsuario());
+
         return inscripcionRepository.save(inscripcion);
     }
 

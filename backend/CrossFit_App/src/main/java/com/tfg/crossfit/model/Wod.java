@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "wods")
+@Table(name = "wod")
 public class Wod implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,6 +31,9 @@ public class Wod implements Serializable {
     @Column(nullable = false)
     private LocalDate fecha;
 
+    @Column(nullable = false)
+    private String tipo; // AMRAP, EMOM, For Time, etc.
+
     @JsonIgnore
     @OneToMany(mappedBy = "wod", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<WodEjercicio> ejercicios;
@@ -39,8 +42,7 @@ public class Wod implements Serializable {
     @OneToMany(mappedBy = "wod", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Resultado> resultados;
 
-    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "coach_id")
+    @JoinColumn(name = "coach_id", nullable = false)
     private Coach coach;
 }

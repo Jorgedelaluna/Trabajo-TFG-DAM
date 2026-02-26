@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "clases")
+@Table(name = "clase")
 public class Clase implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,9 +38,8 @@ public class Clase implements Serializable {
     @OneToMany(mappedBy = "clase", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Inscripcion> inscripciones;
 
-    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "coach_id")
+    @JoinColumn(name = "coach_id", nullable = false)
     private Coach coach;
 
     @PrePersist

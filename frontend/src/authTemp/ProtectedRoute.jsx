@@ -1,19 +1,27 @@
-import { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { AuthContext, useAuth } from "./AuthContext";
+import { useAuth } from "../authTemp/AuthContext";
 
 export default function ProtectedRoute({ children, roles }) {
   const { token, usuario } = useAuth();
-  const rol = usuario?.rol;
 
-  // Si no hay token, fuera
+  // Si no hay token, no puede entrar
   if (!token) {
     return <Navigate to="/login" replace />;
   }
 
-  // Si se han definido roles permitidos y el rol del usuario no está entre ellos
-  if (roles && usuario && !roles.includes(rol)) {
-    return <Navigate to="/" replace />;
+  // Si hay token pero todavía no se ha cargado el usuario, no renderizamos nada
+  // Evita parpadeos o accesos incorrectos
+  if (token && !usuario) {
+    return null;
+  }
+
+  // Comprobación de roles (si se han definido)
+  if (roles && Array.isArray(roles)) {
+    const rolUsuario = usuario?.rol;
+
+    if (!roles.includes(rolUsuario)) {
+      return <Navigate to="/" replace />;
+    }
   }
 
   return children;

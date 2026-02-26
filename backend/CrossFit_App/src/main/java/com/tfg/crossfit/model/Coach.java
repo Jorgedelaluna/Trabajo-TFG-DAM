@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "coaches")
+@Table(name = "coach")
 public class Coach implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,6 +24,10 @@ public class Coach implements Serializable {
 
     @Column(nullable = false)
     private String nombre;
+
+    private String email;
+
+    private String telefono;
 
     private String descripcion;
 

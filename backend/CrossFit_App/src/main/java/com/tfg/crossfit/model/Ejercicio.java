@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ejercicios")
+@Table(name = "ejercicio")
 public class Ejercicio implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,6 +27,7 @@ public class Ejercicio implements Serializable {
 
     private String descripcion;
 
+    @Column(name = "tipo")
     private String tipo; // fuerza, gimnástico, cardio, etc.
 
     @JsonIgnore
