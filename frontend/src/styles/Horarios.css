@@ -1,0 +1,59 @@
+
+/* =========================================
+   HORARIOS PAGE
+   ========================================= */
+.horarios-section {
+  padding-top: 120px;
+  padding-bottom: 80px;
+  color: white;
+}
+
+/* TARJETAS */
+.horarios-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.horarios-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+
+/* ICONO */
+.horarios-icon {
+  font-size: 32px;
+  width: 80px; height: 80px;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  margin: 0 auto 20px auto;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* DÍA */
+.horarios-day {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--brand-yellow);
+}
+
+/* HORA */
+.horarios-time {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--brand-yellow);
+}
+
+/* LISTA */
+.horarios-list li {
+  margin-bottom: 6px;
+  font-size: 1.05rem;
+  color: white;
+}

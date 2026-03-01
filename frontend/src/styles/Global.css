@@ -1,0 +1,95 @@
+
+/* =========================================
+   PALETA DE COLORES
+========================================= */
+:root {
+  --brand-black: #0A0A0A;
+  --brand-yellow: #F2C200;
+  --brand-blue: #0D6EFD;
+
+  --grey-dark: #1A1A1A;
+  --grey-medium: #2E2E2E;
+  --grey-light: #F0F0F0;
+
+  --white: #FFFFFF;
+  --white-soft: #F8F8F8;
+  --yellow-soft: #FFD84D;
+}
+
+/* =========================================
+   FONDO GLOBAL CON TU LOGO
+========================================= */
+body {
+  background:
+    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+    url("/public/logo_crossfit_manager_app.png") center/45% no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: #000;
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+.navbar-section {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.85);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  z-index: 10;
+}
+
+/* =========================================
+   ANIMACIONES
+========================================= */
+.fade-in {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.fade-in-up {
+  animation: fadeInUp 1.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px) }
+  to { opacity: 1; transform: translateY(0) }
+}
+
+/* =========================================
+   SIDEBAR
+========================================= */
+.sidebar .nav-link {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.sidebar .nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+
+/* =========================================
+   LOGIN Y REGISTRATION PAGE
+========================================= */
+.auth-section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent; /* deja ver el fondo global */
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.08); /* glass */
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}

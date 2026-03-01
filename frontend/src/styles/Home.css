@@ -1,0 +1,127 @@
+
+/* =========================================
+   HERO SECTION
+========================================= */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  padding-top: 0;
+  background: transparent;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 3;
+}
+
+/* =========================================
+   CARRUSEL SECTION
+========================================= */
+.carousel-section {
+  height: 80vh;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.carousel-img {
+  max-height: 850px;
+  object-fit: cover;
+}
+
+/* =========================================
+   INFO SECTION
+========================================= */
+.info-section {
+  padding: 100px 0;
+  background: linear-gradient(135deg, var(--grey-dark), var(--brand-black));
+  color: var(--white);
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 40px 30px;
+  backdrop-filter: blur(6px);
+  transition: 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.info-icon {
+  font-size: 60px;
+  width: 100px;
+  height: 100px;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* =========================================
+   FINAL CTA SECTION
+========================================= */
+.final-section {
+  padding: 120px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent; /* deja ver tu fondo global */
+}
+
+.final-section h2 {
+  font-size: 2rem;
+}
+
+.final-section p {
+  font-size: 1.1rem;
+}
+
+
+.final-cta-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 50px 40px;
+  border-radius: 20px;
+
+  /* efecto glass elegante */
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+.final-cta-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.final-cta-title.highlight {
+  color: var(--brand-yellow);
+}
+
+.final-cta-text {
+  font-size: 1.2rem;
+  color: #ddd;
+  margin-top: 20px;
+  line-height: 1.6;
+}
