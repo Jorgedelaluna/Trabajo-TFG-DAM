@@ -1,3 +1,5 @@
+// pages/auth/LoginPage.jsx
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../authTemp/AuthContext";
@@ -31,9 +33,11 @@ export default function LoginPage() {
       }
 
       const data = await res.json();
+      console.log("DATA LOGIN:", data);
 
       // Guardamos token y usuario en el contexto
       login(data.token, data.usuario);
+      console.log("TOKEN GUARDADO:", data.token);
 
       // Redirigimos al dashboard
       navigate("/dashboard");

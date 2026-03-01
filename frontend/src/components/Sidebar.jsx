@@ -1,3 +1,12 @@
+/**
+ * ============================================
+ *  SIDEBAR PRIVADO
+ *  - Navegación lateral para usuarios logueados
+ *  - Muestra opciones según el rol del usuario
+ *  - Coherente con las rutas definidas en App.jsx
+ * ============================================
+ */
+
 import { Link } from "react-router-dom";
 import { useAuth } from "../authTemp/AuthContext";
 
@@ -21,72 +30,73 @@ export default function Sidebar() {
 
       <ul className="nav flex-column">
 
-        {/* Dashboard según rol */}
-        {rol === "ADMIN" && (
-          <li className="nav-item mb-2">
-            <Link className="nav-link text-light" to="/dashboard-admin">
-              Dashboard Admin
-            </Link>
-          </li>
-        )}
+        {/* ============================================
+            OPCIONES COMUNES (todos los roles)
+            - Se reutilizan algunos enlaces aunque estén en el NavBar
+            para mejorar la usabilidad dentro del panel
+        ============================================ */}
 
-        {rol === "COACH" && (
-          <li className="nav-item mb-2">
-            <Link className="nav-link text-light" to="/dashboard-coach">
-              Dashboard Coach
-            </Link>
-          </li>
-        )}
-
-        {rol === "USER" && (
-          <li className="nav-item mb-2">
-            <Link className="nav-link text-light" to="/dashboard-user">
-              Mi Panel
-            </Link>
-          </li>
-        )}
-
-        <hr className="text-secondary" />
-
-        {/* Opciones según rol */}
-        {rol === "ADMIN" && (
-          <>
-            <li className="nav-item mb-2">
-              <Link className="nav-link text-light" to="/usuarios">
-                Usuarios
-              </Link>
-            </li>
-
-            <li className="nav-item mb-2">
-              <Link className="nav-link text-light" to="/clases">
-                Clases
-              </Link>
-            </li>
-          </>
-        )}
-
-        {rol === "COACH" && (
-          <li className="nav-item mb-2">
-            <Link className="nav-link text-light" to="/clases">
-              Mis clases
-            </Link>
-          </li>
-        )}
-
-        {/* Opciones comunes */}
         <li className="nav-item mb-2">
-          <Link className="nav-link text-light" to="/reservas">
-            Reservas
+          <Link className="nav-link text-light" to="/dashboard">
+            Dashboard
           </Link>
         </li>
 
         <li className="nav-item mb-2">
           <Link className="nav-link text-light" to="/perfil">
-            Mi perfil
+            Mi Perfil
           </Link>
         </li>
+
+        <li className="nav-item mb-2">
+          <Link className="nav-link text-light" to="/clases">
+            Clases
+          </Link>
+        </li>
+
+        <li className="nav-item mb-2">
+          <Link className="nav-link text-light" to="/mis-reservas">
+            Mis Reservas
+          </Link>
+        </li>
+
+        {/* ============================================
+            ADMINISTRACIÓN (solo ADMIN)
+        ============================================ */}
+        {rol === "ADMIN" && (
+          <>
+            <li className="nav-item mb-2">
+              <Link className="nav-link text-light" to="/usuarios">
+                Gestión de Usuarios
+              </Link>
+            </li>
+
+            <li className="nav-item mb-2">
+              <Link className="nav-link text-light" to="/clases-admin">
+                Gestión de Clases
+              </Link>
+            </li>
+          </>
+        )}
+
+        <hr className="text-secondary" />
+
+        {/* ============================================
+            COACH (solo COACH)
+        ============================================ */}
+        {rol === "COACH" && (
+          <li className="nav-item mb-2">
+            <Link className="nav-link text-light" to="/clases-admin">
+              Mis Clases
+            </Link>
+          </li>
+        )}
+
       </ul>
 
+        {/* ============================================
+            BOTÓN CERRAR SESIÓN
+        ============================================ */}
       <button
         className="btn btn-outline-light w-100 mt-4"
         onClick={logout}

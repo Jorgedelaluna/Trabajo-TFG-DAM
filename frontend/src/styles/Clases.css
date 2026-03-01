@@ -1,33 +1,40 @@
-
-/* =========================================
-   CLASES PAGE
-   ========================================= */
+/* ======================================================
+   CLASES PAGE — Estilos principales
+   Sección pública que muestra tarjetas informativas
+   y una tabla comparativa de tipos de clases.
+====================================================== */
 .clases-section {
-  padding-top: 120px;
+  padding-top: 120px;   /* deja espacio para la navbar fija */
   padding-bottom: 80px;
   color: white;
 }
 
-/* TARJETAS */
+/* ======================================================
+   TARJETAS DE CLASES
+   - Diseño con bordes redondeados
+   - Hover con elevación suave
+====================================================== */
 .clases-card {
   border-radius: 12px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .clases-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.28);
 }
 
+/* Imagen superior de cada tarjeta */
 .clases-card img {
-  height: 220px;
-  object-fit: cover;
+  height: 220px;          /* altura uniforme */
+  object-fit: cover;      /* evita deformaciones */
+  width: 100%;
 }
 
-/* TABLA */
+/* ======================================================
+   TABLA DE TIPOS DE CLASES
+====================================================== */
 .clases-table th {
   font-weight: 700;
   text-transform: uppercase;
@@ -37,4 +44,3 @@
   vertical-align: middle;
   font-size: 1.05rem;
 }
-

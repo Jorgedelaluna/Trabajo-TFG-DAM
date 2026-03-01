@@ -32,12 +32,29 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        // <-- Permitir preflight CORS para peticiones OPTIONS sin token -->
-        if (request.getMethod().equalsIgnoreCase("OPTIONS")) {
-            response.setStatus(HttpServletResponse.SC_OK);
+        System.out.println("PATH = " + request.getServletPath());
+
+        // 1. Deja pasar siempre las OPTIONS (preflight CORS)
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            filterChain.doFilter(request, response);
             return;
         }
 
+        // 2. Obtener la ruta real de la petición
+        String path = request.getServletPath();
+
+        // 3. Rutas públicas que no requieren JWT
+        List<String> publicEndpoints = List.of(
+                "/usuarios/registro",
+                "/usuarios/login"
+        );
+
+        if (path.startsWith("/usuarios/login") || path.startsWith("/usuarios/registro")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        // 4. Resto del filtro (JWT)
         String header = request.getHeader("Authorization");
 
         if (header != null && header.startsWith("Bearer ")) {
@@ -55,13 +72,13 @@ public class JwtFilter extends OncePerRequestFilter {
                         var usuario = usuarioOpt.get();
 
                         // Convertir rol a autoridad de Spring
-                        List<SimpleGrantedAuthority> authorities =
-                                List.of(new SimpleGrantedAuthority("ROLE_" + usuario.getRol().name()));
+                        var authorities = List.of(
+                                new SimpleGrantedAuthority("ROLE_" + usuario.getRol().name())
+                        );
 
-                        UsernamePasswordAuthenticationToken auth =
-                                new UsernamePasswordAuthenticationToken(
-                                        usuario, null, authorities
-                                );
+                        var auth = new UsernamePasswordAuthenticationToken(
+                                usuario, null, authorities
+                        );
 
                         auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 

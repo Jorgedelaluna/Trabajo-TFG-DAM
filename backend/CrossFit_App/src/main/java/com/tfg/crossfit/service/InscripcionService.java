@@ -2,6 +2,8 @@ package com.tfg.crossfit.service;
 
 import com.tfg.crossfit.model.*;
 import com.tfg.crossfit.repository.InscripcionRepository;
+import com.tfg.crossfit.repository.UsuarioRepository;
+import com.tfg.crossfit.repository.ClaseRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +14,17 @@ import java.util.List;
 public class InscripcionService {
 
     private final InscripcionRepository inscripcionRepository;
+    private final UsuarioRepository usuarioRepository;
+    private final ClaseRepository claseRepository;
     private final EstadisticaService estadisticaService;
 
     public InscripcionService(InscripcionRepository inscripcionRepository,
+                              UsuarioRepository usuarioRepository,
+                              ClaseRepository claseRepository,
                               EstadisticaService estadisticaService) {
         this.inscripcionRepository = inscripcionRepository;
+        this.usuarioRepository = usuarioRepository;
+        this.claseRepository = claseRepository;
         this.estadisticaService = estadisticaService;
     }
 
@@ -51,6 +59,17 @@ public class InscripcionService {
         return inscripcionRepository.save(inscripcion);
     }
 
+    public Inscripcion inscribirPorIds(Long usuarioId, Long claseId) {
+
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
+
+        Clase clase = claseRepository.findById(claseId)
+                .orElseThrow(() -> new EntityNotFoundException("Clase no encontrada"));
+
+        return inscribir(usuario, clase);
+    }
+
     public Inscripcion cancelarInscripcion(Long id) {
         Inscripcion inscripcion = inscripcionRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Inscripción no encontrada"));
@@ -74,4 +93,5 @@ public class InscripcionService {
     public List<Inscripcion> listarPorClase(Clase clase) {
         return inscripcionRepository.findByClase(clase);
     }
+
 }

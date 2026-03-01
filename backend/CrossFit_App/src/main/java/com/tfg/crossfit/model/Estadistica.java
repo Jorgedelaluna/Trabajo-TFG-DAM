@@ -27,7 +27,7 @@ public class Estadistica implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_estadistica")
+    @Column(name = "id")
     private Long id;
 
     @OneToOne

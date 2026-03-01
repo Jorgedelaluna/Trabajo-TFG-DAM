@@ -1,7 +1,8 @@
-
-/* =========================================
+/* ======================================================
    HERO SECTION
-========================================= */
+   - Sección principal con imagen de fondo y overlay
+   - El overlay se combina con el del componente Hero.jsx
+====================================================== */
 .hero-section {
   position: relative;
   height: 100vh;
@@ -9,6 +10,7 @@
   background: transparent;
 }
 
+/* Capa oscura adicional para mejorar contraste del texto */
 .hero-section::before {
   content: "";
   position: absolute;
@@ -22,23 +24,25 @@
   z-index: 3;
 }
 
-/* =========================================
-   CARRUSEL SECTION
-========================================= */
+/* ======================================================
+   CAROUSEL SECTION
+   - Carrusel de imágenes de la página principal
+====================================================== */
 .carousel-section {
-  height: 80vh;
+  height: 80vh; /* altura controlada para mantener proporción */
   padding: 0 !important;
   margin: 0 !important;
 }
 
 .carousel-img {
   max-height: 850px;
-  object-fit: cover;
+  object-fit: cover; /* evita deformaciones */
 }
 
-/* =========================================
+/* ======================================================
    INFO SECTION
-========================================= */
+   - Tarjetas informativas con efecto glass
+====================================================== */
 .info-section {
   padding: 100px 0;
   background: linear-gradient(135deg, var(--grey-dark), var(--brand-black));
@@ -51,14 +55,15 @@
   border-radius: 16px;
   padding: 40px 30px;
   backdrop-filter: blur(6px);
-  transition: 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .info-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.28);
 }
 
+/* Icono circular de cada tarjeta */
 .info-icon {
   font-size: 60px;
   width: 100px;
@@ -74,15 +79,16 @@
   box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
-/* =========================================
+/* ======================================================
    FINAL CTA SECTION
-========================================= */
+   - Llamada a la acción final con glassmorphism
+====================================================== */
 .final-section {
   padding: 120px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: transparent; /* deja ver tu fondo global */
+  background: transparent; /* deja ver el fondo global */
 }
 
 .final-section h2 {
@@ -93,7 +99,7 @@
   font-size: 1.1rem;
 }
 
-
+/* Contenedor principal del CTA */
 .final-cta-container {
   max-width: 700px;
   margin: 0 auto;

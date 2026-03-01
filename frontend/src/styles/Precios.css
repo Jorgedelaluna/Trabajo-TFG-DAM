@@ -1,29 +1,38 @@
-
-/* =========================================
-   PRECIOS PAGE
-========================================= */
+/* ======================================================
+   PRECIOS PAGE — Estilos principales
+   Sección pública con tarjetas de planes y CTA
+====================================================== */
 .precios-section {
-  padding-top: 120px;
+  padding-top: 120px;   /* espacio para navbar fija */
   padding-bottom: 80px;
   color: white;
 }
 
+/* ======================================================
+   TARJETAS DE PLANES
+   - Glassmorphism
+   - Hover suave
+====================================================== */
 .precios-card {
+  position: relative; /* necesario para .precio-popular */
   background: rgba(255, 255, 255, 0.06);
   border: 2px solid rgba(255, 255, 255, 0.15);
   border-radius: 18px;
   padding: 40px 30px;
   text-align: center;
   backdrop-filter: blur(6px);
-  transition: 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .precios-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-6px);
   border-color: var(--brand-yellow);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
 }
 
+/* ======================================================
+   ICONO CIRCULAR DE CADA PLAN
+====================================================== */
 .precios-icon {
   font-size: 60px;
   width: 100px;
@@ -39,11 +48,9 @@
   box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
-.precios-container {
-  border: 2px solid var(--brand-yellow);
-  transform: scale(1.05);
-}
-
+/* ======================================================
+   ETIQUETA “MÁS POPULAR”
+====================================================== */
 .precio-popular {
   background: var(--white);
   color: black;
@@ -54,4 +61,13 @@
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* ======================================================
+   ESTILO ESPECIAL PARA EL PLAN DESTACADO
+====================================================== */
+.precios-card.popular {
+  border-color: var(--brand-yellow);
+  transform: scale(1.03);
 }

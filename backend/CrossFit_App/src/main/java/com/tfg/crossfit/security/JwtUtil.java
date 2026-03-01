@@ -2,6 +2,7 @@ package com.tfg.crossfit.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,12 @@ public class JwtUtil {
 
     @Value("${jwt.secret}")
     private String secret;
+
+    @PostConstruct
+    public void debugSecret() {
+        System.out.println(">>> JWT SECRET CARGADO: " + secret);
+    }
+
 
     @Value("${jwt.expiration}")
     private long expirationMs;

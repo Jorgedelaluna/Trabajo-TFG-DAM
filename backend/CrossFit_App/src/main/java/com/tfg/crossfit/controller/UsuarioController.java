@@ -12,6 +12,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 import java.util.Map;
@@ -60,6 +62,26 @@ public class UsuarioController {
                 "token", token,
                 "usuario", usuarioMapper.toDTO(usuario)
         ));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UsuarioRespuestaDTO> getPerfilUsuario() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth == null || auth.getPrincipal().equals("anonymousUser")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        // El email viene del token validado por Spring Security
+        String email = auth.getName();
+
+        var usuarioOpt = usuarioService.buscarPorEmail(email);
+
+        if (usuarioOpt.isEmpty()) { return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        Usuario usuario = usuarioOpt.get();
+        return ResponseEntity.ok(usuarioMapper.toDTO(usuario));
     }
 
     // Listar usuarios

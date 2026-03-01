@@ -1,0 +1,89 @@
+/* =========================================
+   DASHBOARD WRAPPER
+========================================= */
+.dashboard-container {
+  padding: 90px 30px 40px;
+  color: var(--white);
+}
+
+.dashboard-container h1,
+.dashboard-container h2,
+.dashboard-container h3,
+.dashboard-container h5,
+.dashboard-container p,
+.dashboard-container span {
+    color: white;
+}
+
+.nombre-usuario {
+    color: white;
+    font-weight: 600;
+    font-size: 1.8rem;
+}
+
+.estado-cuota {
+    color: #f1c40f !important;
+    font-weight: bold;
+}
+
+/* =========================================
+   TARJETA DE PERFIL
+========================================= */
+.profile-card {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--brand-yellow);
+  object-fit: cover;
+}
+
+/* =========================================
+   TARJETAS DEL DASHBOARD
+========================================= */
+.dashboard-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  backdrop-filter: blur(6px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+}
+
+/* =========================================
+   HEADER DE TARJETA
+========================================= */
+.dashboard-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.dashboard-icon {
+  font-size: 1.6rem;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 80px 15px;
+  }
+}

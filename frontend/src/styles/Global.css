@@ -1,6 +1,5 @@
-
 /* =========================================
-   PALETA DE COLORES
+   PALETA DE COLORES (Branding del proyecto)
 ========================================= */
 :root {
   --brand-black: #0A0A0A;
@@ -17,19 +16,21 @@
 }
 
 /* =========================================
-   FONDO GLOBAL CON TU LOGO
+   FONDO GLOBAL (con logo suavizado)
+   - Imagen en /public
+   - Evita saturación visual
 ========================================= */
 body {
   background:
-    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
-    url("/public/logo_crossfit_manager_app.png") center/45% no-repeat;
-  background-size: cover;
+    linear-gradient(rgba(0,0,0,0.80), rgba(0,0,0,0.80)),
+    url("../assets/logo_crossfit_manager_app.png") center/cover no-repeat;
   background-attachment: fixed;
   background-color: #000;
+  color: var(--white);
 }
 
 /* =========================================
-   NAVBAR
+   NAVBAR FIJA
 ========================================= */
 .navbar-section {
   position: fixed;
@@ -62,7 +63,7 @@ body {
 }
 
 /* =========================================
-   SIDEBAR
+   SIDEBAR (añadir className="sidebar" en JSX)
 ========================================= */
 .sidebar .nav-link {
   padding: 10px;
@@ -73,23 +74,23 @@ body {
   background: rgba(255, 255, 255, 0.1);
 }
 
-
 /* =========================================
-   LOGIN Y REGISTRATION PAGE
+   LOGIN / REGISTER (Glassmorphism)
 ========================================= */
 .auth-section {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: transparent; /* deja ver el fondo global */
+  background: transparent;
 }
 
 .auth-card {
   width: 100%;
   max-width: 420px;
-  background: rgba(255, 255, 255, 0.08); /* glass */
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(8px);
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
+

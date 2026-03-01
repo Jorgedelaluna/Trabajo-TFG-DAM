@@ -19,4 +19,9 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion, Long> 
     List<Inscripcion> findByClase(Clase clase);
 
     long countByClase(Clase clase);
+
+    // Métodos para trabajar con IDs
+    boolean existsByUsuarioIdAndClaseId(Long usuarioId, Long claseId);
+
+    long countByClaseId(Long claseId);
 }
