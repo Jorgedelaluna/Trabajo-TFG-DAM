@@ -1,10 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import API_URL from "../api/api";
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-
-  // Estado inicial leyendo localStorage
   const [token, setToken] = useState(() => localStorage.getItem("token"));
   const [usuario, setUsuario] = useState(() => {
     const savedUser = localStorage.getItem("usuario");
@@ -13,9 +12,7 @@ export function AuthProvider({ children }) {
 
   const [loading, setLoading] = useState(true);
 
-  // Validar token y cargar usuario actual
   useEffect(() => {
-
     if (!token) {
       setLoading(false);
       return;
@@ -23,25 +20,23 @@ export function AuthProvider({ children }) {
 
     console.log("TOKEN ENVIADO A /me:", token);
 
-
     const cargarUsuario = async () => {
       try {
-        const res = await fetch("http://localhost:8080/usuarios/me", {
+        const res = await fetch(`${API_URL}/usuarios/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
         if (!res.ok) {
-        console.warn("Token no vÃ¡lido o aÃºn no cargado. No hacemos logout automÃ¡tico.");
-        setLoading(false);
-        return;
+          console.warn("Token no válido o aún no cargado. No hacemos logout automático.");
+          setLoading(false);
+          return;
         }
 
         const data = await res.json();
         setUsuario(data);
         localStorage.setItem("usuario", JSON.stringify(data));
-
       } catch (error) {
         logout();
       } finally {
@@ -50,10 +45,8 @@ export function AuthProvider({ children }) {
     };
 
     cargarUsuario();
-
   }, [token]);
 
-  // Login
   const login = (tokenRecibido, usuarioRecibido) => {
     setToken(tokenRecibido);
     setUsuario(usuarioRecibido);
@@ -62,7 +55,6 @@ export function AuthProvider({ children }) {
     localStorage.setItem("usuario", JSON.stringify(usuarioRecibido));
   };
 
-  // Logout
   const logout = () => {
     setToken(null);
     setUsuario(null);
@@ -78,6 +70,7 @@ export function AuthProvider({ children }) {
       value={{
         token,
         usuario,
+        setUsuario,
         login,
         logout,
         isAuthenticated,
