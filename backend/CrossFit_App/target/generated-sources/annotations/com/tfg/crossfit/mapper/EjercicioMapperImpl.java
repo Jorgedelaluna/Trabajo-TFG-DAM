@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-02-28T13:45:25+0100",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
+    date = "2026-03-24T22:23:07+0100",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
 public class EjercicioMapperImpl implements EjercicioMapper {
@@ -21,9 +21,9 @@ public class EjercicioMapperImpl implements EjercicioMapper {
 
         EjercicioDTO ejercicioDTO = new EjercicioDTO();
 
+        ejercicioDTO.setDescripcion( ejercicio.getDescripcion() );
         ejercicioDTO.setId( ejercicio.getId() );
         ejercicioDTO.setNombre( ejercicio.getNombre() );
-        ejercicioDTO.setDescripcion( ejercicio.getDescripcion() );
         ejercicioDTO.setTipo( ejercicio.getTipo() );
 
         return ejercicioDTO;
@@ -37,9 +37,9 @@ public class EjercicioMapperImpl implements EjercicioMapper {
 
         Ejercicio ejercicio = new Ejercicio();
 
+        ejercicio.setDescripcion( dto.getDescripcion() );
         ejercicio.setId( dto.getId() );
         ejercicio.setNombre( dto.getNombre() );
-        ejercicio.setDescripcion( dto.getDescripcion() );
         ejercicio.setTipo( dto.getTipo() );
 
         return ejercicio;

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-02-28T13:45:26+0100",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
+    date = "2026-03-24T22:23:07+0100",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
 public class ClaseMapperImpl implements ClaseMapper {
@@ -21,11 +21,11 @@ public class ClaseMapperImpl implements ClaseMapper {
 
         Clase clase = new Clase();
 
-        clase.setId( dto.getId() );
-        clase.setNombre( dto.getNombre() );
+        clase.setAforoMaximo( dto.getAforoMaximo() );
         clase.setDescripcion( dto.getDescripcion() );
         clase.setFechaHora( dto.getFechaHora() );
-        clase.setAforoMaximo( dto.getAforoMaximo() );
+        clase.setId( dto.getId() );
+        clase.setNombre( dto.getNombre() );
 
         return clase;
     }
@@ -38,11 +38,11 @@ public class ClaseMapperImpl implements ClaseMapper {
 
         ClaseDTO claseDTO = new ClaseDTO();
 
-        claseDTO.setId( entity.getId() );
-        claseDTO.setNombre( entity.getNombre() );
+        claseDTO.setAforoMaximo( entity.getAforoMaximo() );
         claseDTO.setDescripcion( entity.getDescripcion() );
         claseDTO.setFechaHora( entity.getFechaHora() );
-        claseDTO.setAforoMaximo( entity.getAforoMaximo() );
+        claseDTO.setId( entity.getId() );
+        claseDTO.setNombre( entity.getNombre() );
 
         return claseDTO;
     }

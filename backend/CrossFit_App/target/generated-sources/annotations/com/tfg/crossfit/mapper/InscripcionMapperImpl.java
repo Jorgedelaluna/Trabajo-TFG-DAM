@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-02-28T13:45:25+0100",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
+    date = "2026-03-24T22:23:07+0100",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
 public class InscripcionMapperImpl implements InscripcionMapper {
@@ -25,9 +25,9 @@ public class InscripcionMapperImpl implements InscripcionMapper {
 
         inscripcionDTO.setUsuarioId( entityUsuarioId( entity ) );
         inscripcionDTO.setClaseId( entityClaseId( entity ) );
-        inscripcionDTO.setId( entity.getId() );
         inscripcionDTO.setEstado( entity.getEstado() );
         inscripcionDTO.setFechaInscripcion( entity.getFechaInscripcion() );
+        inscripcionDTO.setId( entity.getId() );
 
         return inscripcionDTO;
     }
@@ -42,9 +42,9 @@ public class InscripcionMapperImpl implements InscripcionMapper {
 
         inscripcion.setUsuario( inscripcionDTOToUsuario( dto ) );
         inscripcion.setClase( inscripcionDTOToClase( dto ) );
-        inscripcion.setId( dto.getId() );
-        inscripcion.setFechaInscripcion( dto.getFechaInscripcion() );
         inscripcion.setEstado( dto.getEstado() );
+        inscripcion.setFechaInscripcion( dto.getFechaInscripcion() );
+        inscripcion.setId( dto.getId() );
 
         return inscripcion;
     }
