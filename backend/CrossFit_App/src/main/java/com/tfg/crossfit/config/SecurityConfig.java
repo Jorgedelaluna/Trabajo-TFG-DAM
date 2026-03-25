@@ -29,7 +29,7 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration corsConfig = new CorsConfiguration();
-                    corsConfig.setAllowedOrigins(List.of("http://localhost:8080", "http://localhost:3000")); // tu frontend
+                    corsConfig.setAllowedOrigins(List.of("http://localhost:8080", "http://localhost:3000",  "https://crossfit-frontend.onrender.com")); // tu frontend
                     corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     corsConfig.setAllowedHeaders(List.of("*"));
                     corsConfig.setExposedHeaders(List.of("*"));
