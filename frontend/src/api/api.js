@@ -7,6 +7,8 @@
 // ======================================================
 const API_URL =
     process.env.REACT_APP_API_URL || "http://localhost:8080";
+
+export default API_URL;
 // ======================================================
 // Obtiene los headers comunes para todas las peticiones.
 // Si existe un token en localStorage, lo añade.
