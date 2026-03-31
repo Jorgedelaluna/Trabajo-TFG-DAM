@@ -11,7 +11,7 @@ import "../../styles/Dashboard.css";
 
 import { useAuth } from "../../auth/AuthContext";
 import { useState } from "react";
-import API_URL from "../api/api";
+import API_URL from "../../api/api";
 import axios from "axios";
 
 export default function PerfilPage() {

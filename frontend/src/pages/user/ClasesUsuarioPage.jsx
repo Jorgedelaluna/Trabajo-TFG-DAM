@@ -18,7 +18,7 @@ import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import "../../styles/ClasesUsuario.css";
 import { FaClock } from "react-icons/fa";
-import API_URL from "../api/api";
+import API_URL from "../../api/api";
 
 export default function ClasesUsuarioPage() {
 
