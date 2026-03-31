@@ -19,7 +19,7 @@
 import { useEffect, useState } from "react";
 import { apiGet } from "../../api/api";
 import "../../styles/Reservas.css";
-import ReservaCard from "./ReservaCard";
+import ReservaCard from "./reservas/ReservaCard";
 import { useAuth } from "../../auth/AuthContext";
 
 export default function MisReservasPage() {
