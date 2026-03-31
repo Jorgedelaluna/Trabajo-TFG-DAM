@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-28T09:35:50+0100",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
+    date = "2026-03-24T22:23:07+0100",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
 public class PrUsuarioMapperImpl implements PrUsuarioMapper {
@@ -25,9 +25,9 @@ public class PrUsuarioMapperImpl implements PrUsuarioMapper {
 
         prUsuarioDTO.setUsuarioId( entityUsuarioId( entity ) );
         prUsuarioDTO.setEjercicioId( entityEjercicioId( entity ) );
+        prUsuarioDTO.setFecha( entity.getFecha() );
         prUsuarioDTO.setId( entity.getId() );
         prUsuarioDTO.setValor( entity.getValor() );
-        prUsuarioDTO.setFecha( entity.getFecha() );
 
         return prUsuarioDTO;
     }
@@ -42,9 +42,9 @@ public class PrUsuarioMapperImpl implements PrUsuarioMapper {
 
         prUsuario.setUsuario( mapUsuario( dto.getUsuarioId() ) );
         prUsuario.setEjercicio( mapEjercicio( dto.getEjercicioId() ) );
+        prUsuario.setFecha( dto.getFecha() );
         prUsuario.setId( dto.getId() );
         prUsuario.setValor( dto.getValor() );
-        prUsuario.setFecha( dto.getFecha() );
 
         return prUsuario;
     }

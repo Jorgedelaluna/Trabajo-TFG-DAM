@@ -1,19 +1,16 @@
 package com.tfg.crossfit.mapper;
 
 import com.tfg.crossfit.dto.InscripcionDTO;
-import com.tfg.crossfit.model.Actividad;
 import com.tfg.crossfit.model.Clase;
-import com.tfg.crossfit.model.Coach;
 import com.tfg.crossfit.model.Inscripcion;
 import com.tfg.crossfit.model.Usuario;
-import java.time.LocalDateTime;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-28T09:35:50+0100",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
+    date = "2026-03-24T22:23:07+0100",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
 public class InscripcionMapperImpl implements InscripcionMapper {
@@ -28,12 +25,9 @@ public class InscripcionMapperImpl implements InscripcionMapper {
 
         inscripcionDTO.setUsuarioId( entityUsuarioId( entity ) );
         inscripcionDTO.setClaseId( entityClaseId( entity ) );
-        inscripcionDTO.setClaseNombre( entityClaseActividadNombre( entity ) );
-        inscripcionDTO.setCoachNombre( entityClaseCoachNombre( entity ) );
-        inscripcionDTO.setFechaHora( entityClaseFechaHora( entity ) );
-        inscripcionDTO.setId( entity.getId() );
         inscripcionDTO.setEstado( entity.getEstado() );
         inscripcionDTO.setFechaInscripcion( entity.getFechaInscripcion() );
+        inscripcionDTO.setId( entity.getId() );
 
         return inscripcionDTO;
     }
@@ -48,9 +42,9 @@ public class InscripcionMapperImpl implements InscripcionMapper {
 
         inscripcion.setUsuario( inscripcionDTOToUsuario( dto ) );
         inscripcion.setClase( inscripcionDTOToClase( dto ) );
-        inscripcion.setId( dto.getId() );
-        inscripcion.setFechaInscripcion( dto.getFechaInscripcion() );
         inscripcion.setEstado( dto.getEstado() );
+        inscripcion.setFechaInscripcion( dto.getFechaInscripcion() );
+        inscripcion.setId( dto.getId() );
 
         return inscripcion;
     }
@@ -83,59 +77,6 @@ public class InscripcionMapperImpl implements InscripcionMapper {
             return null;
         }
         return id;
-    }
-
-    private String entityClaseActividadNombre(Inscripcion inscripcion) {
-        if ( inscripcion == null ) {
-            return null;
-        }
-        Clase clase = inscripcion.getClase();
-        if ( clase == null ) {
-            return null;
-        }
-        Actividad actividad = clase.getActividad();
-        if ( actividad == null ) {
-            return null;
-        }
-        String nombre = actividad.getNombre();
-        if ( nombre == null ) {
-            return null;
-        }
-        return nombre;
-    }
-
-    private String entityClaseCoachNombre(Inscripcion inscripcion) {
-        if ( inscripcion == null ) {
-            return null;
-        }
-        Clase clase = inscripcion.getClase();
-        if ( clase == null ) {
-            return null;
-        }
-        Coach coach = clase.getCoach();
-        if ( coach == null ) {
-            return null;
-        }
-        String nombre = coach.getNombre();
-        if ( nombre == null ) {
-            return null;
-        }
-        return nombre;
-    }
-
-    private LocalDateTime entityClaseFechaHora(Inscripcion inscripcion) {
-        if ( inscripcion == null ) {
-            return null;
-        }
-        Clase clase = inscripcion.getClase();
-        if ( clase == null ) {
-            return null;
-        }
-        LocalDateTime fechaHora = clase.getFechaHora();
-        if ( fechaHora == null ) {
-            return null;
-        }
-        return fechaHora;
     }
 
     protected Usuario inscripcionDTOToUsuario(InscripcionDTO inscripcionDTO) {

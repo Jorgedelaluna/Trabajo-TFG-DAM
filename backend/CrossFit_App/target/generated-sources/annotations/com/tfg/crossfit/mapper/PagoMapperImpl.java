@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-28T09:35:50+0100",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
+    date = "2026-03-24T22:23:07+0100",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
 public class PagoMapperImpl implements PagoMapper {
@@ -24,9 +24,9 @@ public class PagoMapperImpl implements PagoMapper {
         Pago pago = new Pago();
 
         pago.setImporte( dto.getImporte() );
-        pago.setTipo( dto.getTipo() );
         pago.setMetodo( dto.getMetodo() );
         pago.setNotas( dto.getNotas() );
+        pago.setTipo( dto.getTipo() );
 
         return pago;
     }
@@ -40,12 +40,12 @@ public class PagoMapperImpl implements PagoMapper {
         PagoDTO pagoDTO = new PagoDTO();
 
         pagoDTO.setUsuarioId( pagoUsuarioId( pago ) );
+        pagoDTO.setFechaPago( pago.getFechaPago() );
         pagoDTO.setId( pago.getId() );
         pagoDTO.setImporte( pago.getImporte() );
-        pagoDTO.setTipo( pago.getTipo() );
         pagoDTO.setMetodo( pago.getMetodo() );
         pagoDTO.setNotas( pago.getNotas() );
-        pagoDTO.setFechaPago( pago.getFechaPago() );
+        pagoDTO.setTipo( pago.getTipo() );
 
         return pagoDTO;
     }

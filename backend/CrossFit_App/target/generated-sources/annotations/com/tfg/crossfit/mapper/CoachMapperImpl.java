@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-28T09:35:50+0100",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
+    date = "2026-03-24T22:23:07+0100",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
 public class CoachMapperImpl implements CoachMapper {
@@ -21,10 +21,10 @@ public class CoachMapperImpl implements CoachMapper {
 
         CoachDTO coachDTO = new CoachDTO();
 
+        coachDTO.setCertificaciones( coach.getCertificaciones() );
+        coachDTO.setDescripcion( coach.getDescripcion() );
         coachDTO.setId( coach.getId() );
         coachDTO.setNombre( coach.getNombre() );
-        coachDTO.setDescripcion( coach.getDescripcion() );
-        coachDTO.setCertificaciones( coach.getCertificaciones() );
 
         return coachDTO;
     }
@@ -37,10 +37,10 @@ public class CoachMapperImpl implements CoachMapper {
 
         Coach coach = new Coach();
 
+        coach.setCertificaciones( dto.getCertificaciones() );
+        coach.setDescripcion( dto.getDescripcion() );
         coach.setId( dto.getId() );
         coach.setNombre( dto.getNombre() );
-        coach.setDescripcion( dto.getDescripcion() );
-        coach.setCertificaciones( dto.getCertificaciones() );
 
         return coach;
     }
