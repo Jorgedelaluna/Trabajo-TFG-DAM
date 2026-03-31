@@ -9,7 +9,6 @@
 // URL base del backend real
 const API_URL =
     process.env.REACT_APP_API_URL || "http://localhost:8080"; 
-
 export default API_URL;
 // ======================================================
 // Genera los headers comunes para cualquier petición.
