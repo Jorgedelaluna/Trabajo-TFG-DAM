@@ -1,15 +1,16 @@
-// src/api/api.js
 // ======================================================
-// Módulo centralizado para realizar peticiones HTTP.
-// Usa fetch y añade automáticamente:
-// - Headers JSON
-// - Token de autenticación (si existe)
+// Archivo donde centralizamos todas las peticiones al backend.
+// La idea es no repetir código en cada componente y tener aquí:
+//   - La URL base del backend
+//   - Los headers comunes (JSON + token si existe)
+//   - El manejo de errores y respuestas
 // ======================================================
-const API_URL = "http://localhost:8080";
+const API_URL = "http://localhost:8080"; // URL base del backend real
 
 // ======================================================
-// Obtiene los headers comunes para todas las peticiones.
-// Si existe un token en localStorage, lo añade.
+// Genera los headers comunes para cualquier petición.
+// Si existe un token en localStorage, se añade automáticamente.
+// Esto asegura que todas las rutas protegidas reciban la cabecera correcta.
 // ======================================================
 function getAuthHeaders() {
   const token = localStorage.getItem("token");
@@ -18,6 +19,7 @@ function getAuthHeaders() {
     "Content-Type": "application/json"
   };
 
+  // Si el usuario está autenticado, se añade el token al header
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
@@ -26,8 +28,11 @@ function getAuthHeaders() {
 }
 
 // ======================================================
-// Manejo centralizado de respuestas.
-// Si la respuesta no es OK, lanza un error con el texto.
+// Manejo común de respuestas del backend.
+// - Si la respuesta no es correcta -> lanzamos un error con el mensaje.
+// - Si es 204 (sin contenido) → devuelvo null.
+// - Si todo va bien → devuelvo el JSON.
+// Esto me permite tener un único punto de control de errores.
 // ======================================================
 async function handleResponse(response) {
   if (!response.ok) {
@@ -35,15 +40,19 @@ async function handleResponse(response) {
     throw new Error(errorText || "Error en la petición");
   }
 
+  // Algunas peticiones (DELETE, PUT) pueden no devolver contenido
   if (response.status === 204) return null;
 
   return response.json();
 }
 
 // ======================================================
-// Métodos HTTP generícos
-// Si la respuesta no es OK, lanza un error con el texto.
+// Métodos HTTP genéricos.
+// Cada uno construye la petición usando fetch y los headers comunes.
+// Todos pasan por handleResponse() para unificar el manejo de errores.
 // ======================================================
+
+// GET: obtiene datos del backend
 export async function apiGet(endpoint) {
   const response = await fetch(`${API_URL}${endpoint}`, {
     headers: getAuthHeaders()
@@ -51,6 +60,7 @@ export async function apiGet(endpoint) {
   return handleResponse(response);
 }
 
+// POST: envía datos al backend
 export async function apiPost(endpoint, data) {
   const response = await fetch(`${API_URL}${endpoint}`, {
     method: "POST",
@@ -60,6 +70,7 @@ export async function apiPost(endpoint, data) {
   return handleResponse(response);
 }
 
+// PUT: actualiza un recurso existente
 export async function apiPut(endpoint, data) {
   const response = await fetch(`${API_URL}${endpoint}`, {
     method: "PUT",
@@ -69,6 +80,7 @@ export async function apiPut(endpoint, data) {
   return handleResponse(response);
 }
 
+// DELETE: elimnina un recurso
 export async function apiDelete(endpoint) {
   const response = await fetch(`${API_URL}${endpoint}`, {
     method: "DELETE",

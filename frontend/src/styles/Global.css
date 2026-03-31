@@ -1,5 +1,8 @@
 /* =========================================
-   PALETA DE COLORES (Branding del proyecto)
+  PALETA DE COLORES (Branding del proyecto)
+
+   - Define los colores principales de la identidad visual.
+   - Se usan variables CSS para mantener consistencia global.
 ========================================= */
 :root {
   --brand-black: #0A0A0A;
@@ -16,7 +19,7 @@
 }
 
 /* =========================================
-   FONDO GLOBAL (con logo suavizado)
+  FONDO GLOBAL (con logo suavizado)
    - Imagen en /public
    - Evita saturación visual
 ========================================= */
@@ -30,7 +33,11 @@ body {
 }
 
 /* =========================================
-   NAVBAR FIJA
+  NAVBAR FIJA
+
+   - Barra superior fija para navegación global.
+   - Fondo semitransparente con borde sutil.
+   - Se mantiene siempre visible.
 ========================================= */
 .navbar-section {
   position: fixed;
@@ -42,7 +49,11 @@ body {
 }
 
 /* =========================================
-   ANIMACIONES
+  ANIMACIONES
+   
+   - Animaciones suaves para mejorar la experiencia visual.
+   - fade-in: aparición progresiva.
+   - fade-in-up: aparición con desplazamiento vertical.
 ========================================= */
 .fade-in {
   animation: fadeIn 1.5s ease-in-out;
@@ -63,7 +74,10 @@ body {
 }
 
 /* =========================================
-   SIDEBAR (añadir className="sidebar" en JSX)
+   SIDEBAR (estructura base)
+
+   - Estilos comunes para sidebars de usuario, coach y admin.
+   - Se aplican cuando el contenedor usa className="sidebar".
 ========================================= */
 .sidebar .nav-link {
   padding: 10px;
@@ -76,6 +90,9 @@ body {
 
 /* =========================================
    LOGIN / REGISTER (Glassmorphism)
+
+   - Efecto glass para tarjetas de autenticación.
+   - Fondo semitransparente + blur para estética moderna.
 ========================================= */
 .auth-section {
   min-height: 100vh;

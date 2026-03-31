@@ -1,5 +1,7 @@
 package com.tfg.crossfit.service;
 
+import com.tfg.crossfit.dto.InscripcionDTO;
+import com.tfg.crossfit.mapper.InscripcionMapper;
 import com.tfg.crossfit.model.*;
 import com.tfg.crossfit.repository.InscripcionRepository;
 import com.tfg.crossfit.repository.UsuarioRepository;
@@ -17,21 +19,24 @@ public class InscripcionService {
     private final UsuarioRepository usuarioRepository;
     private final ClaseRepository claseRepository;
     private final EstadisticaService estadisticaService;
+    private final InscripcionMapper inscripcionMapper;
 
     public InscripcionService(InscripcionRepository inscripcionRepository,
                               UsuarioRepository usuarioRepository,
                               ClaseRepository claseRepository,
-                              EstadisticaService estadisticaService) {
+                              EstadisticaService estadisticaService,
+                              InscripcionMapper inscripcionMapper) {
         this.inscripcionRepository = inscripcionRepository;
         this.usuarioRepository = usuarioRepository;
         this.claseRepository = claseRepository;
         this.estadisticaService = estadisticaService;
+        this.inscripcionMapper = inscripcionMapper;
     }
 
     public Inscripcion inscribir(Usuario usuario, Clase clase) {
 
         // -- 1. Evitar doble inscripción
-        if (inscripcionRepository.existsByUsuarioAndClase(usuario, clase)) {
+        if (inscripcionRepository.existsByUsuarioAndClaseAndEstado(usuario, clase, EstadoInscripcion.INSCRITO)) {
             throw new IllegalStateException("El usuario ya está inscrito en esta clase");
         }
 
@@ -86,12 +91,18 @@ public class InscripcionService {
         return inscripcionRepository.save(inscripcion);
     }
 
-    public List<Inscripcion> listarPorUsuario(Usuario usuario) {
-        return inscripcionRepository.findByUsuario(usuario);
+    public List<InscripcionDTO> listarPorUsuario(Usuario usuario) {
+        return inscripcionRepository.findByUsuario(usuario)
+                .stream()
+                .map(inscripcionMapper::toDTO)
+                .toList();
     }
 
-    public List<Inscripcion> listarPorClase(Clase clase) {
-        return inscripcionRepository.findByClase(clase);
+    public List<InscripcionDTO> listarPorClase(Clase clase) {
+        return inscripcionRepository.findByClase(clase)
+                .stream()
+                .map(inscripcionMapper::toDTO)
+                .toList();
     }
 
 }

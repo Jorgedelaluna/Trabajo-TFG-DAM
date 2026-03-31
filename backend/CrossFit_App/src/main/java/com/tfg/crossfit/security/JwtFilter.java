@@ -32,7 +32,12 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        System.out.println("PATH = " + request.getServletPath());
+        //System.out.println("PATH = " + request.getServletPath());
+        System.out.println(">>> METHOD = " + request.getMethod());
+        System.out.println(">>> RAW URI = " + request.getRequestURI());
+        System.out.println(">>> SERVLET PATH = " + request.getServletPath());
+        System.out.println(">>> CONTEXT PATH = " + request.getContextPath());
+        System.out.println(">>> AUTH HEADER = " + request.getHeader("Authorization"));
 
         // 1. Deja pasar siempre las OPTIONS (preflight CORS)
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
@@ -41,7 +46,7 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         // 2. Obtener la ruta real de la petición
-        String path = request.getServletPath();
+        String path = request.getRequestURI();
 
         // 3. Rutas públicas que no requieren JWT
         List<String> publicEndpoints = List.of(
@@ -49,7 +54,12 @@ public class JwtFilter extends OncePerRequestFilter {
                 "/usuarios/login"
         );
 
-        if (path.startsWith("/usuarios/login") || path.startsWith("/usuarios/registro")) {
+        if (path.equals("/usuarios/login") ||
+                path.equals("/usuarios/registro") ||
+                path.startsWith("/clases/generar-semana") ||
+                path.startsWith("/clases") ||
+                path.startsWith("/horarios")) {
+
             filterChain.doFilter(request, response);
             return;
         }
@@ -61,24 +71,24 @@ public class JwtFilter extends OncePerRequestFilter {
             String token = header.substring(7);
 
             try {
-                if (jwtUtil.validarToken(token) &&
-                        SecurityContextHolder.getContext().getAuthentication() == null) {
+                if (jwtUtil.validarToken(token)) {
 
                     String email = jwtUtil.obtenerEmail(token);
 
-                    var usuarioOpt = usuarioService.buscarPorEmail(email);
+                    var usuarioOpt = usuarioService.buscarPorEmailIgnoreCase(email);
 
                     if (usuarioOpt.isPresent()) {
                         var usuario = usuarioOpt.get();
 
                         // Convertir rol a autoridad de Spring
-                        var authorities = List.of(
-                                new SimpleGrantedAuthority("ROLE_" + usuario.getRol().name())
-                        );
+                        var userDetails = new CustomUserDetails(usuario);
 
                         var auth = new UsernamePasswordAuthenticationToken(
-                                usuario, null, authorities
+                                userDetails, null, userDetails.getAuthorities()
                         );
+
+                        System.out.println(">>> AUTHENTICATED PRINCIPAL = " + auth.getPrincipal());
+                        System.out.println(">>> AUTHORITIES = " + auth.getAuthorities());
 
                         auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 

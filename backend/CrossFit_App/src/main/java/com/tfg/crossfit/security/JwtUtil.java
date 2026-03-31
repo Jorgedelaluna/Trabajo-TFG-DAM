@@ -1,5 +1,6 @@
 package com.tfg.crossfit.security;
 
+import com.tfg.crossfit.model.Usuario;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -15,12 +16,6 @@ public class JwtUtil {
     @Value("${jwt.secret}")
     private String secret;
 
-    @PostConstruct
-    public void debugSecret() {
-        System.out.println(">>> JWT SECRET CARGADO: " + secret);
-    }
-
-
     @Value("${jwt.expiration}")
     private long expirationMs;
 
@@ -28,9 +23,10 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
-    public String generarToken(String email) {
+    public String generarToken(Usuario usuario) {
         return Jwts.builder()
-                .setSubject(email)
+                .setSubject(usuario.getEmail())
+                .claim("rol", usuario.getRol().name())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationMs))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)

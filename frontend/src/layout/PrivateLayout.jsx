@@ -1,40 +1,53 @@
 /**
  * ============================================
- *  PRIVATE LAYOUT
- *  - Envuelve todas las páginas privadas
- *  - Se muestra solo cuando el usuario está logueado
- *  - Aquí podríamos añadir un sidebar en el futuro
+ *  PRIVATE LAYOUT: PrivateLayout.jsx
+ * 
+ *  Layout exclusivo para usuarios autenticados (USER, COACH, ADMIN).
+ * 
+ *  Funcionalidades:
+ *    - Renderiza el SidebarUsuario en el lateral izquierdo.
+ *    - Muestra el contenido dinámico mediante <Outlet />.
+ *    - Evita que el contenido quede oculto bajo el navbar global.
+ * 
+ *  Las rutas de administración NO pasan por este layout, ya que
+ *  tienen su propio AdminLayout con su sidebar correspondiente.
  * ============================================
  */
 
-import { Outlet } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import { Outlet, Navigate } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext";
+import Sidebar from "../components/user/SidebarUsuario";
 
 export default function PrivateLayout() {
+  const { usuario, loading } = useAuth();
+
+  // Esperar a que AuthContext termine
+  if (loading) return <p>Cargando...</p>;
+
+  // Si no hay usuario → fuera
+  if (!usuario) return <Navigate to="/login" />;
+
+  // Si el rol NO es válido → que PanelRedirect decida
+  if (!["USER", "COACH", "ADMIN"].includes(usuario.rol)) {
+    return <Navigate to="/panel" />;
+  }
+
   return (
-      <div style={{ display: "flex" }}>
+    <div style={{ display: "flex" }}>
 
-      {/* ============================================
-          SIDEBAR LATERAL IZQUIERDO
-          - Solo visible en páginas privadas
-          - Panel para navegación tipo app web
-      ============================================ */}
-        <Sidebar />
+      {/* Sidebar del usuario (solo aparece en rutas privadas de usuario) */}
+      <Sidebar />
 
-      {/* ============================================
-          CONTENIDO PRINCIPAL
-          - marginTop deja espacio para el navbar fijo
-          - padding para mejora visual
-      ============================================ */}
-        <main style={{
-          marginTop: "80px",
+      {/* Contenedor principal donde se renderizan las páginas */}
+      <main
+        style={{
+          marginTop: "80px", // Evita que el contenido quede debajo del navbar
           padding: "20px",
-          width: "100%"
-          }}>
-          
-      {/* Outlet renderiza la página privada correspondiente.*/}
-          <Outlet />
-        </main>
-      </div>
+          width: "100%" // Asegura que el contenido ocupa toda la pantalla
+        }}
+      >
+        <Outlet />
+      </main>
+    </div>
   );
 }

@@ -24,15 +24,24 @@ CREATE TABLE coach (
   certificaciones TEXT
 );
 
+-- Tabla Actividad
+
+CREATE TABLE actividad (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(100) NOT NULL,
+  descripcion TEXT
+);
+
 -- Tabla Clase
 
 CREATE TABLE clase (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  nombre VARCHAR(50) NOT NULL,
+  actividad_id BIGINT NOT NULL,
   descripcion TEXT,
   fecha_hora DATETIME NOT NULL,
   aforo_maximo INT NOT NULL,
   coach_id BIGINT NOT NULL,
+  CONSTRAINT fk_clase_actividad FOREIGN KEY (actividad_id) REFERENCES actividad(id),
   CONSTRAINT fk_clase_coach FOREIGN KEY (coach_id) REFERENCES coach(id)
 );
 
@@ -138,3 +147,139 @@ CREATE TABLE estadistica (
     actualizado_en DATETIME,
     CONSTRAINT fk_estadistica_usuario FOREIGN KEY (usuario_id) REFERENCES usuario(id)
     );
+    
+-- Tabla Horarios_Clase (patrón semanal)
+
+CREATE TABLE horario_clase (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  dia_semana VARCHAR(20) NOT NULL,                         -- LUNES, MARTES, etc.
+  hora TIME NOT NULL,                                      -- 09:00, 10:00, etc.
+  tipo ENUM('NORMAL', 'ESPECIAL', 'CERRADO') NOT NULL,     -- NORMAL, ESPECIAL, CERRADO.
+  notas TEXT,
+  actividad_id BIGINT NULL,
+  coach_id BIGINT NULL,
+  CONSTRAINT fk_horario_clase_actividad FOREIGN KEY (actividad_id) REFERENCES actividad(id),
+  CONSTRAINT fk_horario_clase_coach FOREIGN KEY (coach_id) REFERENCES coach(id)
+);
+
+
+-----------------------------------
+-- DATOS REALES PARA LOS INSERTS
+-----------------------------------
+-- Lista de Usuarios
+INSERT INTO usuario (id, nombre, email, password_hash, rol, estado_cuota, fecha_alta ) VALUES
+(1, 'Admin', 'admin@crossfitmanager.com', '$2a$12$4Tz/gyKZS6.D1FoiEpPPS.is5nB0Ljf4mQ42mPtR25e0RDSlMp/Li', 'ADMIN', 'ACTIVA', NOW()), -- id 1 Admin (Prueba1234)
+(2, 'Koke', 'koke@crossfitmanager.com', '$2a$12$otnDjybLTavRAdj./GYbHOj8pI2O4nhloFzQcznyZe7dnGCZs2Ihy', 'COACH', 'ACTIVA', NOW()),  -- id 2 Coach (Prueba1234)
+(3, 'Jorge', 'jorge@unir.com', '$2a$12$n83T1OSuG2VxRjBzbbHTh.zUMEYIVhCltzahipK12P5DdTFbPTzh.', 'USER', 'ACTIVA', NOW()); -- id 3 User (Prueba1234)
+(4, 'Rober', 'rober@unir.com', '$2a$12$b9Tv.9NQcC1m1NFwOb.O9ORPEwloGToWaaWRQvs2O0t1rQV34oyli', 'USER', 'ACTIVA', NOW()); -- id 4 User (Prueba1234)
+(5, 'David', 'david@unir.com', '$2a$12$PbkWsDdAzDwJg/5nRRWyyucAcCbnSRA0nSv24gnnPe8OjKXt8lDRu', 'USER', 'ACTIVA', NOW()); -- id 5 User (Prueba1234)
+
+
+-- Listado de Coachs
+INSERT INTO coach (nombre, email, telefono, descripcion, certificaciones) VALUES
+('Pepon', 'pepon@crossfitmanager.com', '600000000', 'Coach de CrossFit', 'CF-L1'),  -- id 1 Pepon
+('Koke', 'koke@crossfitmanager.com', '600000001', 'Coach de CrossFit', 'CF-L1'),    -- id 2 Koke
+('Alex', 'alex@crossfitmanager.com', '600000002', 'Coach de CrossFit', 'CF-L1');    -- id 3 Alex
+
+
+-- Listado de Actividades
+INSERT INTO actividad (nombre, descripcion) VALUES
+('CrossFit', NULL),                 -- id 1 CrossFit
+('Halterofilia', NULL),             -- id 2 Halterofilia
+('Endurance', NULL),                -- id 3 Endurance
+('Meditación & Mobility', NULL),    -- id 4 Meditación & Mobility
+('Open Box', NULL),                 -- id 5 Open Box
+('Gymnastics', NULL);               -- id 6 Gymnastics
+
+
+-- Horario Lunes
+INSERT INTO horario_clase (dia_semana, hora, tipo, actividad_id, coach_id) VALUES
+('LUNES', '09:00', 'NORMAL', 1, 2),  -- CrossFit con Koke
+('LUNES', '10:00', 'NORMAL', 2, 2),  -- Halterofilia con Koke
+('LUNES', '11:00', 'NORMAL', 3, 2),  -- Endurance con Koke
+('LUNES', '12:00', 'NORMAL', 4, 2),  -- Meditación & Mobility con Koke
+('LUNES', '13:00', 'NORMAL', 5, 2),  -- Open Box con Koke
+('LUNES', '14:00', 'NORMAL', 6, 1),  -- Gymnastics con Pepon
+('LUNES', '15:00', 'NORMAL', 1, 1),  -- CrossFit con Pepon
+('LUNES', '16:00', 'NORMAL', 3, 2),  -- Endurance con Koke
+('LUNES', '17:00', 'NORMAL', 2, 3),  -- Halterofilia con Alex
+('LUNES', '18:00', 'NORMAL', 1, 3),  -- CrossFit con Alex
+('LUNES', '19:00', 'NORMAL', 6, 3),  -- Gymnastics con Alex
+('LUNES', '20:00', 'NORMAL', 5, 3),  -- Open Box con Alex
+('LUNES', '21:00', 'NORMAL', 1, 3);  -- CrossFit con Alex
+
+-- Horario Martes
+INSERT INTO horario_clase (dia_semana, hora, tipo, actividad_id, coach_id) VALUES
+('MARTES', '09:00', 'NORMAL', 1, 2),  -- CrossFit con Koke
+('MARTES', '10:00', 'NORMAL', 2, 2),  -- Halterofilia con Koke
+('MARTES', '11:00', 'NORMAL', 3, 2),  -- Endurance con Koke
+('MARTES', '12:00', 'NORMAL', 4, 2),  -- Meditación & Mobility con Koke
+('MARTES', '13:00', 'NORMAL', 5, 2),  -- Open Box con Koke
+('MARTES', '14:00', 'NORMAL', 6, 1),  -- Gymnastics con Pepon
+('MARTES', '15:00', 'NORMAL', 1, 1),  -- CrossFit con Pepon
+('MARTES', '16:00', 'NORMAL', 3, 2),  -- Endurance con Koke
+('MARTES', '17:00', 'NORMAL', 2, 3),  -- Halterofilia con Alex
+('MARTES', '18:00', 'NORMAL', 1, 3),  -- CrossFit con Alex
+('MARTES', '19:00', 'NORMAL', 6, 3),  -- Gymnastics con Alex
+('MARTES', '20:00', 'NORMAL', 5, 3),  -- Open Box con Alex
+('MARTES', '21:00', 'NORMAL', 1, 3);  -- CrossFit con Alex
+
+-- Horario Miércoles
+INSERT INTO horario_clase (dia_semana, hora, tipo, actividad_id, coach_id) VALUES
+('MIERCOLES', '09:00', 'NORMAL', 1, 2),  -- CrossFit con Koke
+('MIERCOLES', '10:00', 'NORMAL', 2, 2),  -- Halterofilia con Koke
+('MIERCOLES', '11:00', 'NORMAL', 3, 2),  -- Endurance con Koke
+('MIERCOLES', '12:00', 'NORMAL', 4, 2),  -- Meditación & Mobility con Koke
+('MIERCOLES', '13:00', 'NORMAL', 5, 2),  -- Open Box con Koke
+('MIERCOLES', '14:00', 'NORMAL', 6, 1),  -- Gymnastics con Pepon
+('MIERCOLES', '15:00', 'NORMAL', 1, 1),  -- CrossFit con Pepon
+('MIERCOLES', '16:00', 'NORMAL', 3, 2),  -- Endurance con Koke
+('MIERCOLES', '17:00', 'NORMAL', 2, 3),  -- Halterofilia con Alex
+('MIERCOLES', '18:00', 'NORMAL', 1, 3),  -- CrossFit con Alex
+('MIERCOLES', '19:00', 'NORMAL', 6, 3),  -- Gymnastics con Alex
+('MIERCOLES', '20:00', 'NORMAL', 5, 3),  -- Open Box con Alex
+('MIERCOLES', '21:00', 'NORMAL', 1, 3);  -- CrossFit con Alex
+
+-- Horario Jueves
+INSERT INTO horario_clase (dia_semana, hora, tipo, actividad_id, coach_id) VALUES
+('JUEVES', '09:00', 'NORMAL', 1, 2),  -- CrossFit con Koke
+('JUEVES', '10:00', 'NORMAL', 2, 2),  -- Halterofilia con Koke
+('JUEVES', '11:00', 'NORMAL', 3, 2),  -- Endurance con Koke
+('JUEVES', '12:00', 'NORMAL', 4, 2),  -- Meditación & Mobility con Koke
+('JUEVES', '13:00', 'NORMAL', 5, 2),  -- Open Box con Koke
+('JUEVES', '14:00', 'NORMAL', 6, 1),  -- Gymnastics con Pepon
+('JUEVES', '15:00', 'NORMAL', 1, 1),  -- CrossFit con Pepon
+('JUEVES', '16:00', 'NORMAL', 3, 2),  -- Endurance con Koke
+('JUEVES', '17:00', 'NORMAL', 2, 3),  -- Halterofilia con Alex
+('JUEVES', '18:00', 'NORMAL', 1, 3),  -- CrossFit con Alex
+('JUEVES', '19:00', 'NORMAL', 6, 3),  -- Gymnastics con Alex
+('JUEVES', '20:00', 'NORMAL', 5, 3),  -- Open Box con Alex
+('JUEVES', '21:00', 'NORMAL', 1, 3);  -- CrossFit con Alex
+
+-- Horario Viernes
+INSERT INTO horario_clase (dia_semana, hora, tipo, actividad_id, coach_id) VALUES
+('VIERNES', '09:00', 'NORMAL', 1, 2),  -- CrossFit con Koke
+('VIERNES', '10:00', 'NORMAL', 2, 2),  -- Halterofilia con Koke
+('VIERNES', '11:00', 'NORMAL', 3, 2),  -- Endurance con Koke
+('VIERNES', '12:00', 'NORMAL', 4, 2),  -- Meditación & Mobility con Koke
+('VIERNES', '13:00', 'NORMAL', 5, 2),  -- Open Box con Koke
+('VIERNES', '14:00', 'NORMAL', 6, 1),  -- Gymnastics con Pepon
+('VIERNES', '15:00', 'NORMAL', 1, 1),  -- CrossFit con Pepon
+('VIERNES', '16:00', 'NORMAL', 3, 2),  -- Endurance con Koke
+('VIERNES', '17:00', 'NORMAL', 2, 3),  -- Halterofilia con Alex
+('VIERNES', '18:00', 'NORMAL', 1, 3),  -- CrossFit con Alex
+('VIERNES', '19:00', 'NORMAL', 6, 3),  -- Gymnastics con Alex
+('VIERNES', '20:00', 'NORMAL', 5, 3),  -- Open Box con Alex
+('VIERNES', '21:00', 'NORMAL', 1, 3);  -- CrossFit con Alex
+
+-- Horario Sábado
+INSERT INTO horario_clase (dia_semana, hora, tipo, actividad_id, coach_id) VALUES
+('SABADO', '10:00', 'ESPECIAL', 1, 3), -- CrossFit con Alex
+('SABADO', '11:00', 'ESPECIAL', 6, 3), -- Gymnastics con Alex
+('SABADO', '12:00', 'ESPECIAL', 5, 3), -- Open Box con Alex
+('SABADO', '13:00', 'ESPECIAL', 1, 3); -- CrossFit con Alex
+
+-- Domingo cerrado
+INSERT INTO horario_clase (dia_semana, hora, tipo, notas, actividad_id, coach_id) VALUES
+('DOMINGO', '00:00', 'CERRADO', 'Día de descanso', NULL, NULL);
+
