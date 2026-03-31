@@ -34,7 +34,7 @@ export default function UsuarioListaPage() {
 
   const cargarUsuarios = async () => {
     try {
-      const res = await axios.get(`${API_URL}/usuarios/${id}`);
+      const res = await axios.get(`${API_URL}/usuarios`);
       setUsuarios(res.data);
     } catch (error) {
       console.error("Error cargando usuarios:", error);
