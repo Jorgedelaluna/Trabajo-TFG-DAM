@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "../../../styles/Dashboard.css";
-import API_URL from "../api/api";
+import API_URL from "../../api/api";
 export default function UsuarioListaPage() {
 
   // Lista de usuarios obtenidos del backend
