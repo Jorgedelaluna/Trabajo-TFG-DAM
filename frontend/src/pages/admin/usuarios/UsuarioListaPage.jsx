@@ -1,14 +1,14 @@
 /**
  * ======================================================
- *  PÁGINA ADMIN: UsuarioListaPage.jsx
+ *  PÃ�GINA ADMIN: UsuarioListaPage.jsx
  * 
- *  Vista principal para la gestión de usuarios.
+ *  Vista principal para la gestiÃ³n de usuarios.
  *  Funcionalidades:
  *    - Carga real de usuarios desde el backend
  *    - Tabla con datos clave (nombre, email, rol, cuota)
  *    - Acceso directo al detalle de cada usuario
  * 
- *  Esta página forma parte del panel de administración y se
+ *  Esta pÃ¡gina forma parte del panel de administraciÃ³n y se
  *  integra con AdminLayout y el estilo glass del dashboard.
  * ======================================================
  */
@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "../../../styles/Dashboard.css";
-
+import API_URL from "../api/api";
 export default function UsuarioListaPage() {
 
   // Lista de usuarios obtenidos del backend
@@ -34,7 +34,7 @@ export default function UsuarioListaPage() {
 
   const cargarUsuarios = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/usuarios");
+      const res = await axios.get(`${API_URL}/usuarios/${id}`);
       setUsuarios(res.data);
     } catch (error) {
       console.error("Error cargando usuarios:", error);
@@ -45,7 +45,7 @@ export default function UsuarioListaPage() {
     <div className="dashboard-container-fluid">
 
       {/* Titulo principal */}
-      <h1 className="fw-bold mb-4">Gestión de Usuarios</h1>
+      <h1 className="fw-bold mb-4">GestiÃ³n de Usuarios</h1>
 
       {/* Tarjeta principal */}
       <div className="dashboard-card p-4">

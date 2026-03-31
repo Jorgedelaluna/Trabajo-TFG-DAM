@@ -1,23 +1,24 @@
 /**
  * ============================================================
- *  PÁGINA DE REGISTRO: RegistroPage.jsx
+ *  PÃ�GINA DE REGISTRO: RegistroPage.jsx
  * 
- *  Página pública donde un nuevo usuario puede crear su cuenta.
+ *  PÃ¡gina pÃºblica donde un nuevo usuario puede crear su cuenta.
  * 
  *  Funcionalidades:
  *    - Enviar datos del formulario al backend
- *    - Validar respuesta y mostrar mensajes de error/éxito
- *    - Redirigir automáticamente al login tras registrarse
+ *    - Validar respuesta y mostrar mensajes de error/Ã©xito
+ *    - Redirigir automÃ¡ticamente al login tras registrarse
  * 
  *  Nota:
- *    - No se realiza login automático para mantener seguridad
- *      y claridad en el flujo de autenticación.
+ *    - No se realiza login automÃ¡tico para mantener seguridad
+ *      y claridad en el flujo de autenticaciÃ³n.
  * ============================================================
  */
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
+import API_URL from "../api/api";
 
 export default function RegistroPage() {
 
@@ -57,7 +58,7 @@ export default function RegistroPage() {
     setSuccess("");
 
     try {
-      const res = await fetch("http://localhost:8080/usuarios/registro", {
+      const res = await fetch(`${API_URL}/usuarios/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form)
@@ -72,10 +73,10 @@ export default function RegistroPage() {
       const data = await res.json();
       console.log("REGISTRO:", data);
 
-      // Mensaje de éxito
-      setSuccess("Registro completado. Redirigiendo…");
+      // Mensaje de Ã©xito
+      setSuccess("Registro completado. Redirigiendoâ€¦");
 
-      // Redirigir al login tras un pequeño delay
+      // Redirigir al login tras un pequeÃ±o delay
       setTimeout(() => navigate("/login"), 1200);
 
     } catch (err) {
@@ -92,7 +93,7 @@ export default function RegistroPage() {
     <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
       <div className="card shadow p-4" style={{ width: "100%", maxWidth: "400px" }}>
         
-        {/* Título */}
+        {/* TÃ­tulo */}
         <h3 className="text-center mb-4 fw-bold">Registrarse</h3>
 
         {/* Formulario */}
@@ -114,7 +115,7 @@ export default function RegistroPage() {
 
           {/* Email */}
           <div className="mb-3">
-            <label className="form-label fw-semibold">Correo electrónico</label>
+            <label className="form-label fw-semibold">Correo electrÃ³nico</label>
             <input
               type="email"
               name="email"
@@ -126,35 +127,35 @@ export default function RegistroPage() {
             />
           </div>
 
-          {/* Contraseña */}
+          {/* ContraseÃ±a */}
           <div className="mb-3">
-            <label className="form-label fw-semibold">Contraseña</label>
+            <label className="form-label fw-semibold">ContraseÃ±a</label>
             <input
               type="password"
               name="password"
               className="form-control"
-              placeholder="••••••••"
+              placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
               value={form.password}
               onChange={handleChange}
               required
             />
           </div>
 
-          {/* Botón enviar */}
+          {/* BotÃ³n enviar */}
           <button type="submit" className="btn btn-primary w-100">
             Registrarse
           </button>
         </form>
 
-        {/* Mensajes de error o éxito */}
+        {/* Mensajes de error o Ã©xito */}
         {error && <div className="alert alert-danger mt-3">{error}</div>}
         {success && <div className="alert alert-success mt-3">{success}</div>}
 
         {/* Enlace a login */}
         <p className="text-center mt-3">
-          ¿Ya tienes cuenta?
+          Â¿Ya tienes cuenta?
           <Link to="/login" className="text-primary fw-bold ms-1">
-            Inicia sesión
+            Inicia sesiÃ³n
           </Link>
         </p>
       </div>

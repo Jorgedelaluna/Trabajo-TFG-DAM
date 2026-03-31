@@ -1,16 +1,16 @@
 /**
  * ======================================================
- *  PÁGINA PRIVADA: ClasesUsuarioPage.jsx
+ *  PÃ�GINA PRIVADA: ClasesUsuarioPage.jsx
  * 
  *  Muestra todas las clases disponibles para el usuario.
  *  Funcionalidades principales:
  *    - Filtrar clases por fecha mediante un input type="date"
- *    - Agrupar clases por día de la semana en un accordion
+ *    - Agrupar clases por dÃ­a de la semana en un accordion
  *    - Permitir reservar una clase (se guarda en el backend)
- *    - Actualizar automáticamente MisReservas al reservar
+ *    - Actualizar automÃ¡ticamente MisReservas al reservar
  * 
- *  Esta página es clave para la experiencia del usuario,
- *  ya que centraliza la búsqueda y reserva de clases.
+ *  Esta pÃ¡gina es clave para la experiencia del usuario,
+ *  ya que centraliza la bÃºsqueda y reserva de clases.
  * ======================================================
  */
 
@@ -18,7 +18,7 @@ import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import "../../styles/ClasesUsuario.css";
 import { FaClock } from "react-icons/fa";
-
+import API_URL from "../api/api";
 
 export default function ClasesUsuarioPage() {
 
@@ -28,32 +28,32 @@ export default function ClasesUsuarioPage() {
   // Reservas del usuario autenticado
   const [reservasUsuario, setReservasUsuario] = useState([]);
 
-  // Mensaje informativo de éxito/error tras reservar una clase
+  // Mensaje informativo de Ã©xito/error tras reservar una clase
   const [mensaje, setMensaje] = useState("");
 
-  // Día seleccionado en el calendario
+  // DÃ­a seleccionado en el calendario
   const [diaSeleccionado, setDiaSeleccionado] = useState("");
 
-  // ID del usuario autenticado (guardado en localStorage al iniciar sesión)
+  // ID del usuario autenticado (guardado en localStorage al iniciar sesiÃ³n)
   const usuario = JSON.parse(localStorage.getItem("usuario"));
   const usuarioId = usuario?.id;
 
     /**
    * ======================================================
    * Cargar clases y reservas desde el backend
-   * - Se usa useCallback para evitar recrear la función
+   * - Se usa useCallback para evitar recrear la funciÃ³n
    * - Se cargan clases reales y reservas reales del usuario
    * ======================================================
    */
   const fetchData = useCallback(async () => {
     try {
       // Cargar clases reales
-      const clasesRes = await axios.get("http://localhost:8080/clases");
+      const clasesRes = await axios.get(`${API_URL}/clases`);
       setClases(clasesRes.data);
 
       // Cargar reservas del usuario
       const reservasRes = await axios.get(
-        `http://localhost:8080/inscripciones/usuario/${usuarioId}`,
+        `${API_URL}/inscripciones/usuario/${usuarioId}`,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
@@ -73,7 +73,7 @@ export default function ClasesUsuarioPage() {
     if (usuarioId) fetchData();
   }, [usuarioId, fetchData]);
 
-  // Recargar automáticamente al volver a esta pestaña
+  // Recargar automÃ¡ticamente al volver a esta pestaÃ±a
   useEffect(() => {
     const handleFocus = () => {
       if (usuarioId) fetchData();
@@ -85,15 +85,15 @@ export default function ClasesUsuarioPage() {
   /**
    * ======================================================
    * Reservar clase
-   * - Envía la inscripción al backend
+   * - EnvÃ­a la inscripciÃ³n al backend
    * - Recarga las reservas reales del usuario
-   * - Muestra mensaje temporal de éxito o error
+   * - Muestra mensaje temporal de Ã©xito o error
    * ======================================================
    */
   const reservarClase = async (claseId) => {
     try {
       await axios.post(
-        "http://localhost:8080/inscripciones",
+        `${API_URL}/inscripciones`,
         { usuarioId, claseId },
         {
           headers: {
@@ -104,7 +104,7 @@ export default function ClasesUsuarioPage() {
 
       // Recargar reservas reales
       const reservasRes = await axios.get(
-        `http://localhost:8080/inscripciones/usuario/${usuarioId}`,
+        `${API_URL}/inscripciones/usuario/${usuarioId}`,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
@@ -114,12 +114,12 @@ export default function ClasesUsuarioPage() {
 
       setReservasUsuario(reservasRes.data);
 
-      setMensaje("Clase reservada con éxito ✔");
+      setMensaje("Clase reservada con Ã©xito âœ”");
       setTimeout(() => setMensaje(""), 3000);
 
     } catch (error) {
       console.error("Error al reservar:", error);
-      setMensaje("Error al reservar la clase ❌");
+      setMensaje("Error al reservar la clase â�Œ");
       setTimeout(() => setMensaje(""), 3000);
     }
   };
@@ -127,7 +127,7 @@ export default function ClasesUsuarioPage() {
   /**
    * ======================================================
    * IDs de clases reservadas por el usuario
-   * - Se usa un Set para comprobar reservas rápidamente
+   * - Se usa un Set para comprobar reservas rÃ¡pidamente
    * ======================================================
    */
   const clasesReservadas = new Set(
@@ -138,7 +138,7 @@ export default function ClasesUsuarioPage() {
 
   /**
    * ======================================================
-   * Filtrar clases según el día seleccionado en el calendario
+   * Filtrar clases segÃºn el dÃ­a seleccionado en el calendario
    * ======================================================
    */
   const clasesFiltradas = diaSeleccionado
@@ -151,8 +151,8 @@ export default function ClasesUsuarioPage() {
 
   /**
    * ======================================================
-   * Agrupar clases por día de la semana
-   * - Se usa reduce para crear un objeto con claves por día
+   * Agrupar clases por dÃ­a de la semana
+   * - Se usa reduce para crear un objeto con claves por dÃ­a
    * ======================================================
    */
   const clasesPorDia = clasesFiltradas.reduce((acc, clase) => {
@@ -174,10 +174,10 @@ export default function ClasesUsuarioPage() {
       <h1 className="fw-bold mb-4">Clases disponibles</h1>
 
       {/* ============================
-          Selector de día (calendario)
+          Selector de dÃ­a (calendario)
          ============================ */}
       <div className="mb-4">
-        <label className="form-label fw-bold">Selecciona un día:</label>
+        <label className="form-label fw-bold">Selecciona un dÃ­a:</label>
         <input
           type="date"
           className="form-control"
@@ -186,13 +186,13 @@ export default function ClasesUsuarioPage() {
         />
       </div>
 
-      {/* Mensaje de éxito/error */}
+      {/* Mensaje de Ã©xito/error */}
       {mensaje && (
         <div className="alert alert-info text-center">{mensaje}</div>
       )}
 
       {/* ============================
-          ACCORDION AGRUPADO POR DÍA
+          ACCORDION AGRUPADO POR DÃ�A
          ============================ */}
       <div className="accordion" id="accordionClases">
 
@@ -224,7 +224,7 @@ export default function ClasesUsuarioPage() {
 
                       <h4>{clase.actividadNombre}</h4>
 
-                      {/* Día + Hora */}
+                      {/* DÃ­a + Hora */}
                       <p className="m-0">
                         <FaClock />{" "}
                         {new Date(clase.fechaHora).toLocaleDateString("es-ES", {
@@ -232,12 +232,12 @@ export default function ClasesUsuarioPage() {
                           day: "2-digit",
                           month: "2-digit"
                         })}{" "}
-                        —{" "}
+                        â€”{" "}
                         {new Date(clase.fechaHora).toLocaleTimeString("es-ES", {
                           hour: "2-digit",
                           minute: "2-digit"
                         })}{" "}
-                        — <strong>{clase.actividadNombre}</strong> (Coach: {clase.coachNombre})
+                        â€” <strong>{clase.actividadNombre}</strong> (Coach: {clase.coachNombre})
                       </p>
 
                       <p className="m-0 opacity-75">

@@ -11,6 +11,7 @@ import "../../styles/Dashboard.css";
 
 import { useAuth } from "../../auth/AuthContext";
 import { useState } from "react";
+import API_URL from "../api/api";
 import axios from "axios";
 
 export default function PerfilPage() {
@@ -32,9 +33,9 @@ export default function PerfilPage() {
 
     try {
       const response = await axios.put(
-        `http://localhost:8080/usuarios/${usuario.id}`,
-        { ...usuario, telefono }
-      );
+		  `${API_URL}/usuarios/${usuario.id}`,
+		  { ...usuario, telefono }
+		);
 
       // Actualizar usuario en contexto
       setUsuario(response.data);

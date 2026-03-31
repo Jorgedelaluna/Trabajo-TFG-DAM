@@ -1,15 +1,15 @@
 /**
  * ======================================================
- *  PÁGINA ADMIN: UsuarioDetallePage.jsx
+ *  PÃ�GINA ADMIN: UsuarioDetallePage.jsx
  * 
- *  Muestra la información completa de un usuario concreto.
+ *  Muestra la informaciÃ³n completa de un usuario concreto.
  *  Funcionalidades:
  *    - Obtiene los datos reales desde el backend usando su ID
  *    - Protegida por rol ADMIN desde App.jsx
- *    - Forma parte del panel de administración (AdminLayout)
+ *    - Forma parte del panel de administraciÃ³n (AdminLayout)
  * 
  *  Esta vista permite al administrador consultar datos clave
- *  antes de realizar acciones de gestión.
+ *  antes de realizar acciones de gestiÃ³n.
  * ======================================================
  */
 
@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import "../../../styles/Dashboard.css";
+import API_URL from "../api/api";
 
 export default function UsuarioDetallePage() {
 
@@ -28,7 +29,7 @@ export default function UsuarioDetallePage() {
 
   /**
    * ============================================================
-   *  Cargar datos del usuario al entrar en la página
+   *  Cargar datos del usuario al entrar en la pÃ¡gina
    * ============================================================
    */
   useEffect(() => {
@@ -37,7 +38,7 @@ export default function UsuarioDetallePage() {
 
   const cargarUsuario = async () => {
     try {
-      const res = await axios.get(`http://localhost:8080/usuarios/${id}`);
+      const res = await axios.get(`${API_URL}/usuarios/${id}`);
       setUsuario(res.data);
     } catch (error) {
       console.error("Error cargando usuario:", error);
@@ -62,7 +63,7 @@ export default function UsuarioDetallePage() {
   return (
     <div className="dashboard-container-fluid">
 
-      {/* Título principal */}
+      {/* TÃ­tulo principal */}
       <h1 className="fw-bold mb-4">Detalle del Usuario</h1>
 
       {/* Tarjeta con estilo glass */}
@@ -73,7 +74,7 @@ export default function UsuarioDetallePage() {
         <p><strong>Rol:</strong> {usuario.rol}</p>
         <p><strong>Cuota:</strong> {usuario.cuota}</p>
 
-        {/* Botón para volver */}
+        {/* BotÃ³n para volver */}
         <Link to="/admin/usuarios" className="btn btn-secondary mt-3">
           Volver
         </Link>

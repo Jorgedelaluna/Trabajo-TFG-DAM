@@ -1,20 +1,21 @@
 /**
  * ============================================================
- *  PÁGINA DE LOGIN: LoginPage.jsx
+ *  PÃ�GINA DE LOGIN: LoginPage.jsx
  * 
- *  Página pública donde el usuario introduce sus credenciales.
+ *  PÃ¡gina pÃºblica donde el usuario introduce sus credenciales.
  *  Funcionalidades:
- *    - Enviar email y contraseña al backend
+ *    - Enviar email y contraseÃ±a al backend
  *    - Validar respuesta y guardar token + usuario en AuthContext
- *    - Redirigir al dashboard correspondiente según el rol
+ *    - Redirigir al dashboard correspondiente segÃºn el rol
  * 
- *  Forma parte del flujo de autenticación general.
+ *  Forma parte del flujo de autenticaciÃ³n general.
  * ============================================================
  */
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
+import API_URL from "../api/api";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ export default function LoginPage() {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:8080/usuarios/login", {
+      const res = await fetch(`${API_URL}/usuarios/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form)
@@ -66,7 +67,7 @@ export default function LoginPage() {
 
       /**
        * ============================================================
-       * Redirigir según el rol del usuario
+       * Redirigir segÃºn el rol del usuario
        * - Se redirige al usuario a su dashboard correspondiente
        * ============================================================
        */
@@ -92,15 +93,15 @@ export default function LoginPage() {
     <section className="auth-section d-flex justify-content-center align-items-center">
       <div className="card auth-card shadow p-4">
 
-        {/* Título */}
-        <h3 className="text-center mb-4 fw-bold">Iniciar sesión</h3>
+        {/* TÃ­tulo */}
+        <h3 className="text-center mb-4 fw-bold">Iniciar sesiÃ³n</h3>
 
         {/* Formulario */}
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             
             {/* Email */}
-            <label className="form-label fw-semibold">Correo electrónico</label>
+            <label className="form-label fw-semibold">Correo electrÃ³nico</label>
             <input
               type="email"
               name="email"
@@ -112,21 +113,21 @@ export default function LoginPage() {
             />
           </div>
 
-          {/* Contraseña */}
+          {/* ContraseÃ±a */}
           <div className="mb-3">
-            <label className="form-label fw-semibold">Contraseña</label>
+            <label className="form-label fw-semibold">ContraseÃ±a</label>
             <input
               type="password"
               name="password"
               className="form-control form-control-lg"
-              placeholder="••••••••"
+              placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
               value={form.password}
               onChange={handleChange}
               required
             />
           </div>
 
-          {/* Botón entrar */}
+          {/* BotÃ³n entrar */}
           <button type="submit" className="btn btn-primary btn-lg w-100 mt-2">
             Entrar
           </button>
@@ -137,9 +138,9 @@ export default function LoginPage() {
 
         {/* Enlace a registro */}
         <p className="text-center mt-3">
-          ¿No tienes cuenta?
+          Â¿No tienes cuenta?
           <Link to="/registro" className="fw-bold ms-1 text-primary">
-            Regístrate
+            RegÃ­strate
           </Link>
         </p>
 
