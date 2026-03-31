@@ -17,6 +17,9 @@ public interface UsuarioMapper {
     Usuario toEntity(UsuarioRegistroDTO dto);
 
     // Entidad → DTO de respuesta
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "rol", source = "rol")
     UsuarioRespuestaDTO toDTO(Usuario usuario);
+
 }
 

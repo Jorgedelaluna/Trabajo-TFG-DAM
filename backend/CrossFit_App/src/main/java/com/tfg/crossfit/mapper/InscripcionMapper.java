@@ -11,6 +11,9 @@ public interface InscripcionMapper {
     // Entidad → DTO
     @Mapping(source = "usuario.id", target = "usuarioId")
     @Mapping(source = "clase.id", target = "claseId")
+    @Mapping(source = "clase.actividad.nombre", target = "claseNombre")
+    @Mapping(source = "clase.coach.nombre", target = "coachNombre")
+    @Mapping(source = "clase.fechaHora", target = "fechaHora")
     InscripcionDTO toDTO(Inscripcion entity);
 
     // DTO → Entidad (Solo si se necesita)

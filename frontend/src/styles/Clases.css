@@ -1,7 +1,10 @@
 /* ======================================================
-   CLASES PAGE — Estilos principales
-   Sección pública que muestra tarjetas informativas
-   y una tabla comparativa de tipos de clases.
+SECCIÓN PRINCIPAL DE CLASES (Página pública)
+
+  - Contenedor general de la página de clases.
+  - Incluye padding superior para evitar solaparse con la navbar fija.
+  - Se usa en la página pública que muestra tipos de clases,
+    tarjetas informativas y tabla comparativa.
 ====================================================== */
 .clases-section {
   padding-top: 120px;   /* deja espacio para la navbar fija */
@@ -10,9 +13,11 @@
 }
 
 /* ======================================================
-   TARJETAS DE CLASES
-   - Diseño con bordes redondeados
-   - Hover con elevación suave
+TARJETAS DE CLASES
+
+  - Tarjetas informativas con imagen + descripción.
+  - Diseño moderno con bordes redondeados.
+  - Hover con elevación suave para dar sensación de profundidad.
 ====================================================== */
 .clases-card {
   border-radius: 12px;
@@ -33,7 +38,10 @@
 }
 
 /* ======================================================
-   TABLA DE TIPOS DE CLASES
+TABLA DE TIPOS DE CLASES
+
+  - Tabla comparativa que muestra diferencias entre modalidades.
+  - Tipografías ligeramente más grandes para mejorar legibilidad.
 ====================================================== */
 .clases-table th {
   font-weight: 700;

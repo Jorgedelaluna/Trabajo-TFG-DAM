@@ -48,8 +48,8 @@ public class UsuarioService {
     }
 
     // <-- Buscar por email -->
-    public Optional<Usuario> buscarPorEmail(String email) {
-        return usuarioRepository.findByEmail(email);
+    public Optional<Usuario> buscarPorEmailIgnoreCase(String email) {
+        return usuarioRepository.findByEmailIgnoreCase(email);
     }
 
     // <-- Listar todos -->

@@ -33,6 +33,13 @@ public class ClaseController {
         return ResponseEntity.ok(claseService.listarClases());
     }
 
+    // Generar clases reales desde el horario
+    @PostMapping("/generar-semana")
+    public ResponseEntity<Void> generarSemana() {
+        claseService.generarClasesDesdeHorario();
+        return ResponseEntity.ok().build();
+    }
+
     // Obtener clase por ID
     @GetMapping("/{id}")
     public ResponseEntity<ClaseDTO> obtenerClase(@PathVariable Long id) {
@@ -45,4 +52,5 @@ public class ClaseController {
         claseService.eliminarClase(id);
         return ResponseEntity.noContent().build();
     }
+
 }

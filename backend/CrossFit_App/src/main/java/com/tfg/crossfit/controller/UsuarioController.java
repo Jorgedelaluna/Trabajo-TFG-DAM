@@ -6,11 +6,13 @@ import com.tfg.crossfit.dto.UsuarioRespuestaDTO;
 import com.tfg.crossfit.mapper.UsuarioMapper;
 import com.tfg.crossfit.model.EstadoCuota;
 import com.tfg.crossfit.model.Usuario;
+import com.tfg.crossfit.security.CustomUserDetails;
 import com.tfg.crossfit.security.JwtUtil;
 import com.tfg.crossfit.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -36,7 +38,7 @@ public class UsuarioController {
     @PostMapping("/registro")
     public ResponseEntity<UsuarioRespuestaDTO> registrar(@Valid @RequestBody UsuarioRegistroDTO dto) {
 
-        if (usuarioService.buscarPorEmail(dto.getEmail()).isPresent()) {
+        if (usuarioService.buscarPorEmailIgnoreCase(dto.getEmail()).isPresent()) {
             return ResponseEntity.badRequest().build();
         }
 
@@ -48,7 +50,7 @@ public class UsuarioController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody UsuarioLoginDTO loginDTO) {
 
-        var usuarioOpt = usuarioService.buscarPorEmail(loginDTO.getEmail());
+        var usuarioOpt = usuarioService.buscarPorEmailIgnoreCase(loginDTO.getEmail());
 
         if (usuarioOpt.isEmpty() ||
                 !usuarioService.validarPassword(loginDTO.getPassword(), usuarioOpt.get().getPasswordHash())) {
@@ -56,7 +58,7 @@ public class UsuarioController {
         }
 
         Usuario usuario = usuarioOpt.get();
-        String token = jwtUtil.generarToken(usuario.getEmail());
+        String token = jwtUtil.generarToken(usuario);
 
         return ResponseEntity.ok(Map.of(
                 "token", token,
@@ -65,19 +67,18 @@ public class UsuarioController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<UsuarioRespuestaDTO> getPerfilUsuario() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    public ResponseEntity<UsuarioRespuestaDTO> getPerfilUsuario(
+            @AuthenticationPrincipal CustomUserDetails userDetails) {
 
-        if (auth == null || auth.getPrincipal().equals("anonymousUser")) {
+        if (userDetails == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        // El email viene del token validado por Spring Security
-        String email = auth.getName();
+        String email = userDetails.getUsername();
+        var usuarioOpt = usuarioService.buscarPorEmailIgnoreCase(email);
 
-        var usuarioOpt = usuarioService.buscarPorEmail(email);
-
-        if (usuarioOpt.isEmpty()) { return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        if (usuarioOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
         Usuario usuario = usuarioOpt.get();

@@ -39,6 +39,11 @@ public class InscripcionController {
     // Inscribir usuario en clase
     @PostMapping
     public ResponseEntity<InscripcionDTO> inscribir(@Valid @RequestBody InscripcionCrearDTO dto) {
+
+        System.out.println(">>> DTO recibido:");
+        System.out.println("usuarioId = " + dto.getUsuarioId());
+        System.out.println("claseId   = " + dto.getClaseId());
+
         Usuario usuario = usuarioService.buscarPorId(dto.getUsuarioId());
         Clase clase = claseService.obtenerEntidad(dto.getClaseId());
 
@@ -61,12 +66,7 @@ public class InscripcionController {
     public ResponseEntity<List<InscripcionDTO>> listarPorUsuario(@PathVariable Long usuarioId) {
         Usuario usuario = usuarioService.buscarPorId(usuarioId);
 
-        var inscripciones = inscripcionService.listarPorUsuario(usuario)
-                .stream()
-                .map(inscripcionMapper::toDTO)
-                .toList();
-
-        return ResponseEntity.ok(inscripciones);
+        return ResponseEntity.ok(inscripcionService.listarPorUsuario(usuario));
     }
 
     // Listar inscripciones por clase
@@ -74,11 +74,6 @@ public class InscripcionController {
     public ResponseEntity<List<InscripcionDTO>> listarPorClase(@PathVariable Long claseId) {
         Clase clase = claseService.obtenerEntidad(claseId);
 
-        var inscripciones = inscripcionService.listarPorClase(clase)
-            .stream()
-            .map(inscripcionMapper::toDTO)
-            .toList();
-
-        return ResponseEntity.ok(inscripciones);
+        return ResponseEntity.ok(inscripcionService.listarPorClase(clase));
     }
 }

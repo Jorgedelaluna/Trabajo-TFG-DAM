@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface CoachRepository extends JpaRepository<Coach, Long> {
 
-    Optional<Coach> findByNombre(String nombre);
+    Optional<Coach> findByNombreIgnoreCase(String nombre);
 }

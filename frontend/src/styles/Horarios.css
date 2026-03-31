@@ -1,19 +1,24 @@
 /* ======================================================
-   HORARIOS PAGE — Estilos generales
-   Sección pública con tarjetas informativas y horario semanal
+HORARIOS PAGE — Estilos generales
+   
+  - Página pública que muestra horarios semanales y tarjetas
+    informativas por día.
+  - Incluye padding superior para evitar solaparse con la navbar fija.
 ====================================================== */
 .horarios-section {
   padding-top: 120px;   /* espacio para navbar fija */
   padding-bottom: 80px;
-  color: white;
 }
 
 /* ======================================================
-   TARJETAS PRINCIPALES (L-V / Sábado / Domingo)
-   Glassmorphism + hover suave
+TARJETAS PRINCIPALES (L-V / Sábado / Domingo)
+
+  - Tarjetas con efecto glassmorphism.
+  - Borde lateral amarillo para reforzar branding.
+  - Hover con elevación suave para sensación de profundidad.
 ====================================================== */
 .horarios-card {
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.10) !important;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-left: 4px solid var(--brand-yellow);
   border-radius: 16px;
@@ -28,7 +33,11 @@
 }
 
 /* ======================================================
-   ICONO DE LAS TARJETAS PRINCIPALES
+ICONO DE LAS TARJETAS PRINCIPALES
+
+  - Icono circular con borde y sombra.
+  - Centrado perfecto mediante flexbox.
+  - Refuerza la identidad visual del panel público.
 ====================================================== */
 .horarios-icon {
   font-size: 32px;
@@ -38,15 +47,18 @@
   border: 2px solid rgba(255,255,255,0.2);
   border-radius: 50%;
   display: flex;
-  align-items: center;     /* centrado correcto */
-  justify-content: center; /* centrado correcto */
+  align-items: center;     /* centrado vertical */
+  justify-content: center; /* centrado horizontal */
   margin: 0 auto 20px auto;
   backdrop-filter: blur(4px);
   box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
 /* ======================================================
-   TIPOGRAFÍA: DÍA Y HORARIO
+TIPOGRAFÍA: DÍA Y HORARIO
+
+  - Títulos destacados en amarillo corporativo.
+  - Tamaños grandes para mejorar legibilidad.
 ====================================================== */
 .horarios-day {
   font-size: 1.4rem;
@@ -62,7 +74,10 @@
 }
 
 /* ======================================================
-   LISTA DE ACTIVIDADES (tarjetas principales)
+LISTA DE ACTIVIDADES (dentro de cada tarjeta)
+
+  - Lista vertical con separación sutil entre elementos.
+  - Último elemento sin borde inferior.
 ====================================================== */
 .horarios-list li {
   padding: 6px 0;
@@ -76,7 +91,10 @@
 }
 
 /* ======================================================
-   LISTA CON SCROLL (horario semanal)
+LISTA CON SCROLL (horario semanal)
+
+  - Altura máxima para evitar tarjetas demasiado largas.
+  - Scrollbar personalizado para estética moderna.
 ====================================================== */
 .horarios-list {
   max-height: 260px;

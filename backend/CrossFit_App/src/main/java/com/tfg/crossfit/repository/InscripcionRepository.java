@@ -1,5 +1,6 @@
 package com.tfg.crossfit.repository;
 
+import com.tfg.crossfit.model.EstadoInscripcion;
 import com.tfg.crossfit.model.Inscripcion;
 import com.tfg.crossfit.model.Usuario;
 import com.tfg.crossfit.model.Clase;
@@ -19,6 +20,8 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion, Long> 
     List<Inscripcion> findByClase(Clase clase);
 
     long countByClase(Clase clase);
+
+    boolean existsByUsuarioAndClaseAndEstado(Usuario usuario, Clase clase, EstadoInscripcion estado);
 
     // Métodos para trabajar con IDs
     boolean existsByUsuarioIdAndClaseId(Long usuarioId, Long claseId);

@@ -32,14 +32,14 @@ public class CoachServiceImpl implements CoachService {
     // <-- Evita duplicados y permite búsquedas rápidas -->
     @Override
     public Optional<Coach> findByNombre(String nombre) {
-        return coachRepository.findByNombre(nombre);
+        return coachRepository.findByNombreIgnoreCase(nombre);
     }
 
     // <-- Incluye validación para evitar coaches con el mismo nombre -->
     @Override
     public Coach save(Coach coach) {
         // <-- Validación: evitar duplicados por nombre -->
-        coachRepository.findByNombre(coach.getNombre())
+        coachRepository.findByNombreIgnoreCase(coach.getNombre())
                 .ifPresent(c -> {
                     throw new RuntimeException("Ya existe un coach con ese nombre");
                 });

@@ -1,0 +1,104 @@
+/* ======================================================
+CLASES USUARIO - Estilos principales
+
+  - Estilos aplicados a la página privada donde el usuario
+    visualiza clases disponibles y gestiona sus reservas.
+  - Mantiene coherencia con el estilo glass del dashboard.
+====================================================== */
+
+/* ======================================================
+CONTENEDOR GENERAL DE LA PÁGINA
+
+  - Espaciado interno estándar para separar contenido.
+====================================================== */
+.clases-usuario-container {
+  padding: 20px;
+}
+
+
+/* ======================================================
+TARJETAS DE CLASE (GLASSMORPHISM)
+
+  - Tarjetas reutilizables para mostrar información de clases.
+  - Fondo semitransparente + blur para estética moderna.
+  - Hover con elevación suave para dar sensación de profundidad.
+====================================================== */
+.dashboard-card {
+  background: rgba(255, 255, 255, 0.08); /* Transparencia */
+  backdrop-filter: blur(10px);           /* Efecto cristal */
+  border-radius: 15px;                   /* Bordes redondeados */
+  border: 1px solid rgba(255, 255, 255, 0.15); /* Borde sutil */
+  padding: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: white;
+}
+
+/* Efecto al pasar el ratón por encima */
+.dashboard-card:hover {
+  transform: translateY(-4px); /* Se eleva ligeramente */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* Sombra elegante */
+}
+
+
+/* ======================================================
+ TÍTULOS DE LAS TARJETAS
+
+  - Títulos destacados con margen inferior.
+====================================================== */
+.dashboard-card h4 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+
+/* ======================================================
+ICONOS DENTRO DE LAS TARJETAS
+
+  - Botón ancho, redondeado y destacado.
+  - Se usa en cada tarjeta de clase disponible.
+  ====================================================== */
+.dashboard-card svg {
+  margin-right: 6px;
+}
+
+
+/* ======================================================
+ BOTÓN "RESERVAR"
+
+  - Botón ancho, redondeado y destacado.
+  - Se usa en cada tarjeta de clase disponible.
+====================================================== */
+.btn-reservar {
+  width: 100%;
+  margin-top: 10px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+
+/* ======================================================
+MENSAJE DE ÉXITO (AL RESERVAR)
+
+  - Estilo glass con tonos azules para indicar acción correcta.
+====================================================== */
+.alert-info {
+  background: rgba(0, 123, 255, 0.2);
+  border: 1px solid rgba(0, 123, 255, 0.4);
+  color: white;
+  backdrop-filter: blur(6px);
+}
+
+/* ======================================================
+TARJETAS DE CLASES RESERVADAS
+
+  - Tarjetas similares a las de clases disponibles,
+    pero con estilo diferenciado para indicar reserva activa.
+ ====================================================== */
+.reserva-card {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white !important;
+}

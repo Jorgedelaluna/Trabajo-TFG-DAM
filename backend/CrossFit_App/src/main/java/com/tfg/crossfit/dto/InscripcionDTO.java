@@ -12,4 +12,7 @@ public class InscripcionDTO {
     private Long claseId;
     private EstadoInscripcion estado;
     private LocalDateTime fechaInscripcion;
+    private String claseNombre;
+    private String coachNombre;
+    private LocalDateTime fechaHora;
 }

@@ -1,11 +1,17 @@
 /* =========================================
-   DASHBOARD WRAPPER
+CONTENEDOR PRINCIPAL DEL DASHBOARD
+
+ - Define el espacio donde se renderiza el contenido interno
+   del panel (admin, coach o usuario).
+ - Incluye padding superior para evitar solaparse con el navbar.
 ========================================= */
 .dashboard-container {
   padding: 90px 30px 40px;
   color: var(--white);
+    margin-left: 240px; /* mismo ancho que el sidebar */
 }
 
+/* Tipografías internas del dashboard*/ 
 .dashboard-container h1,
 .dashboard-container h2,
 .dashboard-container h3,
@@ -15,19 +21,24 @@
     color: white;
 }
 
+/* Nombre del usuario en el dashboard */
 .nombre-usuario {
     color: white;
     font-weight: 600;
     font-size: 1.8rem;
 }
 
+/* Estado de cuota destacado */
 .estado-cuota {
     color: #f1c40f !important;
     font-weight: bold;
 }
 
 /* =========================================
-   TARJETA DE PERFIL
+TARJETA DE PERFIL
+  
+  - Se usa en dashboards para mostrar avatar + datos del usuario.
+  - Diseño simple y alineado con el estilo glass general.
 ========================================= */
 .profile-card {
   display: flex;
@@ -44,7 +55,11 @@
 }
 
 /* =========================================
-   TARJETAS DEL DASHBOARD
+TARJETAS DEL DASHBOARD (Glassmorphism)
+
+  - Tarjetas reutilizables para paneles, estadísticas y listados.
+  - Fondo semitransparente + blur para estética moderna.
+  - Animación hover para dar sensación de profundidad.
 ========================================= */
 .dashboard-card {
   background: rgba(255, 255, 255, 0.08);
@@ -64,7 +79,10 @@
 }
 
 /* =========================================
-   HEADER DE TARJETA
+HEADER DE TARJETA
+
+  - Cabecera con icono + título.
+  - Línea inferior sutil para separar contenido.
 ========================================= */
 .dashboard-card-header {
   display: flex;
@@ -80,10 +98,89 @@
 }
 
 /* =========================================
-   RESPONSIVE
+RESPONSIVE
+
+  - Ajusta el padding en pantallas pequeñas.
 ========================================= */
 @media (max-width: 768px) {
   .dashboard-container {
     padding: 80px 15px;
   }
+}
+
+/* =========================================
+SIDEBAR ADMIN (Glassmorphism)
+
+  - Sidebar exclusivo del administrador.
+  - Fijo a la izquierda, con estilo glass y navegación vertical.
+========================================= */
+.admin-sidebar {
+  width: 240px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  /* Reutiliza estilo glass */
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0 14px 14px 0;
+  backdrop-filter: blur(6px);
+}
+
+/* Título del sidebar */
+.sidebar-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+/* Navegación del sidebar */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Enlaces del sidebar */
+.sidebar-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  transition: 0.2s ease;
+}
+
+/* Hover del enlace */
+.sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(4px);
+}
+
+/* ============================================
+   ADMIN LAYOUT (estilo igual que usuario/coach)
+============================================ */
+.admin-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Contenido principal */
+.admin-content {
+  flex: 1;
+  padding: 20px;
+  margin-top: 80px;
+  color: white;
 }
