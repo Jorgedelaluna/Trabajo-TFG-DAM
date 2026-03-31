@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import "../../../styles/Dashboard.css";
-import API_URL from "../../api/api";
+import API_URL from "../../../api/api";
 
 export default function UsuarioDetallePage() {
 
