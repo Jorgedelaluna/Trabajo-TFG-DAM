@@ -58,7 +58,7 @@ export function AuthProvider({ children }) {
 
         const cargarUsuario = async () => {
             try {
-                const res = await fetch(`${API_URL}/usuarios/login`, {
+                const res = await fetch(`${API_URL}/usuarios/me`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
