@@ -21,131 +21,139 @@ import API_URL from "../../../api/api";
 
 export default function ClaseNuevaPage() {
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  // Estado inicial del formulario
-  const [clase, setClase] = useState({
-    actividad: "",
-    fecha: "",
-    hora: "",
-    aforo: 10
-  });
+    // Estado inicial del formulario
+    const [clase, setClase] = useState({
+        actividad: "",
+        fecha: "",
+        hora: "",
+        aforo: 10
+    });
 
-  /**
-   * ============================================================
-   *  Crear nueva clase en el backend
-   * ============================================================
-   */
-  const crearClase = async (e) => {
-    e.preventDefault();
+    /**
+     * ============================================================
+     *  Crear nueva clase en el backend
+     * ============================================================
+     */
+    const crearClase = async (e) => {
+        e.preventDefault();
 
-    try {
-      // Construir fechaHora en formato ISO
-      const fechaHora = `${clase.fecha}T${clase.hora}:00`;
+        try {
+            // Construir fechaHora en formato ISO
+            const fechaHora = `${clase.fecha}T${clase.hora}:00`;
 
-        await axios.post(`${API_URL}/clases`, {
-        actividad: clase.actividad,
-        fechaHora: fechaHora,
-        aforo: clase.aforo
-      });
+            await axios.post(
+                `${API_URL}/clases`,
+                {
+                    actividad: clase.actividad,
+                    fechaHora: fechaHora,
+                    aforo: clase.aforo
+                },
+                {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("token")
+                    }
+                }
+            );
 
-      alert("Clase creada correctamente");
-      navigate("/admin/clases");
+            alert("Clase creada correctamente");
+            navigate("/admin/clases");
 
-    } catch (error) {
-      console.error("Error creando clase:", error);
-      alert("No se pudo crear la clase");
-    }
-  };
+        } catch (error) {
+            console.error("Error creando clase:", error);
+            alert("No se pudo crear la clase");
+        }
+    };
 
-  /**
-   * ============================================================
-   *  Render principal
-   * ============================================================
-   */
-  return (
-    <div className="dashboard-container-fluid">
+    /**
+     * ============================================================
+     *  Render principal
+     * ============================================================
+     */
+    return (
+        <div className="dashboard-container-fluid">
 
-      <h1 className="fw-bold mb-4">Crear Nueva Clase</h1>
+            <h1 className="fw-bold mb-4">Crear Nueva Clase</h1>
 
-      <div className="dashboard-card p-4">
+            <div className="dashboard-card p-4">
 
-        <form onSubmit={crearClase} className="row g-3">
+                <form onSubmit={crearClase} className="row g-3">
 
-          {/* Actividad */}
-          <div className="col-md-6">
-            <label className="form-label">Actividad</label>
-            <input
-              type="text"
-              className="form-control"
-              value={clase.actividad}
-              onChange={(e) =>
-                setClase({ ...clase, actividad: e.target.value })
-              }
-              required
-            />
-          </div>
+                    {/* Actividad */}
+                    <div className="col-md-6">
+                        <label className="form-label">Actividad</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={clase.actividad}
+                            onChange={(e) =>
+                                setClase({ ...clase, actividad: e.target.value })
+                            }
+                            required
+                        />
+                    </div>
 
-          {/* Fecha */}
-          <div className="col-md-3">
-            <label className="form-label">Fecha</label>
-            <input
-              type="date"
-              className="form-control"
-              value={clase.fecha}
-              onChange={(e) =>
-                setClase({ ...clase, fecha: e.target.value })
-              }
-              required
-            />
-          </div>
+                    {/* Fecha */}
+                    <div className="col-md-3">
+                        <label className="form-label">Fecha</label>
+                        <input
+                            type="date"
+                            className="form-control"
+                            value={clase.fecha}
+                            onChange={(e) =>
+                                setClase({ ...clase, fecha: e.target.value })
+                            }
+                            required
+                        />
+                    </div>
 
-          {/* Hora */}
-          <div className="col-md-3">
-            <label className="form-label">Hora</label>
-            <input
-              type="time"
-              className="form-control"
-              value={clase.hora}
-              onChange={(e) =>
-                setClase({ ...clase, hora: e.target.value })
-              }
-              required
-            />
-          </div>
+                    {/* Hora */}
+                    <div className="col-md-3">
+                        <label className="form-label">Hora</label>
+                        <input
+                            type="time"
+                            className="form-control"
+                            value={clase.hora}
+                            onChange={(e) =>
+                                setClase({ ...clase, hora: e.target.value })
+                            }
+                            required
+                        />
+                    </div>
 
-          {/* Aforo */}
-          <div className="col-md-3">
-            <label className="form-label">Aforo</label>
-            <input
-              type="number"
-              className="form-control"
-              value={clase.aforo}
-              onChange={(e) =>
-                setClase({ ...clase, aforo: Number(e.target.value) })
-              }
-              required
-            />
-          </div>
+                    {/* Aforo */}
+                    <div className="col-md-3">
+                        <label className="form-label">Aforo</label>
+                        <input
+                            type="number"
+                            className="form-control"
+                            value={clase.aforo}
+                            onChange={(e) =>
+                                setClase({ ...clase, aforo: Number(e.target.value) })
+                            }
+                            required
+                        />
+                    </div>
 
-          {/* Botones */}
-          <div className="col-12 mt-4">
-            <button type="submit" className="btn btn-primary me-2">
-              Crear clase
-            </button>
+                    {/* Botones */}
+                    <div className="col-12 mt-4">
+                        <button type="submit" className="btn btn-primary me-2">
+                            Crear clase
+                        </button>
 
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={() => navigate("/admin/clases")}
-            >
-              Cancelar
-            </button>
-          </div>
+                        <button
+                            type="button"
+                            className="btn btn-secondary"
+                            onClick={() => navigate("/admin/clases")}
+                        >
+                            Cancelar
+                        </button>
+                    </div>
 
-        </form>
+                </form>
 
-      </div>
-    </div>
-  );
+            </div>
+        </div>
+    );
 }
