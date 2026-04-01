@@ -94,14 +94,14 @@ export default function LoginPage() {
       <div className="card auth-card shadow p-4">
 
         {/* TÃ­tulo */}
-        <h3 className="text-center mb-4 fw-bold">Iniciar sesiÃ³n</h3>
+        <h3 className="text-center mb-4 fw-bold">Iniciar sesión</h3>
 
         {/* Formulario */}
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             
             {/* Email */}
-            <label className="form-label fw-semibold">Correo electrÃ³nico</label>
+            <label className="form-label fw-semibold">Correo electrónico</label>
             <input
               type="email"
               name="email"
@@ -115,19 +115,19 @@ export default function LoginPage() {
 
           {/* ContraseÃ±a */}
           <div className="mb-3">
-            <label className="form-label fw-semibold">ContraseÃ±a</label>
+            <label className="form-label fw-semibold">Contraseña</label>
             <input
               type="password"
               name="password"
               className="form-control form-control-lg"
-              placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
+              placeholder="******"
               value={form.password}
               onChange={handleChange}
               required
             />
           </div>
 
-          {/* BotÃ³n entrar */}
+          {/* Boton entrar */}
           <button type="submit" className="btn btn-primary btn-lg w-100 mt-2">
             Entrar
           </button>
@@ -138,9 +138,9 @@ export default function LoginPage() {
 
         {/* Enlace a registro */}
         <p className="text-center mt-3">
-          Â¿No tienes cuenta?
+          ¿No tienes cuenta?
           <Link to="/registro" className="fw-bold ms-1 text-primary">
-            RegÃ­strate
+            Regístrate
           </Link>
         </p>
 
