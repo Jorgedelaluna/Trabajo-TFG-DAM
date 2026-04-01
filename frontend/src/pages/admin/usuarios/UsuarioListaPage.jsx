@@ -20,80 +20,86 @@ import "../../../styles/Dashboard.css";
 import API_URL from "../../../api/api";
 export default function UsuarioListaPage() {
 
-  // Lista de usuarios obtenidos del backend
-  const [usuarios, setUsuarios] = useState([]);
+    // Lista de usuarios obtenidos del backend
+    const [usuarios, setUsuarios] = useState([]);
 
-  /**
-   * ============================================================
-   *  Cargar usuarios al montar el componente
-   * ============================================================
-   */
-  useEffect(() => {
-    cargarUsuarios();
-  }, []);
+    /**
+     * ============================================================
+     *  Cargar usuarios al montar el componente
+     * ============================================================
+     */
+    useEffect(() => {
+        cargarUsuarios();
+    }, []);
 
-  const cargarUsuarios = async () => {
-    try {
-      const res = await axios.get(`${API_URL}/usuarios/me`);
-      setUsuarios(res.data);
-    } catch (error) {
-      console.error("Error cargando usuarios:", error);
-    }
-  };
+    const cargarUsuarios = async () => {
+        try {
+            const res = await axios.get(`${API_URL}/usuarios`, {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                }
+            });
 
-  return (
-    <div className="dashboard-container-fluid">
+            setUsuarios(res.data); // 👈 ESTO ES LO QUE FALTA
 
-      {/* Titulo principal */}
-      <h1 className="fw-bold mb-4">Gestión de Usuarios</h1>
+        } catch (error) {
+            console.error("Error cargando usuarios:", error);
+        }
+    };
 
-      {/* Tarjeta principal */}
-      <div className="dashboard-card p-4">
+    return (
+        <div className="dashboard-container-fluid">
 
-        {/* Tabla de usuarios*/}
-        <table className="table table-dark table-striped">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Email</th>
-              <th>Rol</th>
-              <th>Cuota</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
+            {/* Titulo principal */}
+            <h1 className="fw-bold mb-4">Gestión de Usuarios</h1>
 
-          <tbody>
-            {/* Si no hay usuarios */}
-            {usuarios.length === 0 && (
-              <tr>
-                <td colSpan="5" className="text-center py-4">
-                  No hay usuarios registrados.
-                </td>
-              </tr>
-            )}
+            {/* Tarjeta principal */}
+            <div className="dashboard-card p-4">
 
-            {/* Listado real */}
-            {usuarios.map((u) => (
-              <tr key={u.id}>
-                <td>{u.nombre}</td>
-                <td>{u.email}</td>
-                <td>{u.rol}</td>
-                <td>{u.cuota}</td>
+                {/* Tabla de usuarios*/}
+                <table className="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Rol</th>
+                            <th>Cuota</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
 
-                <td>
-                  <Link
-                    to={`/admin/usuarios/${u.id}`}
-                    className="btn btn-primary btn-sm"
-                  >
-                    Ver detalle
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                    <tbody>
+                        {/* Si no hay usuarios */}
+                        {usuarios.length === 0 && (
+                            <tr>
+                                <td colSpan="5" className="text-center py-4">
+                                    No hay usuarios registrados.
+                                </td>
+                            </tr>
+                        )}
 
-      </div>
-    </div>
-  );
+                        {/* Listado real */}
+                        {usuarios.map((u) => (
+                            <tr key={u.id}>
+                                <td>{u.nombre}</td>
+                                <td>{u.email}</td>
+                                <td>{u.rol}</td>
+                                <td>{u.cuota}</td>
+
+                                <td>
+                                    <Link
+                                        to={`/admin/usuarios/${u.id}`}
+                                        className="btn btn-primary btn-sm"
+                                    >
+                                        Ver detalle
+                                    </Link>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    );
 }
