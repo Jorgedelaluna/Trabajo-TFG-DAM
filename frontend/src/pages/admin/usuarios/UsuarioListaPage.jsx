@@ -45,7 +45,7 @@ export default function UsuarioListaPage() {
     <div className="dashboard-container-fluid">
 
       {/* Titulo principal */}
-      <h1 className="fw-bold mb-4">GestiÃ³n de Usuarios</h1>
+      <h1 className="fw-bold mb-4">Gestión de Usuarios</h1>
 
       {/* Tarjeta principal */}
       <div className="dashboard-card p-4">

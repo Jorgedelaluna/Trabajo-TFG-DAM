@@ -1,6 +1,6 @@
 /**
  * ============================================================
- *  PÁGINA ADMIN: ActividadNuevaPage.jsx
+ *  P�GINA ADMIN: ActividadNuevaPage.jsx
  * 
  *  Permite crear una nueva actividad (CrossFit, Yoga…)
  *  Forma parte del panel de administración.
@@ -11,88 +11,89 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../../styles/Dashboard.css";
+import API_URL from "../../../api/api";
 
 export default function ActividadNuevaPage() {
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  // Estado del formulario
-  const [actividad, setActividad] = useState({
-    nombre: "",
-    descripcion: ""
-  });
+    // Estado del formulario
+    const [actividad, setActividad] = useState({
+        nombre: "",
+        descripcion: ""
+    });
 
-  /**
-   * ============================================================
-   * CREAR ACTIVIDAD
-   * - Crear actividad en el backend
-   * ============================================================
-   */
-  const crearActividad = async (e) => {
-    e.preventDefault();
+    /**
+     * ============================================================
+     * CREAR ACTIVIDAD
+     * - Crear actividad en el backend
+     * ============================================================
+     */
+    const crearActividad = async (e) => {
+        e.preventDefault();
 
-    try {
-      await axios.post("http://localhost:8080/actividades", actividad);
-      alert("Actividad creada");
-      navigate("/admin/actividades");
-    } catch (err) {
-      console.error(err);
-      alert("No se pudo crear la actividad");
-    }
-  };
-  
-   /**
-   * ======================================================
-   *  RENDER PRINCIPAL
-   * ======================================================
-   */
-  return (
-    <div className="dashboard-container-fluid">
+        try {
+            await axios.post(`${API_URL}/actividades`, actividad);
+            alert("Actividad creada");
+            navigate("/admin/actividades");
+        } catch (err) {
+            console.error(err);
+            alert("No se pudo crear la actividad");
+        }
+    };
 
-      <h1 className="fw-bold mb-4">Nueva Actividad</h1>
+    /**
+    * ======================================================
+    *  RENDER PRINCIPAL
+    * ======================================================
+    */
+    return (
+        <div className="dashboard-container-fluid">
 
-      <div className="dashboard-card p-4">
+            <h1 className="fw-bold mb-4">Nueva Actividad</h1>
 
-        <form onSubmit={crearActividad} className="row g-3">
+            <div className="dashboard-card p-4">
 
-          {/* Nombre */}
-          <div className="col-12">
-            <label className="form-label">Nombre</label>
-            <input
-              type="text"
-              className="form-control"
-              value={actividad.nombre}
-              onChange={(e) => setActividad({ ...actividad, nombre: e.target.value })}
-              required
-            />
-          </div>
+                <form onSubmit={crearActividad} className="row g-3">
 
-          {/* Descripción */}
-          <div className="col-12">
-            <label className="form-label">Descripción</label>
-            <textarea
-              className="form-control"
-              rows="3"
-              value={actividad.descripcion}
-              onChange={(e) => setActividad({ ...actividad, descripcion: e.target.value })}
-            />
-          </div>
+                    {/* Nombre */}
+                    <div className="col-12">
+                        <label className="form-label">Nombre</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={actividad.nombre}
+                            onChange={(e) => setActividad({ ...actividad, nombre: e.target.value })}
+                            required
+                        />
+                    </div>
 
-          {/* Botones */}
-          <div className="col-12 mt-3">
-            <button className="btn btn-primary me-2">Crear</button>
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={() => navigate("/admin/actividades")}
-            >
-              Cancelar
-            </button>
-          </div>
+                    {/* Descripción */}
+                    <div className="col-12">
+                        <label className="form-label">Descripci�n</label>
+                        <textarea
+                            className="form-control"
+                            rows="3"
+                            value={actividad.descripcion}
+                            onChange={(e) => setActividad({ ...actividad, descripcion: e.target.value })}
+                        />
+                    </div>
 
-        </form>
+                    {/* Botones */}
+                    <div className="col-12 mt-3">
+                        <button className="btn btn-primary me-2">Crear</button>
+                        <button
+                            type="button"
+                            className="btn btn-secondary"
+                            onClick={() => navigate("/admin/actividades")}
+                        >
+                            Cancelar
+                        </button>
+                    </div>
 
-      </div>
-    </div>
-  );
+                </form>
+
+            </div>
+        </div>
+    );
 }

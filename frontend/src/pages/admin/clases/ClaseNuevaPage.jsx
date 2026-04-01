@@ -1,6 +1,6 @@
 /**
  * ============================================================
- *  P√ÅGINA ADMIN / COACH: ClaseNuevaPage.jsx
+ *  P¡GINA ADMIN / COACH: ClaseNuevaPage.jsx
  * 
  *  Vista para crear una nueva clase en el sistema.
  *  Funcionalidades:
@@ -17,6 +17,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../../styles/Dashboard.css";
+import API_URL from "../../../api/api";
 
 export default function ClaseNuevaPage() {
 
@@ -42,7 +43,7 @@ export default function ClaseNuevaPage() {
       // Construir fechaHora en formato ISO
       const fechaHora = `${clase.fecha}T${clase.hora}:00`;
 
-      await axios.post("http://localhost:8080/clases", {
+        await axios.post(`${API_URL}/clases`, {
         actividad: clase.actividad,
         fechaHora: fechaHora,
         aforo: clase.aforo

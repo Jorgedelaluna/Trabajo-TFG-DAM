@@ -1,6 +1,6 @@
 /**
  * ============================================================
- *  PÁGINA ADMIN: CoachDetallePage.jsx
+ *  P�GINA ADMIN: CoachDetallePage.jsx
  * 
  *  Muestra la información completa de un coach.
  *  Accesible solo para ADMIN.
@@ -11,6 +11,8 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import "../../../styles/Dashboard.css";
+import API_URL from "../../../api/api";
+
 
 export default function CoachDetallePage() {
 
@@ -28,7 +30,7 @@ export default function CoachDetallePage() {
   useEffect(() => {
     const cargar = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/coaches/${id}`);
+        const res = await axios.get(`${API_URL}/coaches/${id}`);
         setCoach(res.data);
       } catch (err) {
         console.error(err);

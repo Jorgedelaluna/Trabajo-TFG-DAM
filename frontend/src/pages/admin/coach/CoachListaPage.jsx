@@ -1,6 +1,6 @@
 /**
  * ============================================================
- *  PÃGINA ADMIN: CoachListaPage.jsx
+ *  PÁGINA ADMIN: CoachListaPage.jsx
  * 
  *  Lista todos los coaches registrados en el sistema.
  *  Permite acceder al detalle de cada uno.
@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "../../../styles/Dashboard.css";
+import API_URL from "../../../api/api";
 
 export default function CoachListaPage() {
 
@@ -26,7 +27,7 @@ export default function CoachListaPage() {
   useEffect(() => {
     const cargar = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/coaches");
+        const res = await axios.get(`${API_URL}/coaches`);
         setCoaches(res.data);
       } catch (err) {
         console.error(err);
@@ -43,7 +44,7 @@ export default function CoachListaPage() {
   return (
     <div className="dashboard-container-fluid">
 
-      <h1 className="fw-bold mb-4">GestiÃ³n de Coaches</h1>
+      <h1 className="fw-bold mb-4">Gestión de Coaches</h1>
 
       <div className="dashboard-card p-4">
 
