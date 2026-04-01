@@ -46,9 +46,9 @@ export default function ClaseNuevaPage() {
             await axios.post(
                 `${API_URL}/clases`,
                 {
-                    actividad: clase.actividad,
+                    actividadNombre: clase.actividad,
                     fechaHora: fechaHora,
-                    aforo: clase.aforo
+                    aforoMaximo: clase.aforo
                 },
                 {
                     headers: {
