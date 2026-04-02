@@ -36,7 +36,11 @@ export default function ActividadListaPage() {
     useEffect(() => {
         const cargar = async () => {
             try {
-                const res = await axios.get(`${API_URL}/actividades`);
+                const res = await axios.get(`${API_URL}/actividades`, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("token")
+                    }
+                });
                 setActividades(res.data);
             } catch (err) {
                 console.error("Error cargando actividades:", err);
@@ -57,7 +61,13 @@ export default function ActividadListaPage() {
         if (!window.confirm("¿Eliminar actividad?")) return;
 
         try {
-            await axios.delete(`${API_URL}/actividades/${id}`);
+            await axios.delete(`${API_URL}/actividades/${id}`, {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                }
+            });
+
+
             setActividades(prev => prev.filter(a => a.id !== id));
             alert("Actividad eliminada");
         } catch (err) {

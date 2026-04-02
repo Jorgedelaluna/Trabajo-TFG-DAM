@@ -8,4 +8,5 @@ public class CoachDTO {
     private String nombre;
     private String descripcion;
     private String certificaciones;
+    private String email;
 }
