@@ -18,140 +18,163 @@ import java.util.List;
 @Service
 public class ClaseService {
 
-    private final ClaseRepository claseRepository;
-    private final ClaseMapper claseMapper;
-    private final HorarioClaseRepository horarioClaseRepository;
-    private final CoachRepository coachRepository;
-    private final ActividadRepository actividadRepository;
+	private final ClaseRepository claseRepository;
+	private final ClaseMapper claseMapper;
+	private final HorarioClaseRepository horarioClaseRepository;
+	private final CoachRepository coachRepository;
+	private final ActividadRepository actividadRepository;
 
-    // Constructor con las dependencias necesarias
-    public ClaseService(ClaseRepository claseRepository, ClaseMapper claseMapper,
-                        HorarioClaseRepository horarioClaseRepository,
-                        CoachRepository coachRepository,
-                        ActividadRepository actividadRepository) {
+	// Constructor con las dependencias necesarias
+	public ClaseService(ClaseRepository claseRepository, ClaseMapper claseMapper,
+			HorarioClaseRepository horarioClaseRepository, CoachRepository coachRepository,
+			ActividadRepository actividadRepository) {
 
-        this.claseRepository = claseRepository;
-        this.claseMapper = claseMapper;
-        this.horarioClaseRepository = horarioClaseRepository;
-        this.coachRepository = coachRepository;
-        this.actividadRepository = actividadRepository;
-    }
+		this.claseRepository = claseRepository;
+		this.claseMapper = claseMapper;
+		this.horarioClaseRepository = horarioClaseRepository;
+		this.coachRepository = coachRepository;
+		this.actividadRepository = actividadRepository;
+	}
 
-    // Método para crear una nueva clase a partir de un DTO
-    public ClaseDTO crearClase(ClaseDTO claseDTO) {
-        Clase clase = claseMapper.toEntity(claseDTO);
-        Clase guardada = claseRepository.save(clase);
-        return claseMapper.toDTO(guardada);
-    }
+	// Método para crear una nueva clase a partir de un DTO
+	public ClaseDTO crearClase(ClaseDTO claseDTO) {
 
-    // Método para listar todas las clases guardadas
-    public List<ClaseDTO> listarClases() {
-        return claseRepository.findAll()
-                .stream()
-                .map(claseMapper::toDTO)
-                .toList(); }
+		Clase clase = new Clase();
 
-    // Método para buscar una clase por id
-    public ClaseDTO obtenerClase(Long id) {
-        Clase clase = claseRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Clase no encontrada"));
-        return claseMapper.toDTO(clase);
-    }
+		// Campos básicos
+		clase.setFechaHora(claseDTO.getFechaHora());
+		clase.setAforoMaximo(claseDTO.getAforoMaximo());
 
-    // Método para eliminar una clase por id
-    public void eliminarClase(Long id) {
-        if (!claseRepository.existsById(id)) {
-            throw new EntityNotFoundException("Clase no encontrada");
-        }
-        claseRepository.deleteById(id); }
+		// Actividad por defecto (ID = 1)
+		Actividad actividad = actividadRepository.findById(1L)
+				.orElseThrow(() -> new RuntimeException("Actividad por defecto no encontrada"));
+		clase.setActividad(actividad);
 
-    // Método para obtener la entidad Clase
-    public Clase obtenerEntidad(Long id) {
-        return claseRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Clase no encontrada"));
-    }
+		// Coach por defecto (ID = 1)
+		var coach = coachRepository.findById(1L)
+				.orElseThrow(() -> new RuntimeException("Coach por defecto no encontrado"));
+		clase.setCoach(coach);
 
-    // Método para generar clases a partir del horario de la base de datos
-    public void generarClasesDesdeHorario() {
-        System.out.println("=== EJECUTANDO GENERAR CLASES ===");
+		// Guardar en BD
+		Clase guardada = claseRepository.save(clase);
 
-        List<HorarioClase> horarios = horarioClaseRepository.findAll();
-        System.out.println("Horarios encontrados: " + horarios.size());
+		return claseMapper.toDTO(guardada);
+	}
 
-        for (HorarioClase h : horarios) {
+	// Método para listar todas las clases guardadas
+	public List<ClaseDTO> listarClases() {
+		return claseRepository.findAll().stream().map(claseMapper::toDTO).toList();
+	}
 
-            try{
-                // Omitir días marcados como cerrados
-                if ("CERRADO".equalsIgnoreCase(h.getTipo())) {
-                    System.out.println("Saltando horario cerrado: " + h.getDiaSemana());
-                    continue;
-                }
+	// Método para buscar una clase por id
+	public ClaseDTO obtenerClase(Long id) {
+		Clase clase = claseRepository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("Clase no encontrada"));
+		return claseMapper.toDTO(clase);
+	}
 
-                // Calcular la fecha real del próximo día de la semana
-                // Saltar horas inválidas como "--:--"
-                if (h.getHora() == null || h.getHora().equals("--:--")) {
-                    System.out.println("Hora inválida en horario: " + h.getId());
-                    continue;
-                }
+	// Método para eliminar una clase por id
+	public void eliminarClase(Long id) {
+		if (!claseRepository.existsById(id)) {
+			throw new EntityNotFoundException("Clase no encontrada");
+		}
+		claseRepository.deleteById(id);
+	}
 
-                // Convertir hora
-                LocalTime hora;
-                try {
-                    hora = LocalTime.parse(h.getHora());
-                } catch (Exception e) {
-                    System.out.println("Formato de hora inválido: " + h.getHora());
-                    continue;
-                }
+	// Método para obtener la entidad Clase
+	public Clase obtenerEntidad(Long id) {
+		return claseRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Clase no encontrada"));
+	}
 
-                // Convertir día de la semana
-                DayOfWeek dia = convertirDia(h.getDiaSemana());
+	// Método para generar clases a partir del horario de la base de datos
+	public void generarClasesDesdeHorario() {
+		System.out.println("=== EJECUTANDO GENERAR CLASES ===");
 
-                // Calcular fecha real del próximo día
-                LocalDate hoy = LocalDate.now();
-                int diff = dia.getValue() - hoy.getDayOfWeek().getValue();
-                if (diff <= 0) diff += 7;
-                LocalDate fecha = hoy.plusDays(diff);
+		List<HorarioClase> horarios = horarioClaseRepository.findAll();
+		System.out.println("Horarios encontrados: " + horarios.size());
 
-                LocalDateTime fechaHora = LocalDateTime.of(fecha, hora);
+		for (HorarioClase h : horarios) {
 
-                // Obtener coach dinámicamente
-                var coach = h.getCoach();
-                System.out.println("Coach en horario: " + h.getCoach().getNombre());
+			try {
+				// Omitir días marcados como cerrados
+				if ("CERRADO".equalsIgnoreCase(h.getTipo())) {
+					System.out.println("Saltando horario cerrado: " + h.getDiaSemana());
+					continue;
+				}
 
-                // Obtener actividad desde la BD
-                Actividad actividad = h.getActividad();
-                System.out.println("Actividad en horario: " + h.getActividad().getNombre());
+				// Calcular la fecha real del próximo día de la semana
+				// Saltar horas inválidas como "--:--"
+				if (h.getHora() == null || h.getHora().equals("--:--")) {
+					System.out.println("Hora inválida en horario: " + h.getId());
+					continue;
+				}
 
-                // Crear clase real
-                Clase clase = new Clase();
-                clase.setActividad(actividad);
-                clase.setFechaHora(fechaHora);
-                clase.setAforoMaximo(20); // Valor configurable
-                clase.setCoach(coach);
+				// Convertir hora
+				LocalTime hora;
+				try {
+					hora = LocalTime.parse(h.getHora());
+				} catch (Exception e) {
+					System.out.println("Formato de hora inválido: " + h.getHora());
+					continue;
+				}
 
-                claseRepository.save(clase);
-                System.out.println("Clase generada: " + clase.getActividad().getNombre() + " - " + fechaHora);
+				// Convertir día de la semana
+				DayOfWeek dia = convertirDia(h.getDiaSemana());
 
-                } catch (Exception e) {
-                System.out.println("Error generando clase para horario " + h.getId() + ": " + e.getMessage());
-                }
-        }
+				// Calcular fecha real del próximo día
+				LocalDate hoy = LocalDate.now();
+				int diff = dia.getValue() - hoy.getDayOfWeek().getValue();
+				if (diff <= 0)
+					diff += 7;
+				LocalDate fecha = hoy.plusDays(diff);
 
-    }
+				LocalDateTime fechaHora = LocalDateTime.of(fecha, hora);
 
-    // Convertir día de la semana en español de DayOfWeek
-    private DayOfWeek convertirDia(String dia) {
-        dia = dia.toUpperCase();
+				// Obtener coach dinámicamente
+				var coach = h.getCoach();
+				System.out.println("Coach en horario: " + h.getCoach().getNombre());
 
-        if (dia.equals("LUNES")) return DayOfWeek.MONDAY;
-        if (dia.equals("MARTES")) return DayOfWeek.TUESDAY;
-        if (dia.equals("MIERCOLES")) return DayOfWeek.WEDNESDAY;
-        if (dia.equals("JUEVES")) return DayOfWeek.THURSDAY;
-        if (dia.equals("VIERNES")) return DayOfWeek.FRIDAY;
-        if (dia.equals("SABADO")) return DayOfWeek.SATURDAY;
-        if (dia.equals("DOMINGO")) return DayOfWeek.SUNDAY;
+				// Obtener actividad desde la BD
+				Actividad actividad = h.getActividad();
+				System.out.println("Actividad en horario: " + h.getActividad().getNombre());
 
-        throw new IllegalArgumentException("Día no válido: " + dia);
-    }
+				// Crear clase real
+				Clase clase = new Clase();
+				clase.setActividad(actividad);
+				clase.setFechaHora(fechaHora);
+				clase.setAforoMaximo(20); // Valor configurable
+				clase.setCoach(coach);
+
+				claseRepository.save(clase);
+				System.out.println("Clase generada: " + clase.getActividad().getNombre() + " - " + fechaHora);
+
+			} catch (Exception e) {
+				System.out.println("Error generando clase para horario " + h.getId() + ": " + e.getMessage());
+			}
+		}
+
+	}
+
+	// Convertir día de la semana en español de DayOfWeek
+	private DayOfWeek convertirDia(String dia) {
+		dia = dia.toUpperCase();
+
+		if (dia.equals("LUNES"))
+			return DayOfWeek.MONDAY;
+		if (dia.equals("MARTES"))
+			return DayOfWeek.TUESDAY;
+		if (dia.equals("MIERCOLES"))
+			return DayOfWeek.WEDNESDAY;
+		if (dia.equals("JUEVES"))
+			return DayOfWeek.THURSDAY;
+		if (dia.equals("VIERNES"))
+			return DayOfWeek.FRIDAY;
+		if (dia.equals("SABADO"))
+			return DayOfWeek.SATURDAY;
+		if (dia.equals("DOMINGO"))
+			return DayOfWeek.SUNDAY;
+
+		throw new IllegalArgumentException("Día no válido: " + dia);
+	}
 
 }
