@@ -1,4 +1,4 @@
-package com.tfg.crossfit.config;
+	package com.tfg.crossfit.config;
 
 import com.tfg.crossfit.security.JwtFilter;
 import org.springframework.context.annotation.Bean;
@@ -45,7 +45,10 @@ public class SecurityConfig {
 
                         // Rutas públicas
                         .requestMatchers("/usuarios/registro", "/usuarios/login").permitAll()
-                        .requestMatchers("/clases/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/clases").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/clases/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/clases").hasAnyRole("ADMIN", "COACH")
+                        .requestMatchers(HttpMethod.DELETE, "/clases/**").hasAnyRole("ADMIN", "COACH")
                         .requestMatchers("/clases/generar-semana").permitAll()
                         .requestMatchers("/horarios/**").permitAll()
 

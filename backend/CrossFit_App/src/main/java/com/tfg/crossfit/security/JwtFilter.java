@@ -56,10 +56,10 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (path.equals("/usuarios/login") ||
                 path.equals("/usuarios/registro") ||
-                path.startsWith("/clases/generar-semana") ||
-                path.startsWith("/clases") ||
-                path.startsWith("/horarios")) {
-
+                path.startsWith("/horarios") ||
+                (path.equals("/clases") && request.getMethod().equals("GET")) ||
+                (path.startsWith("/clases/") && request.getMethod().equals("GET")) ||
+                (path.equals("/clases/generar-semana") && request.getMethod().equals("POST"))) {
             filterChain.doFilter(request, response);
             return;
         }
