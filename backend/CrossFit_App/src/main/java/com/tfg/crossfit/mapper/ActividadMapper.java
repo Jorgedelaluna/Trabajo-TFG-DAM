@@ -8,6 +8,5 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring", config = CentralConfig.class)
 public interface ActividadMapper {
 	ActividadDTO toDTO(Actividad actividad);
-
 	Actividad toEntity(ActividadDTO dto);
 }
