@@ -70,7 +70,7 @@ export default function ActividadNuevaPage() {
 
                     {/* DescripciÃ³n */}
                     <div className="col-12">
-                        <label className="form-label">Descripción</label>
+                        <label className="form-label">Descripcion</label>
                         <textarea
                             className="form-control"
                             rows="3"

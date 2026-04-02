@@ -15,73 +15,77 @@ import API_URL from "../../../api/api";
 
 export default function CoachListaPage() {
 
-  // Lista de coaches
-  const [coaches, setCoaches] = useState([]);
+    // Lista de coaches
+    const [coaches, setCoaches] = useState([]);
 
-  /**
-   * ============================================================
-   * CARGAR LISTA DE COACH
-   * Cargar coaches al montar el componente
-   * ============================================================
-   */
-  useEffect(() => {
-    const cargar = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/coaches`);
-        setCoaches(res.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    cargar();
-  }, []);
+    /**
+     * ============================================================
+     * CARGAR LISTA DE COACH
+     * Cargar coaches al montar el componente
+     * ============================================================
+     */
+    useEffect(() => {
+        const cargar = async () => {
+            try {
+                const res = await axios.get(`${API_URL}/coaches`, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("token")
+                    }
+                });
 
-  /**
-   * ============================================================
-   *  RENDER PRINCIPAL
-   * ============================================================
-   */
-  return (
-    <div className="dashboard-container-fluid">
+                setCoaches(res.data);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        cargar();
+    }, []);
+    /**
+     * ============================================================
+     *  RENDER PRINCIPAL
+     * ============================================================
+     */
+    return (
+        <div className="dashboard-container-fluid">
 
-      <h1 className="fw-bold mb-4">Gestión de Coaches</h1>
+            <h1 className="fw-bold mb-4">Gestion de Coaches</h1>
 
-      <div className="dashboard-card p-4">
+            <div className="dashboard-card p-4">
 
-        {coaches.length === 0 ? (
-          <p className="opacity-75">No hay coaches registrados.</p>
-        ) : (
-          <table className="table table-dark table-striped">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th></th>
-              </tr>
-            </thead>
+                {coaches.length === 0 ? (
+                    <p className="opacity-75">No hay coaches registrados.</p>
+                ) : (
+                    <table className="table table-dark table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th></th>
+                            </tr>
+                        </thead>
 
-            <tbody>
-              {coaches.map((c) => (
-                <tr key={c.id}>
-                  <td>{c.nombre}</td>
-                  <td>{c.email}</td>
+                        <tbody>
+                            {coaches.map((c) => (
+                                <tr key={c.id}>
+                                    <td>{c.nombre}</td>
+                                    <td>{c.email}</td>
 
-                  <td className="text-end">
-                    <Link
-                      to={`/admin/coaches/${c.id}`}
-                      className="btn btn-primary btn-sm"
-                    >
-                      Ver detalle
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+                                    <td className="text-end">
+                                        <Link
+                                            to={`/admin/coaches/${c.id}`}
+                                            className="btn btn-primary btn-sm"
+                                        >
+                                            Ver detalle
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
 
-          </table>
-        )}
+                    </table>
+                )}
 
-      </div>
-    </div>
-  );
+            </div>
+        </div>
+    );
 }
