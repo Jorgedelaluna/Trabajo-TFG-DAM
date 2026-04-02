@@ -33,7 +33,11 @@ export default function ActividadNuevaPage() {
         e.preventDefault();
 
         try {
-            await axios.post(`${API_URL}/actividades`, actividad);
+            await axios.post(`${API_URL}/actividades`, actividad,{
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                }
+            });
             alert("Actividad creada");
             navigate("/admin/actividades");
         } catch (err) {

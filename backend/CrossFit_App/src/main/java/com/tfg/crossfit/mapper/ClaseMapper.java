@@ -9,14 +9,14 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface ClaseMapper {
 
-    ClaseMapper INSTANCE = Mappers.getMapper(ClaseMapper.class);
+	ClaseMapper INSTANCE = Mappers.getMapper(ClaseMapper.class);
 
-    @Mapping(source = "actividad.nombre", target = "actividadNombre")
-    @Mapping(source = "coach.nombre", target = "coachNombre")
-    ClaseDTO toDTO(Clase entity);
+	@Mapping(source = "actividad.nombre", target = "actividadNombre")
+	@Mapping(source = "coach.nombre", target = "coachNombre")
+	ClaseDTO toDTO(Clase entity);
 
-    @Mapping(target = "actividad", ignore = true)
-    @Mapping(target = "coach", ignore = true)
-    Clase toEntity(ClaseDTO dto);
+	@Mapping(target = "actividad", ignore = true)
+	@Mapping(target = "coach", ignore = true)
+	Clase toEntity(ClaseDTO dto);
 
 }
