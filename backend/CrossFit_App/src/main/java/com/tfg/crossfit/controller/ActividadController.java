@@ -4,7 +4,6 @@ import com.tfg.crossfit.dto.ActividadDTO;
 import com.tfg.crossfit.mapper.ActividadMapper;
 import com.tfg.crossfit.model.Actividad;
 import com.tfg.crossfit.service.ActividadService;
-import com.tfg.crossfit.service.CoachService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,9 +23,8 @@ public class ActividadController {
 
 	// <-- Devuelve todos las actividades -->
 	@GetMapping
-	public ResponseEntity<List<ActividadDTO>> S() {
+	public ResponseEntity<List<ActividadDTO>> getAllActividad() {
 		List<ActividadDTO> lista = actividadService.findAll().stream().map(actividadMapper::toDTO).toList();
-
 		return ResponseEntity.ok(lista);
 	}
 
