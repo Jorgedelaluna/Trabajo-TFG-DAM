@@ -30,7 +30,7 @@ export default function UsuarioDetallePage() {
                 return;
             }
 
-            const res = await axios.get(`${API_URL}/usuarios`, {
+            const res = await axios.get(`${API_URL}/usuarios/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -67,37 +67,60 @@ export default function UsuarioDetallePage() {
     }
 
     return (
-        <div className="dashboard-container-fluid">
-
-            <h1 className="fw-bold mb-4">Detalle del Usuario</h1>
-
-            <div className="dashboard-card p-4">
-
-                <p><strong>Nombre:</strong> {usuario.nombre}</p>
-                <p><strong>Email:</strong> {usuario.email}</p>
-                <p><strong>Teléfono:</strong> {usuario.telefono || "No informado"}</p>
-                <p><strong>Sexo:</strong> {usuario.sexo || "No informado"}</p>
-
-                <p>
-                    <strong>Cuota:</strong>{" "}
-                    {usuario.estadoCuota
-                        ? getCuotaBadge(usuario.estadoCuota)
-                        : "No disponible"}
-                </p>
-
-                <p>
-                    <strong>Fecha de alta:</strong>{" "}
-                    {usuario.fechaAlta
-                        ? new Date(usuario.fechaAlta).toLocaleString()
-                        : "No disponible"}
-                </p>
-
-                <Link to="/admin/usuarios" className="btn btn-secondary mt-3">
-                    Volver
-                </Link>
-
+        <div className="dashboard-container-fluid dark-dashboard">
+            <div className="d-flex justify-content-between align-items-center mb-4">
+                <h1 className="fw-bold dashboard-title mb-0">Detalle del Usuario</h1>
             </div>
 
+            <div className="dashboard-card p-4">
+                <div className="table-responsive">
+                    <table className="table table-dark table-hover align-middle dashboard-table mb-0">
+                        <tbody>
+                            <tr>
+                                <th style={{ width: "260px" }}>Nombre</th>
+                                <td>{usuario.nombre}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Email</th>
+                                <td>{usuario.email}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Teléfono</th>
+                                <td>{usuario.telefono || "No informado"}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Sexo</th>
+                                <td>{usuario.sexo || "No informado"}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Estado de cuota</th>
+                                <td>
+                                    {usuario.estadoCuota
+                                        ? getCuotaBadge(usuario.estadoCuota)
+                                        : "No disponible"}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Fecha de alta</th>
+                                <td>
+                                    {usuario.fechaAlta
+                                        ? new Date(usuario.fechaAlta).toLocaleString()
+                                        : "No disponible"}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <Link to="/admin/usuarios" className="btn btn-outline-light mt-4">
+                    ← Volver
+                </Link>
+            </div>
         </div>
     );
 }

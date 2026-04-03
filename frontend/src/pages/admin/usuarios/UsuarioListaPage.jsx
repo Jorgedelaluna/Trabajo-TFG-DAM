@@ -71,15 +71,15 @@ export default function UsuarioListaPage() {
     }
 
     return (
-        <div className="dashboard-container-fluid">
+        <div className="dashboard-container">
             <h1 className="fw-bold mb-4">Listado de Usuarios</h1>
 
-            <div className="dashboard-card p-4">
+            <div className="dashboard-card">
                 {usuarios.length === 0 ? (
-                    <p>No hay usuarios registrados.</p>
+                    <p className="opacity-75 mb-0">No hay usuarios registrados.</p>
                 ) : (
                     <div className="table-responsive">
-                        <table className="table table-hover align-middle">
+                        <table className="table table-dark table-hover align-middle dashboard-table mb-0">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -91,6 +91,7 @@ export default function UsuarioListaPage() {
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 {usuarios.map((usuario) => (
                                     <tr key={usuario.id}>

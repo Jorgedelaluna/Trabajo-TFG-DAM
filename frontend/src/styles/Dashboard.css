@@ -184,3 +184,86 @@ SIDEBAR ADMIN (Glassmorphism)
   margin-top: 80px;
   color: white;
 }
+
+/* =========================================
+TABLAS DASHBOARD OSCURAS
+ - Aplica estilo moderno dark a tablas dentro del dashboard
+ - Mantiene coherencia con el fondo glass existente
+========================================= */
+.dashboard-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.dashboard-table.table-dark {
+  --bs-table-bg: transparent;
+  --bs-table-color: #ffffff;
+  --bs-table-border-color: rgba(255, 255, 255, 0.10);
+  --bs-table-hover-bg: rgba(255, 255, 255, 0.08);
+  --bs-table-striped-bg: rgba(255, 255, 255, 0.04);
+  color: white;
+}
+
+.dashboard-table > :not(caption) > * > * {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-color: rgba(255, 255, 255, 0.10) !important;
+  padding: 14px 16px;
+}
+
+.dashboard-table thead th {
+  color: #f1f5f9;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.dashboard-table tbody th {
+  color: #f8fafc;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+.dashboard-table tbody td {
+  color: #e5e7eb;
+}
+
+.dashboard-table tbody tr:hover {
+  transform: none;
+}
+
+/* =========================================
+MEJORA VISUAL DE LA TARJETA PARA TABLAS
+========================================= */
+.dashboard-card .table-responsive {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* =========================================
+BOTÓN OUTLINE LIGHT EN FONDO OSCURO
+========================================= */
+.dashboard-card .btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
+.dashboard-card .btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: white;
+}
+
+/* =========================================
+BADGES EN TABLA DETALLE
+========================================= */
+.dashboard-table .badge {
+  font-size: 0.78rem;
+  padding: 0.45em 0.7em;
+  border-radius: 999px;
+}
