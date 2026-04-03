@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-04-03T02:47:44+0200",
+    date = "2026-04-03T03:48:55+0200",
     comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
@@ -23,7 +23,9 @@ public class ClaseMapperImpl implements ClaseMapper {
 
         ClaseDTO claseDTO = new ClaseDTO();
 
+        claseDTO.setActividadId( entityActividadId( entity ) );
         claseDTO.setActividadNombre( entityActividadNombre( entity ) );
+        claseDTO.setCoachId( entityCoachId( entity ) );
         claseDTO.setCoachNombre( entityCoachNombre( entity ) );
         claseDTO.setId( entity.getId() );
         claseDTO.setDescripcion( entity.getDescripcion() );
@@ -49,6 +51,21 @@ public class ClaseMapperImpl implements ClaseMapper {
         return clase;
     }
 
+    private Long entityActividadId(Clase clase) {
+        if ( clase == null ) {
+            return null;
+        }
+        Actividad actividad = clase.getActividad();
+        if ( actividad == null ) {
+            return null;
+        }
+        Long id = actividad.getId();
+        if ( id == null ) {
+            return null;
+        }
+        return id;
+    }
+
     private String entityActividadNombre(Clase clase) {
         if ( clase == null ) {
             return null;
@@ -62,6 +79,21 @@ public class ClaseMapperImpl implements ClaseMapper {
             return null;
         }
         return nombre;
+    }
+
+    private Long entityCoachId(Clase clase) {
+        if ( clase == null ) {
+            return null;
+        }
+        Coach coach = clase.getCoach();
+        if ( coach == null ) {
+            return null;
+        }
+        Long id = coach.getId();
+        if ( id == null ) {
+            return null;
+        }
+        return id;
     }
 
     private String entityCoachNombre(Clase clase) {

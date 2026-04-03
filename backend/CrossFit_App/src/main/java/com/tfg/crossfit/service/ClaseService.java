@@ -41,21 +41,17 @@ public class ClaseService {
 
 		Clase clase = new Clase();
 
-		// Campos básicos
 		clase.setFechaHora(claseDTO.getFechaHora());
 		clase.setAforoMaximo(claseDTO.getAforoMaximo());
 
-		// Actividad por defecto (ID = 1)
-		Actividad actividad = actividadRepository.findById(1L)
-				.orElseThrow(() -> new RuntimeException("Actividad por defecto no encontrada"));
+		Actividad actividad = actividadRepository.findById(claseDTO.getActividadId()).orElseThrow(
+				() -> new RuntimeException("Actividad no encontrada con id: " + claseDTO.getActividadId()));
 		clase.setActividad(actividad);
 
-		// Coach por defecto (ID = 1)
-		var coach = coachRepository.findById(1L)
-				.orElseThrow(() -> new RuntimeException("Coach por defecto no encontrado"));
+		var coach = coachRepository.findById(claseDTO.getCoachId())
+				.orElseThrow(() -> new RuntimeException("Coach no encontrado con id: " + claseDTO.getCoachId()));
 		clase.setCoach(coach);
 
-		// Guardar en BD
 		Clase guardada = claseRepository.save(clase);
 
 		return claseMapper.toDTO(guardada);

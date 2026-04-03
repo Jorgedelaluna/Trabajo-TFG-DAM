@@ -1,11 +1,3 @@
-/**
- * ============================================================
- *  PÁGINA ADMIN / COACH: ClaseNuevaPage.jsx
- *
- *  Vista para crear una nueva clase en el sistema.
- * ============================================================
- */
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -17,8 +9,8 @@ export default function ClaseNuevaPage() {
     const token = localStorage.getItem("token");
 
     const [clase, setClase] = useState({
-        actividad: "",
-        coach: "",
+        actividadId: "",
+        coachId: "",
         fecha: "",
         hora: "",
         aforo: 10
@@ -77,9 +69,9 @@ export default function ClaseNuevaPage() {
             await axios.post(
                 `${API_URL}/clases`,
                 {
-                    actividadNombre: clase.actividad,
-                    coachId: clase.coach,
-                    fechaHora: fechaHora,
+                    actividadId: Number(clase.actividadId),
+                    coachId: Number(clase.coachId),
+                    fechaHora,
                     aforoMaximo: clase.aforo
                 },
                 {
@@ -104,14 +96,13 @@ export default function ClaseNuevaPage() {
             <div className="dashboard-card p-4">
                 <form onSubmit={crearClase} className="row g-3">
 
-                    {/* Actividad */}
                     <div className="col-md-6">
                         <label className="form-label">Actividad</label>
                         <select
                             className="form-select"
-                            value={clase.actividad}
+                            value={clase.actividadId}
                             onChange={(e) =>
-                                setClase({ ...clase, actividad: e.target.value })
+                                setClase({ ...clase, actividadId: e.target.value })
                             }
                             required
                             disabled={loadingActividades}
@@ -123,21 +114,20 @@ export default function ClaseNuevaPage() {
                             </option>
 
                             {actividades.map((actividad) => (
-                                <option key={actividad.id} value={actividad.nombre}>
+                                <option key={actividad.id} value={actividad.id}>
                                     {actividad.nombre}
                                 </option>
                             ))}
                         </select>
                     </div>
 
-                    {/* Coach */}
                     <div className="col-md-6">
                         <label className="form-label">Coach</label>
                         <select
                             className="form-select"
-                            value={clase.coach}
+                            value={clase.coachId}
                             onChange={(e) =>
-                                setClase({ ...clase, coach: e.target.value })
+                                setClase({ ...clase, coachId: e.target.value })
                             }
                             required
                             disabled={loadingCoaches}
@@ -156,7 +146,6 @@ export default function ClaseNuevaPage() {
                         </select>
                     </div>
 
-                    {/* Fecha */}
                     <div className="col-md-3">
                         <label className="form-label">Fecha</label>
                         <input
@@ -170,7 +159,6 @@ export default function ClaseNuevaPage() {
                         />
                     </div>
 
-                    {/* Hora */}
                     <div className="col-md-3">
                         <label className="form-label">Hora</label>
                         <input
@@ -184,7 +172,6 @@ export default function ClaseNuevaPage() {
                         />
                     </div>
 
-                    {/* Aforo */}
                     <div className="col-md-3">
                         <label className="form-label">Aforo</label>
                         <input
@@ -199,7 +186,6 @@ export default function ClaseNuevaPage() {
                         />
                     </div>
 
-                    {/* Botones */}
                     <div className="col-12 mt-4">
                         <button type="submit" className="btn btn-primary me-2">
                             Crear clase
