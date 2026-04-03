@@ -27,7 +27,7 @@ export default function CoachDetallePage() {
 
     if (!coach) {
         return (
-            <div className="dashboard-container">
+            <div className="admin-dashboard-container">
                 <div className="dashboard-card p-4 text-center">
                     <h3>Cargando coach...</h3>
                 </div>
@@ -36,7 +36,7 @@ export default function CoachDetallePage() {
     }
 
     return (
-        <div className="dashboard-container">
+        <div className="admin-dashboard-container">
             <h1 className="fw-bold mb-4">Detalle del Coach</h1>
 
             <div className="dashboard-card p-4">

@@ -100,7 +100,7 @@ export default function ClaseDetallePage() {
 
     if (!clase) {
         return (
-            <div className="dashboard-container">
+            <div className="admin-dashboard-container">
                 <div className="dashboard-card p-4 text-center">
                     <h3>No se encontró la clase</h3>
                 </div>
@@ -109,7 +109,7 @@ export default function ClaseDetallePage() {
     }
 
     return (
-        <div className="dashboard-container">
+        <div className="admin-dashboard-container">
             <h1 className="fw-bold mb-4">Editar Clase</h1>
 
             <div className="dashboard-card p-4">

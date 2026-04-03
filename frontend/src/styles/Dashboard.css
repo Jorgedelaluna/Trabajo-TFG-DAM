@@ -18,16 +18,31 @@
 }
 
 /* =========================================
-   CONTENEDOR PRINCIPAL
+   CONTENEDORES PRINCIPALES
 ========================================= */
 .dashboard-container {
+	padding: 20px;
+	color: var(--dashboard-text);
+}
+
+.admin-dashboard-container {
+	padding: 90px 30px 40px;
 	margin-left: var(--dashboard-sidebar-width);
 	color: var(--dashboard-text);
 }
 
-.dashboard-container h1, .dashboard-container h2, .dashboard-container h3,
-	.dashboard-container h5, .dashboard-container p, .dashboard-container span
-	{
+.dashboard-container h1,
+.dashboard-container h2,
+.dashboard-container h3,
+.dashboard-container h5,
+.dashboard-container p,
+.dashboard-container span,
+.admin-dashboard-container h1,
+.admin-dashboard-container h2,
+.admin-dashboard-container h3,
+.admin-dashboard-container h5,
+.admin-dashboard-container p,
+.admin-dashboard-container span {
 	color: var(--dashboard-text);
 }
 
@@ -68,7 +83,7 @@
 .dashboard-card {
 	width: 100%;
 	max-width: 100%;
-	margin: 0 auto;
+	margin: 0;
 	padding: 20px;
 	border-radius: var(--radius-lg);
 	background: var(--glass-bg);
@@ -169,40 +184,27 @@
 /* =========================================
    HEADER DE PÁGINA ADMIN
 ========================================= */
-/* =========================================
-HEADER DE PÁGINA ADMIN
-========================================= */
 .page-header-admin {
 	width: 100%;
 	margin-bottom: 24px;
 }
 
-/* Header con acciones (botón a la derecha) */
 .page-header-admin.with-actions {
 	display: flex;
-	justify-content: space-between;	
+	justify-content: space-between;
+	align-items: center;
 	gap: 16px;
 }
 
-/* Título */
 .page-header-admin h1 {
 	margin: 0;
 	color: white;
 	text-align: left;
 }
 
-/* Header solo título (sin botón) */
 .page-header-admin.page-header-left {
 	display: block;
 	text-align: left;
-}
-
-/* Responsive */
-@media ( max-width : 768px) {
-	.page-header-admin.with-actions {
-		flex-direction: column;
-		align-items: flex-start;
-	}
 }
 
 /* =========================================
@@ -225,7 +227,7 @@ HEADER DE PÁGINA ADMIN
 	color: var(--dashboard-text);
 }
 
-.dashboard-table>:not(caption)>*>* {
+.dashboard-table > :not(caption) > * > * {
 	padding: 14px 16px;
 	background-color: transparent !important;
 	box-shadow: none !important;
@@ -303,11 +305,17 @@ HEADER DE PÁGINA ADMIN
 /* =========================================
    RESPONSIVE
 ========================================= */
-@media ( max-width : 768px) {
-	.dashboard-container {
+@media (max-width: 768px) {
+	.admin-dashboard-container {
 		margin-left: 0;
+		padding: 80px 15px 20px;
 	}
-	.page-header-admin {
+
+	.dashboard-container {
+		padding: 15px;
+	}
+
+	.page-header-admin.with-actions {
 		flex-direction: column;
 		align-items: flex-start;
 	}

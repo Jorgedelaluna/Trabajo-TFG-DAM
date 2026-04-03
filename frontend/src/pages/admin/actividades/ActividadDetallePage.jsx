@@ -95,7 +95,7 @@ export default function ActividadDetallePage() {
      */
     if (cargando) {
         return (
-            <div className="dashboard-container">
+            <div className="admin-dashboard-container">
                 <div className="dashboard-card p-4 text-center">
                     <h3>Cargando actividad...</h3>
                 </div>
@@ -105,7 +105,7 @@ export default function ActividadDetallePage() {
 
     if (!actividad) {
         return (
-            <div className="dashboard-container">
+            <div className="admin-dashboard-container">
                 <div className="dashboard-card p-4 text-center">
                     <h3>No encontrada</h3>
                 </div>

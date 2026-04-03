@@ -55,7 +55,7 @@ export default function ClaseListaPage() {
 
     if (cargando) {
         return (
-            <div className="dashboard-container">
+            <div className="admin-dashboard-container">
                 <div className="dashboard-card p-4 text-center">
                     <h3>Cargando clases...</h3>
                 </div>

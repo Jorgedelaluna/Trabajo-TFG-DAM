@@ -58,7 +58,7 @@ export default function UsuarioListaPage() {
 
     if (cargando) {
         return (
-            <div className="dashboard-container">
+            <div className="admin-dashboard-container">
                 <div className="dashboard-card p-4 text-center">
                     <h3>Cargando usuarios...</h3>
                 </div>
@@ -67,7 +67,7 @@ export default function UsuarioListaPage() {
     }
 
     return (
-        <div className="dashboard-container">
+        <div className="admin-dashboard-container">
             <div className="page-header-admin page-header-left">
                 <h1 className="fw-bold">Listado de Usuarios</h1>
             </div>

@@ -126,7 +126,7 @@ export default function UsuarioDetallePage() {
 
     if (!usuario) {
         return (
-            <div className="dashboard-container">
+            <div className="admin-dashboard-container">
                 <div className="dashboard-card p-4 text-center">
                     <h3>Cargando usuario...</h3>
                 </div>
@@ -135,7 +135,7 @@ export default function UsuarioDetallePage() {
     }
 
 	return (
-	    <div className="dashboard-container">
+	    <div className="admin-dashboard-container">
 	        <div className="page-header-admin">
 	            <h1 className="fw-bold">Detalle del Usuario</h1>
 

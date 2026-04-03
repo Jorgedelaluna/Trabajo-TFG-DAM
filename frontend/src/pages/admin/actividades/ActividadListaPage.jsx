@@ -81,7 +81,7 @@ export default function ActividadListaPage() {
        */
     if (cargando) {
         return (
-            <div className="dashboard-container">
+            <div className="admin-dashboard-container">
                 <div className="dashboard-card p-4 text-center">
                     <h3>Cargando actividades...</h3>
                 </div>
