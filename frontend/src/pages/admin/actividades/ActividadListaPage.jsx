@@ -66,8 +66,6 @@ export default function ActividadListaPage() {
                     Authorization: "Bearer " + localStorage.getItem("token")
                 }
             });
-
-
             setActividades(prev => prev.filter(a => a.id !== id));
             alert("Actividad eliminada");
         } catch (err) {

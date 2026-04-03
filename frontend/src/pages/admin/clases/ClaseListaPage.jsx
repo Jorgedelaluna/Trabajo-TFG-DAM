@@ -66,7 +66,7 @@ export default function ClaseListaPage() {
     return (
         <div className="dashboard-container-fluid">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="fw-bold">Gestión de Clases</h1>
+                <h1 className="fw-bold">Gestion de Clases</h1>
 
                 <Link to="/admin/clases/nueva" className="btn btn-primary">
                     + Nueva Clase

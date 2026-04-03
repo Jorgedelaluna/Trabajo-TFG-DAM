@@ -8,7 +8,7 @@
 
 // URL base del backend real
 const API_URL =
-    process.env.REACT_APP_API_URL || "http://localhost:8080"; 
+    process.env.REACT_APP_API_URL || "http://localhost:8080";
 export default API_URL;
 // ======================================================
 // Genera los headers comunes para cualquier petición.
@@ -21,8 +21,8 @@ function getAuthHeaders() {
     const headers = {
         "Content-Type": "application/json"
     };
-	
-	// Si el usuario está autenticado, se añade el token al header
+
+    // Si el usuario está autenticado, se añade el token al header
     if (token) {
         headers["Authorization"] = `Bearer ${token}`;
     }
@@ -44,7 +44,7 @@ async function handleResponse(response) {
         throw new Error(errorText || "Error en la petición");
     }
 
-	// Algunas peticiones (DELETE, PUT) pueden no devolver contenido
+    // Algunas peticiones (DELETE, PUT) pueden no devolver contenido
     if (response.status === 204) return null;
 
     return response.json();

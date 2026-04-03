@@ -69,107 +69,107 @@ import UsuarioDetallePage from "./pages/admin/usuarios/UsuarioDetallePage";
 
 
 export default function App() {
-  return (
-    <BrowserRouter>
+    return (
+        <BrowserRouter>
 
-      {/* NAVBAR GLOBAL PARA TODAS LAS PAGINAS */}
-      <Navbar />
+            {/* NAVBAR GLOBAL PARA TODAS LAS PAGINAS */}
+            <Navbar />
 
-      <Routes>
+            <Routes>
 
-        {/* ============================
+                {/* ============================
             RUTAS PÚBLICAS (NO REQUIEREN AUTENTICACIÓN)
         ============================ */}
-        <Route element={<PublicLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/clases" element={<ClasesPage />} />
-          <Route path="/horarios" element={<HorariosPage />} />
-          <Route path="/precios" element={<PreciosPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/registro" element={<RegistroPage />} />
-        </Route>
+                <Route element={<PublicLayout />}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/clases" element={<ClasesPage />} />
+                    <Route path="/horarios" element={<HorariosPage />} />
+                    <Route path="/precios" element={<PreciosPage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/registro" element={<RegistroPage />} />
+                </Route>
 
-        {/* ============================
+                {/* ============================
             RUTAS PÚBLICAS (NO REQUIEREN AUTENTICACIÓN)
         ============================ */}
-        <Route path="/panel" element={<PanelRedirect />} />
+                <Route path="/panel" element={<PanelRedirect />} />
 
 
-        {/* ============================
+                {/* ============================
             RUTAS PRIVADAS (USUARIO LOGUEADO)
             - Acceso permitido a USER, COACH y ADMIN
             - Usa PrivateLayout (sidebar de usuario)
         ============================ */}
-        <Route
-          element={
-            <ProtectedRoute roles={["ADMIN", "COACH", "USER"]}>
-              <PrivateLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route path="/user/dashboard" element={<UserDashboard />} />
-          <Route path="/user/clases" element={<ClasesUsuarioPage />} />
-          <Route path="/user/reservas" element={<MisReservasPage />} />
-          <Route path="/user/perfil" element={<PerfilPage />} />
-        </Route>
+                <Route
+                    element={
+                        <ProtectedRoute roles={["ADMIN", "COACH", "USER"]}>
+                            <PrivateLayout />
+                        </ProtectedRoute>
+                    }
+                >
+                    <Route path="/user/dashboard" element={<UserDashboard />} />
+                    <Route path="/user/clases" element={<ClasesUsuarioPage />} />
+                    <Route path="/user/reservas" element={<MisReservasPage />} />
+                    <Route path="/user/perfil" element={<PerfilPage />} />
+                </Route>
 
 
-        {/* ============================================================
+                {/* ============================================================
             RUTAS COACH (SOLO COACH)
             - Usa el mismo layout que admin o uno propio si lo deseas
         ============================================================ */}
-        <Route
-          element={
-            <ProtectedRoute roles={["COACH"]}>
-              <CoachLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route path="/coach/dashboard" element={<CoachDashboard />} />
-          <Route path="/coach/clases" element={<CoachClaseListaPage />} />
-          <Route path="/coach/clases/:id" element={<CoachClaseDetallePage />} />
-        </Route>
+                <Route
+                    element={
+                        <ProtectedRoute roles={["COACH"]}>
+                            <CoachLayout />
+                        </ProtectedRoute>
+                    }
+                >
+                    <Route path="/coach/dashboard" element={<CoachDashboard />} />
+                    <Route path="/coach/clases" element={<CoachClaseListaPage />} />
+                    <Route path="/coach/clases/:id" element={<CoachClaseDetallePage />} />
+                </Route>
 
 
-        {/* ============================
+                {/* ============================
             RUTAS ADMIN (SOLO ADMIN)
             - Usa AdminLayout (sidebar de administrador)
         ============================ */}
-        <Route
-          element={
-            <ProtectedRoute roles={["ADMIN"]}>
-              <AdminLayout />   {/* ← AQUÍ VA EL SIDEBAR */}
-            </ProtectedRoute>
-          }
-        >
-          {/* Dashboard */}
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                <Route
+                    element={
+                        <ProtectedRoute roles={["ADMIN"]}>
+                            <AdminLayout />   {/* EL SIDEBAR */}
+                        </ProtectedRoute>
+                    }
+                >
+                    {/* Dashboard */}
+                    <Route path="/admin/dashboard" element={<AdminDashboard />} />
 
-          {/* Usuarios */}
-          <Route path="/admin/usuarios" element={<UsuarioListaPage />} />
-          <Route path="/admin/usuarios/:id" element={<UsuarioDetallePage />} />
+                    {/* Usuarios */}
+                    <Route path="/admin/usuarios" element={<UsuarioListaPage />} />
+                    <Route path="/admin/usuarios/:id" element={<UsuarioDetallePage />} />
 
-          {/* Clases */}
-          <Route path="/admin/clases" element={<ClaseListaPage />} />
-          <Route path="/admin/clases/nueva" element={<ClaseNuevaPage />} />
-          <Route path="/admin/clases/:id" element={<ClaseDetallePage />} />
+                    {/* Clases */}
+                    <Route path="/admin/clases" element={<ClaseListaPage />} />
+                    <Route path="/admin/clases/nueva" element={<ClaseNuevaPage />} />
+                    <Route path="/admin/clases/:id" element={<ClaseDetallePage />} />
 
-          {/* Actividades */}
-          <Route path="/admin/actividades" element={<ActividadListaPage />} />
-          <Route path="/admin/actividades/nueva" element={<ActividadNuevaPage />} />
-          <Route path="/admin/actividades/:id" element={<ActividadDetallePage />} />
+                    {/* Actividades */}
+                    <Route path="/admin/actividades" element={<ActividadListaPage />} />
+                    <Route path="/admin/actividades/nueva" element={<ActividadNuevaPage />} />
+                    <Route path="/admin/actividades/:id" element={<ActividadDetallePage />} />
 
-          {/* Coaches */}
-          <Route path="/admin/coach" element={<CoachListaPage />} />
-          <Route path="/admin/coach/:id" element={<CoachDetallePage />} />
+                    {/* Coaches */}
+                    <Route path="/admin/coaches" element={<CoachListaPage />} />
+                    <Route path="/admin/coaches/:id" element={<CoachDetallePage />} />
 
-        </Route>
+                </Route>
 
-      </Routes>
+            </Routes>
 
-      {/* FOOTER GLOBAL */}
-      <Footer />
+            {/* FOOTER GLOBAL */}
+            <Footer />
 
-    </BrowserRouter>
-  );
+        </BrowserRouter>
+    );
 }

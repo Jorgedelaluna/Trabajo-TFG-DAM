@@ -5,11 +5,22 @@ SECCIÓN PRINCIPAL DE CLASES (Página pública)
   - Incluye padding superior para evitar solaparse con la navbar fija.
   - Se usa en la página pública que muestra tipos de clases,
     tarjetas informativas y tabla comparativa.
+  - Se fuerza color blanco en textos, títulos y enlaces
+    para mejorar la legibilidad sobre fondo oscuro.
 ====================================================== */
 .clases-section {
-  padding-top: 120px;   /* deja espacio para la navbar fija */
-  padding-bottom: 80px;
-  color: white;
+	padding-top: 120px; /* deja espacio para la navbar fija */
+	padding-bottom: 80px;
+	color: white;
+}
+
+/* Fuerza color blanco en los textos dentro de la sección */
+.clases-section h1, .clases-section h2, .clases-section h3,
+	.clases-section h4, .clases-section h5, .clases-section h6,
+	.clases-section p, .clases-section span, .clases-section li,
+	.clases-section small, .clases-section strong, .clases-section a,
+	.clases-section label {
+	color: white;
 }
 
 /* ======================================================
@@ -18,23 +29,34 @@ TARJETAS DE CLASES
   - Tarjetas informativas con imagen + descripción.
   - Diseño moderno con bordes redondeados.
   - Hover con elevación suave para dar sensación de profundidad.
+  - Se refuerza el color blanco en títulos y textos
+    por si Bootstrap u otro CSS sobrescribe la herencia.
 ====================================================== */
 .clases-card {
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+	border-radius: 12px;
+	overflow: hidden;
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+	color: white;
+}
+
+/* Refuerzo para contenido tarjetas */
+.clases-card .card-body, .clases-card .card-title, .clases-card .card-text,
+	.clases-card p, .clases-card h1, .clases-card h2, .clases-card h3,
+	.clases-card h4, .clases-card h5, .clases-card h6, .clases-card span,
+	.clases-card li, .clases-card a {
+	color: white;
 }
 
 .clases-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.28);
+	transform: translateY(-6px);
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.28);
 }
 
 /* Imagen superior de cada tarjeta */
 .clases-card img {
-  height: 220px;          /* altura uniforme */
-  object-fit: cover;      /* evita deformaciones */
-  width: 100%;
+	height: 220px; /* altura uniforme */
+	object-fit: cover; /* evita deformaciones */
+	width: 100%;
 }
 
 /* ======================================================
@@ -42,13 +64,24 @@ TABLA DE TIPOS DE CLASES
 
   - Tabla comparativa que muestra diferencias entre modalidades.
   - Tipografías ligeramente más grandes para mejorar legibilidad.
+  - Se fuerza el texto en blanco en cabeceras y celdas.
 ====================================================== */
+.clases-table, .clases-table th, .clases-table td, .clases-table thead,
+	.clases-table tbody, .clases-table tr {
+	color: white;
+}
+
 .clases-table th {
-  font-weight: 700;
-  text-transform: uppercase;
+	font-weight: 700;
+	text-transform: uppercase;
 }
 
 .clases-table td {
-  vertical-align: middle;
-  font-size: 1.05rem;
+	vertical-align: middle;
+	font-size: 1.05rem;
+}
+
+/* Hover de enlaces dentro de la sección */
+.clases-section a:hover, .clases-card a:hover {
+	color: white;
 }

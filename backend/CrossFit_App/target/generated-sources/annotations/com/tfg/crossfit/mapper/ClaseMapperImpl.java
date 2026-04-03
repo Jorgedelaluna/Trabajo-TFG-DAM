@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-04-03T03:48:55+0200",
+    date = "2026-04-03T14:18:33+0200",
     comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
@@ -27,10 +27,10 @@ public class ClaseMapperImpl implements ClaseMapper {
         claseDTO.setActividadNombre( entityActividadNombre( entity ) );
         claseDTO.setCoachId( entityCoachId( entity ) );
         claseDTO.setCoachNombre( entityCoachNombre( entity ) );
-        claseDTO.setId( entity.getId() );
+        claseDTO.setAforoMaximo( entity.getAforoMaximo() );
         claseDTO.setDescripcion( entity.getDescripcion() );
         claseDTO.setFechaHora( entity.getFechaHora() );
-        claseDTO.setAforoMaximo( entity.getAforoMaximo() );
+        claseDTO.setId( entity.getId() );
 
         return claseDTO;
     }
@@ -43,10 +43,10 @@ public class ClaseMapperImpl implements ClaseMapper {
 
         Clase clase = new Clase();
 
-        clase.setId( dto.getId() );
+        clase.setAforoMaximo( dto.getAforoMaximo() );
         clase.setDescripcion( dto.getDescripcion() );
         clase.setFechaHora( dto.getFechaHora() );
-        clase.setAforoMaximo( dto.getAforoMaximo() );
+        clase.setId( dto.getId() );
 
         return clase;
     }
