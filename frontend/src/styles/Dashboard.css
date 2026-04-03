@@ -2,307 +2,315 @@
    TOKENS / VARIABLES VISUALES
 ========================================= */
 :root {
-  --dashboard-sidebar-width: 240px;
-
-  --dashboard-text: #ffffff;
-  --dashboard-text-soft: #e5e7eb;
-  --dashboard-text-strong: #f8fafc;
-  --dashboard-text-head: #f1f5f9;
-
-  --glass-bg: rgba(255, 255, 255, 0.08);
-  --glass-bg-soft: rgba(255, 255, 255, 0.03);
-  --glass-bg-hover: rgba(255, 255, 255, 0.10);
-
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-border-soft: rgba(255, 255, 255, 0.10);
-
-  --radius-md: 12px;
-  --radius-lg: 14px;
-
-  --shadow-card: 0 8px 25px rgba(0, 0, 0, 0.35);
+	--dashboard-sidebar-width: 240px;
+	--dashboard-text: #ffffff;
+	--dashboard-text-soft: #e5e7eb;
+	--dashboard-text-strong: #f8fafc;
+	--dashboard-text-head: #f1f5f9;
+	--glass-bg: rgba(255, 255, 255, 0.08);
+	--glass-bg-soft: rgba(255, 255, 255, 0.03);
+	--glass-bg-hover: rgba(255, 255, 255, 0.10);
+	--glass-border: rgba(255, 255, 255, 0.12);
+	--glass-border-soft: rgba(255, 255, 255, 0.10);
+	--radius-md: 12px;
+	--radius-lg: 14px;
+	--shadow-card: 0 8px 25px rgba(0, 0, 0, 0.35);
 }
 
 /* =========================================
    CONTENEDOR PRINCIPAL
 ========================================= */
 .dashboard-container {
-  margin-left: var(--dashboard-sidebar-width);
-  color: var(--dashboard-text);
+	margin-left: var(--dashboard-sidebar-width);
+	color: var(--dashboard-text);
 }
 
-.dashboard-container h1,
-.dashboard-container h2,
-.dashboard-container h3,
-.dashboard-container h5,
-.dashboard-container p,
-.dashboard-container span {
-  color: var(--dashboard-text);
+.dashboard-container h1, .dashboard-container h2, .dashboard-container h3,
+	.dashboard-container h5, .dashboard-container p, .dashboard-container span
+	{
+	color: var(--dashboard-text);
 }
 
 /* =========================================
    ELEMENTOS DE TEXTO
 ========================================= */
 .nombre-usuario {
-  color: var(--dashboard-text);
-  font-weight: 600;
-  font-size: 1.8rem;
+	color: var(--dashboard-text);
+	font-weight: 600;
+	font-size: 1.8rem;
 }
 
 .estado-cuota {
-  color: #f1c40f !important;
-  font-weight: bold;
+	color: #f1c40f !important;
+	font-weight: bold;
 }
 
 /* =========================================
    TARJETA DE PERFIL
 ========================================= */
 .profile-card {
-  display: flex;
-  align-items: center;
-  padding: 20px;
+	display: flex;
+	align-items: center;
+	padding: 20px;
 }
 
 .profile-avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  border: 3px solid var(--brand-yellow);
-  object-fit: cover;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	border: 3px solid var(--brand-yellow);
+	object-fit: cover;
 }
 
 /* =========================================
    TARJETAS DASHBOARD
 ========================================= */
 .dashboard-card {
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  border-radius: var(--radius-lg);
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(6px);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+	width: 100%;
+	max-width: 100%;
+	margin: 0 auto;
+	padding: 20px;
+	border-radius: var(--radius-lg);
+	background: var(--glass-bg);
+	border: 1px solid var(--glass-border);
+	backdrop-filter: blur(6px);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .dashboard-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-card);
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-card);
 }
 
 .dashboard-card-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 15px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .dashboard-icon {
-  font-size: 1.6rem;
+	font-size: 1.6rem;
 }
 
 .dashboard-card .table-responsive {
-  border-radius: var(--radius-md);
-  overflow: hidden;
+	border-radius: var(--radius-md);
+	overflow: hidden;
 }
 
 /* =========================================
    SIDEBAR ADMIN
 ========================================= */
 .admin-sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: var(--dashboard-sidebar-width);
-  height: 100vh;
-  padding: 30px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-  backdrop-filter: blur(6px);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: var(--dashboard-sidebar-width);
+	height: 100vh;
+	padding: 30px 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+	background: var(--glass-bg);
+	border: 1px solid var(--glass-border);
+	border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+	backdrop-filter: blur(6px);
 }
 
 .sidebar-title {
-  margin-bottom: 10px;
-  font-size: 1.4rem;
-  font-weight: bold;
-  text-align: center;
-  letter-spacing: 2px;
-  color: var(--dashboard-text);
+	margin-bottom: 10px;
+	font-size: 1.4rem;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: 2px;
+	color: var(--dashboard-text);
 }
 
 .sidebar-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
 }
 
 .sidebar-link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  color: var(--dashboard-text);
-  text-decoration: none;
-  font-size: 1.1rem;
-  transition: 0.2s ease;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 10px 12px;
+	border-radius: 10px;
+	color: var(--dashboard-text);
+	text-decoration: none;
+	font-size: 1.1rem;
+	transition: 0.2s ease;
 }
 
 .sidebar-link:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateX(4px);
+	background: rgba(255, 255, 255, 0.15);
+	transform: translateX(4px);
 }
 
 /* =========================================
    ADMIN LAYOUT
 ========================================= */
 .admin-layout {
-  display: flex;
-  width: 100%;
-  min-height: 100vh;
+	display: flex;
+	width: 100%;
+	min-height: 100vh;
 }
 
 .admin-content {
-  flex: 1;
-  padding: 20px;
-  margin-top: 80px;
-  color: var(--dashboard-text);
+	flex: 1;
+	padding: 20px;
+	margin-top: 80px;
+	color: var(--dashboard-text);
 }
 
 /* =========================================
    HEADER DE PÁGINA ADMIN
 ========================================= */
+/* =========================================
+HEADER DE PÁGINA ADMIN
+========================================= */
 .page-header-admin {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  width: 100%;
-  margin-bottom: 24px;
+	width: 100%;
+	margin-bottom: 24px;
 }
 
+/* Header con acciones (botón a la derecha) */
+.page-header-admin.with-actions {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 16px;
+}
+
+/* Título */
 .page-header-admin h1 {
-  margin: 0;
-  text-align: left;
-  color: var(--dashboard-text);
+	margin: 0;
+	color: white;
+	text-align: left;
 }
 
+/* Header solo título (sin botón) */
 .page-header-admin.page-header-left {
-  justify-content: flex-start;
+	display: block;
+	text-align: left;
+}
+
+/* Responsive */
+@media ( max-width : 768px) {
+	.page-header-admin.with-actions {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 }
 
 /* =========================================
    TABLAS DASHBOARD
 ========================================= */
 .dashboard-table {
-  border-collapse: separate;
-  border-spacing: 0;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  margin-bottom: 0;
+	border-collapse: separate;
+	border-spacing: 0;
+	border-radius: var(--radius-md);
+	overflow: hidden;
+	margin-bottom: 0;
 }
 
 .dashboard-table.table-dark {
-  --bs-table-bg: transparent;
-  --bs-table-color: var(--dashboard-text);
-  --bs-table-border-color: var(--glass-border-soft);
-  --bs-table-hover-bg: rgba(255, 255, 255, 0.08);
-  --bs-table-striped-bg: rgba(255, 255, 255, 0.04);
-  color: var(--dashboard-text);
+	--bs-table-bg: transparent;
+	--bs-table-color: var(--dashboard-text);
+	--bs-table-border-color: var(--glass-border-soft);
+	--bs-table-hover-bg: rgba(255, 255, 255, 0.08);
+	--bs-table-striped-bg: rgba(255, 255, 255, 0.04);
+	color: var(--dashboard-text);
 }
 
-.dashboard-table > :not(caption) > * > * {
-  padding: 14px 16px;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  border-color: var(--glass-border-soft) !important;
+.dashboard-table>:not(caption)>*>* {
+	padding: 14px 16px;
+	background-color: transparent !important;
+	box-shadow: none !important;
+	border-color: var(--glass-border-soft) !important;
 }
 
 .dashboard-table thead th {
-  color: var(--dashboard-text-head);
-  font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.06) !important;
+	color: var(--dashboard-text-head);
+	font-weight: 700;
+	font-size: 0.85rem;
+	letter-spacing: 0.03em;
+	text-transform: uppercase;
+	background: rgba(255, 255, 255, 0.06) !important;
 }
 
 .dashboard-table tbody th {
-  color: var(--dashboard-text-strong);
-  font-weight: 600;
-  background: var(--glass-bg-soft) !important;
+	color: var(--dashboard-text-strong);
+	font-weight: 600;
+	background: var(--glass-bg-soft) !important;
 }
 
 .dashboard-table tbody td {
-  color: var(--dashboard-text-soft);
+	color: var(--dashboard-text-soft);
 }
 
 .dashboard-table tbody tr:hover {
-  transform: none;
+	transform: none;
 }
 
 .dashboard-table .badge {
-  font-size: 0.78rem;
-  padding: 0.45em 0.7em;
-  border-radius: 999px;
+	font-size: 0.78rem;
+	padding: 0.45em 0.7em;
+	border-radius: 999px;
 }
 
 /* =========================================
    BOTONES
 ========================================= */
 .dashboard-card .btn-outline-light {
-  color: var(--dashboard-text);
-  border-color: rgba(255, 255, 255, 0.25);
+	color: var(--dashboard-text);
+	border-color: rgba(255, 255, 255, 0.25);
 }
 
 .dashboard-card .btn-outline-light:hover {
-  color: var(--dashboard-text);
-  background: var(--glass-bg-hover);
-  border-color: rgba(255, 255, 255, 0.35);
+	color: var(--dashboard-text);
+	background: var(--glass-bg-hover);
+	border-color: rgba(255, 255, 255, 0.35);
 }
 
 /* =========================================
    INPUTS / SELECTS
 ========================================= */
 .dashboard-input {
-  color: var(--dashboard-text) !important;
-  background: var(--glass-bg) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  border-radius: 10px;
+	color: var(--dashboard-text) !important;
+	background: var(--glass-bg) !important;
+	border: 1px solid rgba(255, 255, 255, 0.15) !important;
+	border-radius: 10px;
 }
 
 .dashboard-input:focus {
-  color: var(--dashboard-text) !important;
-  background: rgba(255, 255, 255, 0.12) !important;
-  border-color: rgba(13, 110, 253, 0.6) !important;
-  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15) !important;
+	color: var(--dashboard-text) !important;
+	background: rgba(255, 255, 255, 0.12) !important;
+	border-color: rgba(13, 110, 253, 0.6) !important;
+	box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15) !important;
 }
 
 .dashboard-input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+	color: rgba(255, 255, 255, 0.6);
 }
 
 .dashboard-input option {
-  color: black;
+	color: black;
 }
 
 /* =========================================
    RESPONSIVE
 ========================================= */
-@media (max-width: 768px) {
-  .dashboard-container {
-    margin-left: 0;
-  }
-
-  .page-header-admin {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+@media ( max-width : 768px) {
+	.dashboard-container {
+		margin-left: 0;
+	}
+	.page-header-admin {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 }
