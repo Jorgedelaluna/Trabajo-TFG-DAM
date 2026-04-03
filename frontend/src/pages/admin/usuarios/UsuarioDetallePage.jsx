@@ -134,140 +134,139 @@ export default function UsuarioDetallePage() {
         );
     }
 
-    return (
-        <div className="dashboard-container">
-            <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="fw-bold mb-0">Detalle del Usuario</h1>
+	return (
+	    <div className="dashboard-container">
+	        <div className="page-header-admin">
+	            <h1 className="fw-bold">Detalle del Usuario</h1>
 
-                {!editando ? (
-                    <button
-                        className="btn btn-warning"
-                        onClick={() => setEditando(true)}
-                    >
-                        Editar usuario
-                    </button>
-                ) : (
-                    <div className="d-flex gap-2">
-                        <button
-                            className="btn btn-success"
-                            onClick={guardarCambios}
-                            disabled={guardando}
-                        >
-                            {guardando ? "Guardando..." : "Guardar cambios"}
-                        </button>
+	            {!editando ? (
+	                <button
+	                    className="btn btn-warning"
+	                    onClick={() => setEditando(true)}
+	                >
+	                    Editar usuario
+	                </button>
+	            ) : (
+	                <div className="d-flex gap-2">
+	                    <button
+	                        className="btn btn-success"
+	                        onClick={guardarCambios}
+	                        disabled={guardando}
+	                    >
+	                        {guardando ? "Guardando..." : "Guardar cambios"}
+	                    </button>
 
-                        <button
-                            className="btn btn-secondary"
-                            onClick={cancelarEdicion}
-                            disabled={guardando}
-                        >
-                            Cancelar
-                        </button>
-                    </div>
-                )}
-            </div>
+	                    <button
+	                        className="btn btn-secondary"
+	                        onClick={cancelarEdicion}
+	                        disabled={guardando}
+	                    >
+	                        Cancelar
+	                    </button>
+	                </div>
+	            )}
+	        </div>
 
-            <div className="dashboard-card p-4">
-                <div className="table-responsive">
-                    <table className="table table-dark table-hover align-middle dashboard-table mb-0">
-                        <tbody>
-                            <tr>
-                                <th style={{ width: "260px" }}>Nombre</th>
-                                <td>
-                                    {editando ? (
-                                        <input
-                                            type="text"
-                                            name="nombre"
-                                            className="form-control dashboard-input"
-                                            value={formData.nombre}
-                                            onChange={handleChange}
-                                        />
-                                    ) : (
-                                        usuario.nombre
-                                    )}
-                                </td>
-                            </tr>
+	        <div className="dashboard-card p-4">
+	            <div className="table-responsive">
+	                <table className="table table-dark table-hover align-middle dashboard-table mb-0">
+	                    <tbody>
+	                        <tr>
+	                            <th style={{ width: "260px" }}>Nombre</th>
+	                            <td>
+	                                {editando ? (
+	                                    <input
+	                                        type="text"
+	                                        name="nombre"
+	                                        className="form-control dashboard-input"
+	                                        value={formData.nombre}
+	                                        onChange={handleChange}
+	                                    />
+	                                ) : (
+	                                    usuario.nombre
+	                                )}
+	                            </td>
+	                        </tr>
 
-                            <tr>
-                                <th>Email</th>
-                                <td>
-                                    {editando ? (
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            className="form-control dashboard-input"
-                                            value={formData.email}
-                                            onChange={handleChange}
-                                        />
-                                    ) : (
-                                        usuario.email
-                                    )}
-                                </td>
-                            </tr>
+	                        <tr>
+	                            <th>Email</th>
+	                            <td>
+	                                {editando ? (
+	                                    <input
+	                                        type="email"
+	                                        name="email"
+	                                        className="form-control dashboard-input"
+	                                        value={formData.email}
+	                                        onChange={handleChange}
+	                                    />
+	                                ) : (
+	                                    usuario.email
+	                                )}
+	                            </td>
+	                        </tr>
 
-                            <tr>
-                                <th>Teléfono</th>
-                                <td>
-                                    {editando ? (
-                                        <input
-                                            type="text"
-                                            name="telefono"
-                                            className="form-control dashboard-input"
-                                            value={formData.telefono}
-                                            onChange={handleChange}
-                                        />
-                                    ) : (
-                                        usuario.telefono || "No informado"
-                                    )}
-                                </td>
-                            </tr>
+	                        <tr>
+	                            <th>Teléfono</th>
+	                            <td>
+	                                {editando ? (
+	                                    <input
+	                                        type="text"
+	                                        name="telefono"
+	                                        className="form-control dashboard-input"
+	                                        value={formData.telefono}
+	                                        onChange={handleChange}
+	                                    />
+	                                ) : (
+	                                    usuario.telefono || "No informado"
+	                                )}
+	                            </td>
+	                        </tr>
 
-                            <tr>
-                                <th>Sexo</th>
-                                <td>
-                                    {editando ? (
-                                        <select
-                                            name="sexo"
-                                            className="form-select dashboard-input"
-                                            value={formData.sexo}
-                                            onChange={handleChange}
-                                        >
-                                            <option value="">Selecciona una opción</option>
-                                            <option value="HOMBRE">Hombre</option>
-                                            <option value="MUJER">Mujer</option>
-                                            <option value="OTRO">Otro</option>
-                                        </select>
-                                    ) : (
-                                        usuario.sexo || "No informado"
-                                    )}
-                                </td>
-                            </tr>
+	                        <tr>
+	                            <th>Sexo</th>
+	                            <td>
+	                                {editando ? (
+	                                    <select
+	                                        name="sexo"
+	                                        className="form-select dashboard-input"
+	                                        value={formData.sexo}
+	                                        onChange={handleChange}
+	                                    >
+	                                        <option value="">Selecciona una opción</option>
+	                                        <option value="HOMBRE">Hombre</option>
+	                                        <option value="MUJER">Mujer</option>
+	                                        <option value="OTRO">Otro</option>
+	                                    </select>
+	                                ) : (
+	                                    usuario.sexo || "No informado"
+	                                )}
+	                            </td>
+	                        </tr>
 
-                            <tr>
-                                <th>Estado de cuota</th>
-                                <td>
-                                    {usuario.estadoCuota
-                                        ? getCuotaBadge(usuario.estadoCuota)
-                                        : "No disponible"}
-                                </td>
-                            </tr>
+	                        <tr>
+	                            <th>Estado de cuota</th>
+	                            <td>
+	                                {usuario.estadoCuota
+	                                    ? getCuotaBadge(usuario.estadoCuota)
+	                                    : "No disponible"}
+	                            </td>
+	                        </tr>
 
-                            <tr>
-                                <th>Fecha de alta</th>
-                                <td>
-                                    {usuario.fechaAlta
-                                        ? new Date(usuario.fechaAlta).toLocaleString()
-                                        : "No disponible"}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+	                        <tr>
+	                            <th>Fecha de alta</th>
+	                            <td>
+	                                {usuario.fechaAlta
+	                                    ? new Date(usuario.fechaAlta).toLocaleString()
+	                                    : "No disponible"}
+	                            </td>
+	                        </tr>
+	                    </tbody>
+	                </table>
+	            </div>
 
-                <Link to="/admin/usuarios" className="btn btn-outline-light mt-4">
-                    ← Volver
-                </Link>
-            </div>
-        </div>
-    );
-}
+	            <Link to="/admin/usuarios" className="btn btn-outline-light mt-4">
+	                ← Volver
+	            </Link>
+	        </div>
+	    </div>
+	);}

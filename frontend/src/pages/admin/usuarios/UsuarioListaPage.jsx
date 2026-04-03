@@ -72,48 +72,59 @@ export default function UsuarioListaPage() {
 
     return (
         <div className="dashboard-container">
-            <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="fw-bold mb-0">Listado de Usuarios</h1>
+            <div className="page-header-admin">
+                <h1 className="fw-bold">Gestión de Clases</h1>
+
+                <Link to="/admin/clases/nueva" className="btn btn-primary">
+                    + Nueva Clase
+                </Link>
             </div>
 
             <div className="dashboard-card">
-                {usuarios.length === 0 ? (
-                    <p className="opacity-75 mb-0">No hay usuarios registrados.</p>
+                {clases.length === 0 ? (
+                    <p className="opacity-75 mb-0">No hay clases registradas.</p>
                 ) : (
                     <div className="table-responsive">
                         <table className="table table-dark table-hover align-middle dashboard-table mb-0">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Email</th>
-                                    <th>Teléfono</th>
-                                    <th>Sexo</th>
-                                    <th>Cuota</th>
-                                    <th>Acciones</th>
+                                    <th>Actividad</th>
+                                    <th>Coach</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Aforo</th>
+                                    <th className="text-end">Acciones</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {usuarios.map((usuario) => (
-                                    <tr key={usuario.id}>
-                                        <td>{usuario.id}</td>
-                                        <td>{usuario.nombre}</td>
-                                        <td>{usuario.email}</td>
-                                        <td>{usuario.telefono || "No informado"}</td>
-                                        <td>{usuario.sexo || "No informado"}</td>
+                                {clases.map((clase) => (
+                                    <tr key={clase.id}>
+                                        <td>{clase.actividadNombre}</td>
+                                        <td>{clase.coachNombre}</td>
+                                        <td>{new Date(clase.fechaHora).toLocaleDateString()}</td>
                                         <td>
-                                            {usuario.estadoCuota
-                                                ? getCuotaBadge(usuario.estadoCuota)
-                                                : "No disponible"}
+                                            {new Date(clase.fechaHora).toLocaleTimeString([], {
+                                                hour: "2-digit",
+                                                minute: "2-digit",
+                                            })}
                                         </td>
-                                        <td>
+                                        <td>{clase.aforoMaximo}</td>
+
+                                        <td className="text-end">
                                             <Link
-                                                to={`/admin/usuarios/${usuario.id}`}
-                                                className="btn btn-sm btn-primary"
+                                                to={`/admin/clases/${clase.id}`}
+                                                className="btn btn-sm btn-warning me-2"
                                             >
-                                                Ver detalle
+                                                Editar
                                             </Link>
+
+                                            <button
+                                                className="btn btn-sm btn-danger"
+                                                onClick={() => eliminarClase(clase.id)}
+                                            >
+                                                Eliminar
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}
@@ -123,5 +134,4 @@ export default function UsuarioListaPage() {
                 )}
             </div>
         </div>
-    );
-}
+    );}
