@@ -72,7 +72,9 @@ export default function UsuarioListaPage() {
 
     return (
         <div className="dashboard-container">
-            <h1 className="fw-bold mb-4">Listado de Usuarios</h1>
+            <div className="d-flex justify-content-between align-items-center mb-4">
+                <h1 className="fw-bold mb-0">Listado de Usuarios</h1>
+            </div>
 
             <div className="dashboard-card">
                 {usuarios.length === 0 ? (

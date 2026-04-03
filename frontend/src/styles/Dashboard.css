@@ -267,3 +267,28 @@ BADGES EN TABLA DETALLE
   padding: 0.45em 0.7em;
   border-radius: 999px;
 }
+
+/* =========================================
+INPUTS / SELECTS EN MODO DASHBOARD OSCURO
+========================================= */
+.dashboard-input {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: white !important;
+  border-radius: 10px;
+}
+
+.dashboard-input:focus {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(13, 110, 253, 0.6) !important;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15) !important;
+  color: white !important;
+}
+
+.dashboard-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dashboard-input option {
+  color: black;
+}
