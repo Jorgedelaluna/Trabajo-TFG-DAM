@@ -12,10 +12,17 @@ public interface UsuarioMapper {
 
 	UsuarioDTO toDTO(Usuario usuario);
 
+	//  Importante: ignorar campos sensibles
+	@Mapping(target = "passwordHash", ignore = true)
+	@Mapping(target = "rol", ignore = true)
+	@Mapping(target = "estadoCuota", ignore = true)
+	@Mapping(target = "fechaAlta", ignore = true)
 	Usuario toEntity(UsuarioDTO dto);
 
 	@Mapping(target = "id", ignore = true)
 	@Mapping(target = "passwordHash", ignore = true)
 	@Mapping(target = "fechaAlta", ignore = true)
+	@Mapping(target = "rol", ignore = true)
+	@Mapping(target = "estadoCuota", ignore = true)
 	void updateEntityFromDto(UsuarioDTO dto, @MappingTarget Usuario usuario);
 }

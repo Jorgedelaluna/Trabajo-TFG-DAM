@@ -16,33 +16,39 @@ import java.time.LocalDateTime;
 @Table(name = "usuario")
 public class Usuario implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(nullable = false)
-    private String nombre;
+	@Column(nullable = false)
+	private String nombre;
 
-    @Column(nullable = false, unique = true)
-    private String email;
+	@Column(nullable = false, unique = true)
+	private String email;
 
-    @JsonIgnore
-    @Column(name = "password_hash", nullable = false)
-    private String passwordHash;
+	@JsonIgnore
+	@Column(name = "password_hash", nullable = false)
+	private String passwordHash;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Rol rol = Rol.USER;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private Rol rol = Rol.USER;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "estado_cuota", nullable = false)
-    private EstadoCuota estadoCuota = EstadoCuota.INACTIVA;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "estado_cuota", nullable = false)
+	private EstadoCuota estadoCuota = EstadoCuota.INACTIVA;
 
-    @Column(name = "fecha_alta", nullable = false)
-    private LocalDateTime fechaAlta;
+	@Column(name = "fecha_alta", nullable = false)
+	private LocalDateTime fechaAlta;
 
-    @PrePersist
-    public void prePersist() {
-        this.fechaAlta = LocalDateTime.now();
-    }
+	@Column(length = 20)
+	private String telefono;
+
+	@Enumerated(EnumType.STRING)
+	private Sexo sexo;
+
+	@PrePersist
+	public void prePersist() {
+		this.fechaAlta = LocalDateTime.now();
+	}
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-04-03T20:21:54+0200",
+    date = "2026-04-03T21:03:42+0200",
     comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
@@ -24,9 +24,10 @@ public class UsuarioMapperImpl implements UsuarioMapper {
         usuarioDTO.setId( usuario.getId() );
         usuarioDTO.setNombre( usuario.getNombre() );
         usuarioDTO.setEmail( usuario.getEmail() );
-        usuarioDTO.setRol( usuario.getRol() );
         usuarioDTO.setEstadoCuota( usuario.getEstadoCuota() );
         usuarioDTO.setFechaAlta( usuario.getFechaAlta() );
+        usuarioDTO.setTelefono( usuario.getTelefono() );
+        usuarioDTO.setSexo( usuario.getSexo() );
 
         return usuarioDTO;
     }
@@ -42,9 +43,8 @@ public class UsuarioMapperImpl implements UsuarioMapper {
         usuario.setId( dto.getId() );
         usuario.setNombre( dto.getNombre() );
         usuario.setEmail( dto.getEmail() );
-        usuario.setRol( dto.getRol() );
-        usuario.setEstadoCuota( dto.getEstadoCuota() );
-        usuario.setFechaAlta( dto.getFechaAlta() );
+        usuario.setTelefono( dto.getTelefono() );
+        usuario.setSexo( dto.getSexo() );
 
         return usuario;
     }
@@ -57,7 +57,7 @@ public class UsuarioMapperImpl implements UsuarioMapper {
 
         usuario.setNombre( dto.getNombre() );
         usuario.setEmail( dto.getEmail() );
-        usuario.setRol( dto.getRol() );
-        usuario.setEstadoCuota( dto.getEstadoCuota() );
+        usuario.setTelefono( dto.getTelefono() );
+        usuario.setSexo( dto.getSexo() );
     }
 }

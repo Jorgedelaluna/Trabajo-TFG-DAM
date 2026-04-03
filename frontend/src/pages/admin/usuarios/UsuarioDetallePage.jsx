@@ -1,15 +1,8 @@
 /**
  * ======================================================
- *  PÃ�GINA ADMIN: UsuarioDetallePage.jsx
- * 
- *  Muestra la informaciÃ³n completa de un usuario concreto.
- *  Funcionalidades:
- *    - Obtiene los datos reales desde el backend usando su ID
- *    - Protegida por rol ADMIN desde App.jsx
- *    - Forma parte del panel de administraciÃ³n (AdminLayout)
- * 
- *  Esta vista permite al administrador consultar datos clave
- *  antes de realizar acciones de gestiÃ³n.
+ *  PÁGINA ADMIN: UsuarioDetallePage.jsx
+ *
+ *  Muestra la información completa de un usuario concreto.
  * ======================================================
  */
 
@@ -21,20 +14,12 @@ import API_URL from "../../../api/api";
 
 export default function UsuarioDetallePage() {
 
-    // Obtener el ID del usuario desde la URL
     const { id } = useParams();
-
-    // Estado donde guardamos los datos reales del usuario
     const [usuario, setUsuario] = useState(null);
 
-    /**
-     * ============================================================
-     *  Cargar datos del usuario al entrar en la pÃ¡gina
-     * ============================================================
-     */
     useEffect(() => {
         cargarUsuario();
-    }, []);
+    }, [id]);
 
     const cargarUsuario = async () => {
         try {
@@ -45,25 +30,32 @@ export default function UsuarioDetallePage() {
                 return;
             }
 
-            const res = await axios.get(
-                `${API_URL}/usuarios/${id}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
+            const res = await axios.get(`${API_URL}/usuarios/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
             setUsuario(res.data);
         } catch (error) {
             console.error("Error cargando usuario:", error);
         }
     };
-    /**
-     * ============================================================
-     *  Estado de carga
-     * ============================================================
-     */
+
+    // 🎨 Badge cuota
+    const getCuotaBadge = (estado) => {
+        switch (estado) {
+            case "ACTIVA":
+                return <span className="badge bg-success">ACTIVA</span>;
+            case "INACTIVA":
+                return <span className="badge bg-danger">INACTIVA</span>;
+            case "PENDIENTE":
+                return <span className="badge bg-warning text-dark">PENDIENTE</span>;
+            default:
+                return <span className="badge bg-secondary">DESCONOCIDO</span>;
+        }
+    };
+
     if (!usuario) {
         return (
             <div className="dashboard-container">
@@ -77,21 +69,33 @@ export default function UsuarioDetallePage() {
     return (
         <div className="dashboard-container-fluid">
 
-            {/* TÃ­tulo principal */}
             <h1 className="fw-bold mb-4">Detalle del Usuario</h1>
 
-            {/* Tarjeta con estilo glass */}
             <div className="dashboard-card p-4">
 
                 <p><strong>Nombre:</strong> {usuario.nombre}</p>
                 <p><strong>Email:</strong> {usuario.email}</p>
-                <p><strong>Rol:</strong> {usuario.rol}</p>
-                <p><strong>Cuota:</strong> {usuario.cuota}</p>
+                <p><strong>Teléfono:</strong> {usuario.telefono || "No informado"}</p>
+                <p><strong>Sexo:</strong> {usuario.sexo || "No informado"}</p>
 
-                {/* BotÃ³n para volver */}
+                <p>
+                    <strong>Cuota:</strong>{" "}
+                    {usuario.estadoCuota
+                        ? getCuotaBadge(usuario.estadoCuota)
+                        : "No disponible"}
+                </p>
+
+                <p>
+                    <strong>Fecha de alta:</strong>{" "}
+                    {usuario.fechaAlta
+                        ? new Date(usuario.fechaAlta).toLocaleString()
+                        : "No disponible"}
+                </p>
+
                 <Link to="/admin/usuarios" className="btn btn-secondary mt-3">
                     Volver
                 </Link>
+
             </div>
 
         </div>
