@@ -21,8 +21,6 @@ export default function ActividadDetallePage() {
     // Datos reales de la actividad
     const [actividad, setActividad] = useState(null);
     const [cargando, setCargando] = useState(true);
-
-
     /**
      * ======================================================
      * ESTADO DE CARGA
@@ -32,7 +30,23 @@ export default function ActividadDetallePage() {
     useEffect(() => {
         const cargar = async () => {
             try {
-                const res = await axios.get(`${API_URL}/actividades/${id}`);
+                const token = localStorage.getItem("token");
+
+                if (!token) {
+                    alert("Sesión expirada. Inicia sesión de nuevo.");
+                    setCargando(false);
+                    return;
+                }
+
+                const res = await axios.get(
+                    `${API_URL}/actividades/${id}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+
                 setActividad(res.data);
             } catch (err) {
                 console.error(err);
@@ -41,6 +55,7 @@ export default function ActividadDetallePage() {
                 setCargando(false);
             }
         };
+
         cargar();
     }, [id]);
 
@@ -54,7 +69,17 @@ export default function ActividadDetallePage() {
         e.preventDefault();
 
         try {
-            await axios.put(`${API_URL}/actividades/${id}`, actividad);
+            const token = localStorage.getItem("token");
+
+            await axios.put(
+                `${API_URL}/actividades/${id}`,
+                actividad,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
             alert("Actividad actualizada");
             navigate("/admin/actividades");
         } catch (err) {

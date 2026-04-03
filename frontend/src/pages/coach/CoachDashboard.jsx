@@ -72,7 +72,7 @@ export default function CoachDashboard() {
       <h1 className="fw-bold mb-4">Panel del Coach</h1>
 
       {/* ============================================================
-          TARJETAS DE M√âTRICAS
+          TARJETAS DE M…TRICAS
       ============================================================ */}
       <div className="row g-4 mb-4">
 
@@ -103,7 +103,7 @@ export default function CoachDashboard() {
       </div>
 
       {/* ============================================================
-          ACCESOS R√ÅPIDOS
+          ACCESOS R¡PIDOS
       ============================================================ */}
       <div className="dashboard-card p-4">
         <h3 className="mb-3">
