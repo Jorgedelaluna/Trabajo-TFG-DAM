@@ -1,14 +1,10 @@
 /**
  * ======================================================
  *  PERFIL DEL USUARIO
- *  - Muestra la información personal del usuario logueado
- *  - Permite editar algunos datos básicos (opcional)
- *  - Página sencilla y clara para el TFG
  * ======================================================
  */
 
 import "../../styles/Dashboard.css";
-
 import { useAuth } from "../../auth/AuthContext";
 import { useState } from "react";
 import API_URL from "../../api/api";
@@ -16,30 +12,47 @@ import axios from "axios";
 
 export default function PerfilPage() {
   const { usuario, setUsuario } = useAuth();
-
-  // Estado local para edición
   const [telefono, setTelefono] = useState(usuario?.telefono || "");
   const [guardando, setGuardando] = useState(false);
 
-  /**
-   * ======================================================
-   *  GUARDAR CAMBIOS DE PERFIL
-   *  - Solo actualiza teléfono (ejemplo simple para TFG)
-   * ======================================================
-   */
+  const getCuotaBadge = (estado) => {
+    switch (estado) {
+      case "ACTIVA":
+        return <span className="badge bg-success">ACTIVA</span>;
+      case "INACTIVA":
+        return <span className="badge bg-danger">INACTIVA</span>;
+      case "PENDIENTE":
+        return <span className="badge bg-warning text-dark">PENDIENTE</span>;
+      default:
+        return <span className="badge bg-secondary">DESCONOCIDO</span>;
+    }
+  };
+
   const guardarCambios = async (e) => {
     e.preventDefault();
     setGuardando(true);
 
     try {
+      const token = localStorage.getItem("token");
+
+      const payload = {
+        nombre: usuario.nombre,
+        email: usuario.email,
+        telefono: telefono.trim(),
+        sexo: usuario.sexo || null,
+      };
+
       const response = await axios.put(
-		  `${API_URL}/usuarios/${usuario.id}`,
-		  { ...usuario, telefono }
-		);
+        `${API_URL}/usuarios/${usuario.id}`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      // Actualizar usuario en contexto
       setUsuario(response.data);
-
       alert("Perfil actualizado correctamente");
     } catch (error) {
       console.error("Error actualizando perfil:", error);
@@ -49,40 +62,83 @@ export default function PerfilPage() {
     }
   };
 
-  return (
-    <section className="container mt-4 text-light">
+  if (!usuario) {
+    return (
+      <div className="dashboard-container">
+        <div className="dashboard-card p-4 text-center">
+          <h3>Cargando perfil...</h3>
+        </div>
+      </div>
+    );
+  }
 
-      <h1 className="fw-bold mb-4">Mi Perfil</h1>
+  return (
+    <div className="dashboard-container">
+      <div className="page-header-admin page-header-left">
+        <h1 className="fw-bold">Mi Perfil</h1>
+      </div>
+
+      <div className="dashboard-card p-4 fade-in-up mb-4">
+        <div className="table-responsive">
+          <table className="table table-dark table-hover align-middle dashboard-table mb-0">
+            <tbody>
+              <tr>
+                <th style={{ width: "260px" }}>Nombre</th>
+                <td>{usuario.nombre}</td>
+              </tr>
+
+              <tr>
+                <th>Email</th>
+                <td>{usuario.email}</td>
+              </tr>
+
+              <tr>
+                <th>Teléfono</th>
+                <td>{usuario.telefono || "No informado"}</td>
+              </tr>
+
+              <tr>
+                <th>Sexo</th>
+                <td>{usuario.sexo || "No informado"}</td>
+              </tr>
+
+              <tr>
+                <th>Rol</th>
+                <td>{usuario.rol || "No informado"}</td>
+              </tr>
+
+              <tr>
+                <th>Estado de cuota</th>
+                <td>
+                  {usuario.estadoCuota
+                    ? getCuotaBadge(usuario.estadoCuota)
+                    : "No disponible"}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
       <div className="dashboard-card p-4 fade-in-up">
-
-        {/* Datos del usuario */}
-        <div className="row mb-4">
-          <div className="col-md-6">
-            <p><strong>Nombre:</strong> {usuario?.nombre}</p>
-            <p><strong>Email:</strong> {usuario?.email}</p>
-          </div>
-
-          <div className="col-md-6">
-            <p><strong>Rol:</strong> {usuario?.rol}</p>
-            <p><strong>Estado de cuota:</strong> Activa</p>
-          </div>
+        <div className="dashboard-card-header">
+          <span className="dashboard-icon">✏️</span>
+          <h5 className="m-0">Editar teléfono</h5>
         </div>
 
-        {/* Formulario de edición */}
         <form onSubmit={guardarCambios} className="row g-3">
-
-          <div className="col-md-6">
-            <label className="form-label">Teléfono</label>
+          <div className="col-12 col-md-6">
+            <label className="form-label text-white">Teléfono</label>
             <input
               type="text"
-              className="form-control"
+              className="form-control dashboard-input"
               value={telefono}
               onChange={(e) => setTelefono(e.target.value)}
+              placeholder="Introduce tu teléfono"
             />
           </div>
 
-          <div className="col-12 mt-3">
+          <div className="col-12">
             <button
               type="submit"
               className="btn btn-primary"
@@ -91,10 +147,8 @@ export default function PerfilPage() {
               {guardando ? "Guardando..." : "Guardar cambios"}
             </button>
           </div>
-
         </form>
-
       </div>
-    </section>
+    </div>
   );
 }

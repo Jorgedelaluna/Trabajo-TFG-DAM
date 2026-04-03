@@ -162,7 +162,6 @@
 
 .admin-content {
 	flex: 1;
-	padding: 20px;
 	margin-top: 80px;
 	color: var(--dashboard-text);
 }
@@ -181,8 +180,7 @@ HEADER DE PÁGINA ADMIN
 /* Header con acciones (botón a la derecha) */
 .page-header-admin.with-actions {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	justify-content: space-between;	
 	gap: 16px;
 }
 

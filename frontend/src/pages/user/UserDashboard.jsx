@@ -1,50 +1,35 @@
-/**
- * ======================================================
- *  USER DASHBOARD: UserDashboard.jsx
- * 
- *  Página principal del usuario tras iniciar sesión.
- *  Muestra:
- *    - Información básica del usuario
- *    - Acceso rápido a editar perfil
- *    - Un gráfico simple de asistencia (datos simulados)
- * 
- *  El gráfico no usa datos reales.
- *  Se explica en la memoria como parte del diseño visual del panel.
- * ======================================================
- */
-
 import { useAuth } from "../../auth/AuthContext";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Chart from "chart.js/auto";
+import "../../styles/Dashboard.css";
 
 export default function UserDashboard() {
   const { usuario, loading } = useAuth();
   const chartRef = useRef(null);
   const navigate = useNavigate();
 
-/**
- * ======================================================
- *  GRÁFICO DE ASISTENCIA (datos simulados)
- *  - Se destruye si ya existe para evitar duplicados
- *  - No usa datos reales (se explica en la memoria)
- *  - Se usa solo como elemento visual del dashboard
- * ======================================================
- */
-  useEffect(() => {
-    // Solo crear gráfico cuando el usuario está listo
-    if (loading) return <p>Cargando...</p>;
-    if (!usuario) return <p>No autorizado</p>;
-    if (usuario.rol !== "USER") return <p>No tienes permisos</p>;
-    if (!chartRef.current)return;
+  const getCuotaBadge = (estado) => {
+    switch (estado) {
+      case "ACTIVA":
+        return <span className="badge bg-success">ACTIVA</span>;
+      case "INACTIVA":
+        return <span className="badge bg-danger">INACTIVA</span>;
+      case "PENDIENTE":
+        return <span className="badge bg-warning text-dark">PENDIENTE</span>;
+      default:
+        return <span className="badge bg-secondary">DESCONOCIDO</span>;
+    }
+  };
 
-    // Si ya existe un gráfico previo -> destruirlo
+  useEffect(() => {
+    if (loading || !usuario || usuario.rol !== "USER" || !chartRef.current) return;
+
     const existingChart = Chart.getChart(chartRef.current);
     if (existingChart) {
       existingChart.destroy();
     }
 
-    // Crear gráfico nuevo
     const newChart = new Chart(chartRef.current, {
       type: "line",
       data: {
@@ -61,98 +46,151 @@ export default function UserDashboard() {
         ],
       },
       options: {
-        plugins: { legend: { labels: { color: "#fff" } } },
+        plugins: {
+          legend: {
+            labels: { color: "#fff" },
+          },
+        },
         scales: {
-          x: { ticks: { color: "#fff" } },
-          y: { ticks: { color: "#fff",
-            stepSize: 1, // pasos de 1 en 1
-            callback: function(value) {
-              return Number.isInteger(value) ? value : null; // solo números enteros
-            }},
-            beginAtZero: true, // empieza en 0 horas
-            suggestedMax: 5 // máximo de horas
-           }}
-      }}
-    );
+          x: {
+            ticks: { color: "#fff" },
+          },
+          y: {
+            ticks: {
+              color: "#fff",
+              stepSize: 1,
+              callback: function (value) {
+                return Number.isInteger(value) ? value : null;
+              },
+            },
+            beginAtZero: true,
+            suggestedMax: 5,
+          },
+        },
+      },
+    });
 
-    // Cleanup al desmontar
     return () => {
       newChart.destroy();
     };
   }, [loading, usuario]);
 
-  return (
-    <div className="dashboard-container-fluid">
+  if (loading) {
+    return (
+      <div className="dashboard-container">
+        <div className="dashboard-card p-4 text-center">
+          <h3>Cargando...</h3>
+        </div>
+      </div>
+    );
+  }
 
-      {/* ======================================================
-          TARJETA DE PERFIL
-      ====================================================== */}
-      <div className="row justify-content-center">
-        <div className="col-12">   
-        <div className="profile-card dashboard-card mb-4 fade-in-up">
-          <div className="d-flex align-items-center gap-3">
-            <img
-              src="/default_profile.png"
-              alt="Foto de perfil"
-              className="profile-avatar"
-            />
-            <div>
-              <h4 className="m-0 nombre-usuario">{usuario.nombre}</h4>
-              <p className="m-0 profile-status">
-                Estado de cuota:{""}
-                <span className="status-active estado-cuota">Activa</span>
-              </p>
-            </div>
+  if (!usuario) {
+    return (
+      <div className="dashboard-container">
+        <div className="dashboard-card p-4 text-center">
+          <h3>No autorizado</h3>
+        </div>
+      </div>
+    );
+  }
+
+  if (usuario.rol !== "USER") {
+    return (
+      <div className="dashboard-container">
+        <div className="dashboard-card p-4 text-center">
+          <h3>No tienes permisos</h3>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="dashboard-container">
+      <div className="page-header-admin page-header-left">
+        <h1 className="fw-bold">Mi Panel</h1>
+      </div>
+
+      <div className="profile-card dashboard-card mb-4 fade-in-up">
+        <div className="d-flex align-items-center gap-3">
+          <img
+            src="/default_profile.png"
+            alt="Foto de perfil"
+            className="profile-avatar"
+          />
+          <div>
+            <h4 className="m-0 nombre-usuario">{usuario.nombre}</h4>
+            <p className="m-0 profile-status">
+              Estado de cuota:{" "}
+              {usuario.estadoCuota
+                ? getCuotaBadge(usuario.estadoCuota)
+                : "No disponible"}
+            </p>
           </div>
         </div>
       </div>
-    </div>
 
-      {/* ======================================================
-          GRID PRINCIPAL
-      ====================================================== */}
-      <div className="row g-4 justify-content-center">
+      <div className="dashboard-card mb-4 fade-in-up">
+        <div className="page-header-admin with-actions mb-3">
+          <h5 className="m-0">Mis Datos</h5>
 
-        {/* Datos del usuario */}
-        <div className="col-12">
-        <div className="dashboard-card fade-in-up mb-4">
-          <div className="dashboard-card-header">
-            <span className="dashboard-icon">👤</span>
-            <h5 className="m-0 ">Mis Datos</h5>
-          </div>
-
-          <div className="row">
-            <div className="col-12 col-md-6">
-              <p><strong>Nombre:</strong> {usuario.nombre}</p>
-              <p><strong>Email:</strong> {usuario.email}</p>
-            </div>
-
-            <div className="col-12 col-md-6">
-              <p><strong>Teléfono:</strong> {usuario.telefono || "No registrado"}</p>
-              <p><strong>Rol:</strong> {usuario.rol}</p>
-            </div>
-          </div>
-
-          {/* Botón que redirige a Mi Perfil */}
-          <button className="btn btn-primary mt-3" onClick={() => navigate("/perfil")}
+          <button
+            className="btn btn-primary"
+            onClick={() => navigate("/perfil")}
           >
             Editar perfil
           </button>
         </div>
+
+        <div className="table-responsive">
+          <table className="table table-dark table-hover align-middle dashboard-table mb-0">
+            <tbody>
+              <tr>
+                <th style={{ width: "260px" }}>Nombre</th>
+                <td>{usuario.nombre}</td>
+              </tr>
+
+              <tr>
+                <th>Email</th>
+                <td>{usuario.email}</td>
+              </tr>
+
+              <tr>
+                <th>Teléfono</th>
+                <td>{usuario.telefono || "No informado"}</td>
+              </tr>
+
+              <tr>
+                <th>Sexo</th>
+                <td>{usuario.sexo || "No informado"}</td>
+              </tr>
+
+              <tr>
+                <th>Cuota</th>
+                <td>
+                  {usuario.estadoCuota
+                    ? getCuotaBadge(usuario.estadoCuota)
+                    : "No disponible"}
+                </td>
+              </tr>
+
+              <tr>
+                <th>Rol</th>
+                <td>{usuario.rol || "No informado"}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
-        {/* Gráfico */}
-        <div className="col-12">
-          <div className="dashboard-card fade-in-up mb-4">
-            <div className="dashboard-card-header">
-              <span className="dashboard-icon">📊</span>
-              <h5 className="m-0">Asistencia semanal</h5>
-            </div>
-
-            <canvas ref={chartRef} height="100"></canvas>
-          </div>
+      <div className="dashboard-card fade-in-up mb-4">
+        <div className="dashboard-card-header">
+          <span className="dashboard-icon">📊</span>
+          <h5 className="m-0">Asistencia semanal</h5>
         </div>
 
+        <canvas ref={chartRef} height="100"></canvas>
       </div>
-      </div>
-)}
+    </div>
+  );
+}
