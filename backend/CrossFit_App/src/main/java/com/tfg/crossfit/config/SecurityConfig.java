@@ -56,6 +56,7 @@ public class SecurityConfig {
                         .requestMatchers("/usuarios/me").authenticated()
 
                         // Inscripciones (USER + ADMIN)
+                        .requestMatchers(HttpMethod.PUT, "/usuarios/perfil").hasAnyAuthority("ROLE_USER", "ROLE_COACH", "ROLE_ADMIN")
                         .requestMatchers(HttpMethod.POST, "/inscripciones").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.GET, "/inscripciones/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/inscripciones/**").hasAnyRole("USER", "ADMIN")

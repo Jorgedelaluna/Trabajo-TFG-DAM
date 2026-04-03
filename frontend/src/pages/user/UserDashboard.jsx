@@ -136,7 +136,7 @@ export default function UserDashboard() {
 
                     <button
                         className="btn btn-primary"
-                        onClick={() => navigate("/perfil")}
+                        onClick={() => navigate("/user/perfil")}
                     >
                         Editar perfil
                     </button>
