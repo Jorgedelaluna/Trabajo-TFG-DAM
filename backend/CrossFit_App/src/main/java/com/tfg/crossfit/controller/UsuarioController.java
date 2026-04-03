@@ -1,8 +1,8 @@
 package com.tfg.crossfit.controller;
 
+import com.tfg.crossfit.dto.UsuarioDTO;
 import com.tfg.crossfit.dto.UsuarioLoginDTO;
 import com.tfg.crossfit.dto.UsuarioRegistroDTO;
-import com.tfg.crossfit.dto.UsuarioRespuestaDTO;
 import com.tfg.crossfit.mapper.UsuarioMapper;
 import com.tfg.crossfit.model.EstadoCuota;
 import com.tfg.crossfit.model.Usuario;
@@ -24,87 +24,87 @@ import java.util.Map;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
-    private final UsuarioService usuarioService;
-    private final UsuarioMapper usuarioMapper;
-    private final JwtUtil jwtUtil;
+	private final UsuarioService usuarioService;
+	private final UsuarioMapper usuarioMapper;
+	private final JwtUtil jwtUtil;
 
-    public UsuarioController(UsuarioService usuarioService, UsuarioMapper usuarioMapper, JwtUtil jwtUtil) {
-        this.usuarioService = usuarioService;
-        this.usuarioMapper = usuarioMapper;
-        this.jwtUtil = jwtUtil;
-    }
+	public UsuarioController(UsuarioService usuarioService, UsuarioMapper usuarioMapper, JwtUtil jwtUtil) {
+		this.usuarioService = usuarioService;
+		this.usuarioMapper = usuarioMapper;
+		this.jwtUtil = jwtUtil;
+	}
 
-    // Registro
-    @PostMapping("/registro")
-    public ResponseEntity<UsuarioRespuestaDTO> registrar(@Valid @RequestBody UsuarioRegistroDTO dto) {
+	// Registro
+	@PostMapping("/registro")
+	public ResponseEntity<UsuarioDTO> registrar(@Valid @RequestBody UsuarioRegistroDTO dto) {
 
-        if (usuarioService.buscarPorEmailIgnoreCase(dto.getEmail()).isPresent()) {
-            return ResponseEntity.badRequest().build();
-        }
+		if (usuarioService.buscarPorEmailIgnoreCase(dto.getEmail()).isPresent()) {
+			return ResponseEntity.badRequest().build();
+		}
 
-        Usuario nuevo = usuarioService.registrarUsuario(dto);
-        return ResponseEntity.ok(usuarioMapper.toDTO(nuevo));
-    }
+		Usuario nuevo = usuarioService.registrarUsuario(dto);
+		return ResponseEntity.ok(usuarioMapper.toDTO(nuevo));
+	}
 
-    // Login con JWT
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody UsuarioLoginDTO loginDTO) {
+	// Login con JWT
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@Valid @RequestBody UsuarioLoginDTO loginDTO) {
 
-        var usuarioOpt = usuarioService.buscarPorEmailIgnoreCase(loginDTO.getEmail());
+		var usuarioOpt = usuarioService.buscarPorEmailIgnoreCase(loginDTO.getEmail());
 
-        if (usuarioOpt.isEmpty() ||
-                !usuarioService.validarPassword(loginDTO.getPassword(), usuarioOpt.get().getPasswordHash())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas");
-        }
+		if (usuarioOpt.isEmpty()
+				|| !usuarioService.validarPassword(loginDTO.getPassword(), usuarioOpt.get().getPasswordHash())) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas");
+		}
 
-        Usuario usuario = usuarioOpt.get();
-        String token = jwtUtil.generarToken(usuario);
+		Usuario usuario = usuarioOpt.get();
+		String token = jwtUtil.generarToken(usuario);
 
-        return ResponseEntity.ok(Map.of(
-                "token", token,
-                "usuario", usuarioMapper.toDTO(usuario)
-        ));
-    }
+		return ResponseEntity.ok(Map.of("token", token, "usuario", usuarioMapper.toDTO(usuario)));
+	}
 
-    @GetMapping("/me")
-    public ResponseEntity<UsuarioRespuestaDTO> getPerfilUsuario(
-            @AuthenticationPrincipal CustomUserDetails userDetails) {
+	@GetMapping("/me")
+	public ResponseEntity<UsuarioDTO> getPerfilUsuario(@AuthenticationPrincipal CustomUserDetails userDetails) {
 
-        if (userDetails == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+		if (userDetails == null) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		}
 
-        String email = userDetails.getUsername();
-        var usuarioOpt = usuarioService.buscarPorEmailIgnoreCase(email);
+		String email = userDetails.getUsername();
+		var usuarioOpt = usuarioService.buscarPorEmailIgnoreCase(email);
 
-        if (usuarioOpt.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+		if (usuarioOpt.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		}
 
-        Usuario usuario = usuarioOpt.get();
-        return ResponseEntity.ok(usuarioMapper.toDTO(usuario));
-    }
+		Usuario usuario = usuarioOpt.get();
+		return ResponseEntity.ok(usuarioMapper.toDTO(usuario));
+	}
 
-    // Listar usuarios
-    @GetMapping
-    public ResponseEntity<List<UsuarioRespuestaDTO>> listarUsuarios() {
-        List<UsuarioRespuestaDTO> usuarios = usuarioService.listarUsuarios()
-                .stream()
-                .map(usuarioMapper::toDTO)
-                .toList();
+	// Listar usuarios
+	@GetMapping
+	public ResponseEntity<List<UsuarioDTO>> listarUsuarios() {
+		List<UsuarioDTO> usuarios = usuarioService.listarUsuarios().stream().map(usuarioMapper::toDTO).toList();
 
-        return ResponseEntity.ok(usuarios);
-    }
+		return ResponseEntity.ok(usuarios);
+	}
 
-    // Cambiar estado de cuota
-    @PutMapping("/{id}/cuota")
-    public ResponseEntity<UsuarioRespuestaDTO> actualizarCuota(
-            @PathVariable Long id,
-            @RequestParam EstadoCuota estado
-    ) {
-        Usuario actualizado = usuarioService.actualizarEstadoCuota(id, estado);
-        return ResponseEntity.ok(usuarioMapper.toDTO(actualizado));
-    }
+	@GetMapping("/{id}")
+	public ResponseEntity<UsuarioDTO> obtenerUsuarioPorId(@PathVariable Long id) {
+		return usuarioService.buscarPorId(id).map(usuarioMapper::toDTO).map(ResponseEntity::ok)
+				.orElse(ResponseEntity.notFound().build());
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<UsuarioDTO> actualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO dto) {
+		return usuarioService.actualizarUsuario(id, dto).map(usuarioMapper::toDTO).map(ResponseEntity::ok)
+				.orElse(ResponseEntity.notFound().build());
+	}
+
+	// Cambiar estado de cuota
+	@PutMapping("/{id}/cuota")
+	public ResponseEntity<UsuarioDTO> actualizarCuota(@PathVariable Long id, @RequestParam EstadoCuota estado) {
+		Usuario actualizado = usuarioService.actualizarEstadoCuota(id, estado);
+		return ResponseEntity.ok(usuarioMapper.toDTO(actualizado));
+	}
 }
-
-

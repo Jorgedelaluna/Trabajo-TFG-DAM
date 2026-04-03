@@ -1,25 +1,21 @@
 package com.tfg.crossfit.mapper;
 
 import com.tfg.crossfit.config.CentralConfig;
-import com.tfg.crossfit.dto.UsuarioRegistroDTO;
-import com.tfg.crossfit.dto.UsuarioRespuestaDTO;
+import com.tfg.crossfit.dto.UsuarioDTO;
 import com.tfg.crossfit.model.Usuario;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", config = CentralConfig.class)
 public interface UsuarioMapper {
 
-    // DTO de registro → entidad
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "passwordHash", ignore = true) // se asigna en el servicio
-    @Mapping(target = "estadoCuota", ignore = true)  // se asigna por defecto
-    Usuario toEntity(UsuarioRegistroDTO dto);
+	UsuarioDTO toDTO(Usuario usuario);
 
-    // Entidad → DTO de respuesta
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "rol", source = "rol")
-    UsuarioRespuestaDTO toDTO(Usuario usuario);
+	Usuario toEntity(UsuarioDTO dto);
 
+	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "passwordHash", ignore = true)
+	@Mapping(target = "fechaAlta", ignore = true)
+	void updateEntityFromDto(UsuarioDTO dto, @MappingTarget Usuario usuario);
 }
-
