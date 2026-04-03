@@ -1,6 +1,7 @@
 package com.tfg.crossfit.dto;
 
 import com.tfg.crossfit.model.EstadoCuota;
+import com.tfg.crossfit.model.Rol;
 import com.tfg.crossfit.model.Sexo;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -23,6 +24,7 @@ public class UsuarioDTO {
 	@Email
 	private String email;
 	private EstadoCuota estadoCuota;
+	private Rol rol;
 	private LocalDateTime fechaAlta;
 
 	// nuevos campos
