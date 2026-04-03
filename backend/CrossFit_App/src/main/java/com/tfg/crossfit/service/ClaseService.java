@@ -77,6 +77,29 @@ public class ClaseService {
 		claseRepository.deleteById(id);
 	}
 
+	// Método para actualizar una clase existente a partir de un DTO
+
+	public ClaseDTO actualizarClase(Long id, ClaseDTO claseDTO) {
+
+		Clase clase = claseRepository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("Clase no encontrada"));
+
+		clase.setFechaHora(claseDTO.getFechaHora());
+		clase.setAforoMaximo(claseDTO.getAforoMaximo());
+
+		Actividad actividad = actividadRepository.findById(claseDTO.getActividadId()).orElseThrow(
+				() -> new RuntimeException("Actividad no encontrada con id: " + claseDTO.getActividadId()));
+		clase.setActividad(actividad);
+
+		var coach = coachRepository.findById(claseDTO.getCoachId())
+				.orElseThrow(() -> new RuntimeException("Coach no encontrado con id: " + claseDTO.getCoachId()));
+		clase.setCoach(coach);
+
+		Clase actualizada = claseRepository.save(clase);
+
+		return claseMapper.toDTO(actualizada);
+	}
+
 	// Método para obtener la entidad Clase
 	public Clase obtenerEntidad(Long id) {
 		return claseRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Clase no encontrada"));

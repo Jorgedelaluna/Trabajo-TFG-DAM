@@ -12,45 +12,49 @@ import java.util.List;
 @RequestMapping("/clases")
 public class ClaseController {
 
-    private final ClaseService claseService;
+	private final ClaseService claseService;
 
-    public ClaseController(ClaseService claseService) {
-        this.claseService = claseService;
-    }
+	public ClaseController(ClaseService claseService) {
+		this.claseService = claseService;
+	}
 
-    // Crear clase
-    @PostMapping
-    public ResponseEntity<ClaseDTO> crearClase(@Valid @RequestBody ClaseDTO claseDTO) {
-        ClaseDTO creada = claseService.crearClase(claseDTO);
-        return ResponseEntity
-                .created(URI.create("/clases/" + creada.getId()))
-                .body(creada);
-    }
+	// Crear clase
+	@PostMapping
+	public ResponseEntity<ClaseDTO> crearClase(@Valid @RequestBody ClaseDTO claseDTO) {
+		ClaseDTO creada = claseService.crearClase(claseDTO);
+		return ResponseEntity.created(URI.create("/clases/" + creada.getId())).body(creada);
+	}
 
-    // Listar clases
-    @GetMapping
-    public ResponseEntity<List<ClaseDTO>> listarClases() {
-        return ResponseEntity.ok(claseService.listarClases());
-    }
+	// Listar clases
+	@GetMapping
+	public ResponseEntity<List<ClaseDTO>> listarClases() {
+		return ResponseEntity.ok(claseService.listarClases());
+	}
 
-    // Generar clases reales desde el horario
-    @PostMapping("/generar-semana")
-    public ResponseEntity<Void> generarSemana() {
-        claseService.generarClasesDesdeHorario();
-        return ResponseEntity.ok().build();
-    }
+	// Generar clases reales desde el horario
+	@PostMapping("/generar-semana")
+	public ResponseEntity<Void> generarSemana() {
+		claseService.generarClasesDesdeHorario();
+		return ResponseEntity.ok().build();
+	}
 
-    // Obtener clase por ID
-    @GetMapping("/{id}")
-    public ResponseEntity<ClaseDTO> obtenerClase(@PathVariable Long id) {
-        return ResponseEntity.ok(claseService.obtenerClase(id));
-    }
+	// Obtener clase por ID
+	@GetMapping("/{id}")
+	public ResponseEntity<ClaseDTO> obtenerClase(@PathVariable Long id) {
+		return ResponseEntity.ok(claseService.obtenerClase(id));
+	}
 
-    // Eliminar clase
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarClase(@PathVariable Long id) {
-        claseService.eliminarClase(id);
-        return ResponseEntity.noContent().build();
-    }
+	// Eliminar clase
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> eliminarClase(@PathVariable Long id) {
+		claseService.eliminarClase(id);
+		return ResponseEntity.noContent().build();
+	}
+
+	// Actualizar clase
+	@PutMapping("/{id}")
+	public ResponseEntity<ClaseDTO> actualizarClase(@PathVariable Long id, @Valid @RequestBody ClaseDTO claseDTO) {
+		return ResponseEntity.ok(claseService.actualizarClase(id, claseDTO));
+	}
 
 }
