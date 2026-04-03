@@ -30,7 +30,7 @@ export default function UsuarioDetallePage() {
                 return;
             }
 
-            const res = await axios.get(`${API_URL}/usuarios/${id}`, {
+            const res = await axios.get(`${API_URL}/usuarios`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
