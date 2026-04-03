@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-04-03T14:18:33+0200",
+    date = "2026-04-03T19:03:50+0200",
     comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
@@ -21,9 +21,9 @@ public class ActividadMapperImpl implements ActividadMapper {
 
         ActividadDTO actividadDTO = new ActividadDTO();
 
-        actividadDTO.setDescripcion( actividad.getDescripcion() );
         actividadDTO.setId( actividad.getId() );
         actividadDTO.setNombre( actividad.getNombre() );
+        actividadDTO.setDescripcion( actividad.getDescripcion() );
 
         return actividadDTO;
     }
@@ -36,10 +36,20 @@ public class ActividadMapperImpl implements ActividadMapper {
 
         Actividad actividad = new Actividad();
 
-        actividad.setDescripcion( dto.getDescripcion() );
         actividad.setId( dto.getId() );
         actividad.setNombre( dto.getNombre() );
+        actividad.setDescripcion( dto.getDescripcion() );
 
         return actividad;
+    }
+
+    @Override
+    public void updateEntityFromDto(ActividadDTO dto, Actividad actividad) {
+        if ( dto == null ) {
+            return;
+        }
+
+        actividad.setNombre( dto.getNombre() );
+        actividad.setDescripcion( dto.getDescripcion() );
     }
 }

@@ -4,9 +4,17 @@ import com.tfg.crossfit.config.CentralConfig;
 import com.tfg.crossfit.dto.ActividadDTO;
 import com.tfg.crossfit.model.Actividad;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring", config = CentralConfig.class)
 public interface ActividadMapper {
+
 	ActividadDTO toDTO(Actividad actividad);
+
 	Actividad toEntity(ActividadDTO dto);
+
+	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "clases", ignore = true)
+	void updateEntityFromDto(ActividadDTO dto, @MappingTarget Actividad actividad);
 }
