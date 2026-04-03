@@ -69,7 +69,7 @@ export default function SidebarAdmin() {
 
         {/* Gestión de coaches */}
         <li className="nav-item mb-2">
-          <Link className="nav-link text-light" to="/admin/coach">
+          <Link className="nav-link text-light" to="/admin/coaches">
             Coaches
           </Link>
         </li>
@@ -80,7 +80,7 @@ export default function SidebarAdmin() {
         className="btn btn-outline-light w-100 mt-4"
         onClick={logout}
       >
-        Cerrar sesión
+        Cerrar sesi�n
       </button>
 
     </aside>
