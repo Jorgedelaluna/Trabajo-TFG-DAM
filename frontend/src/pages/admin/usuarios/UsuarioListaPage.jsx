@@ -1,24 +1,30 @@
 /**
  * ======================================================
- *  PÁGINA ADMIN: UsuarioDetallePage.jsx
+ *  PÁGINA ADMIN: UsuarioListaPage.jsx
+ *
+ *  Muestra el listado de todos los usuarios registrados.
+ *  Funcionalidades:
+ *    - Carga usuarios desde el backend
+ *    - Muestra datos básicos en tabla
+ *    - Permite ir al detalle de cada usuario por ID
  * ======================================================
  */
 
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "../../../styles/Dashboard.css";
 import API_URL from "../../../api/api";
 
-export default function UsuarioDetallePage() {
-    const { id } = useParams();
-    const [usuario, setUsuario] = useState(null);
+export default function UsuarioListaPage() {
+    const [usuarios, setUsuarios] = useState([]);
+    const [cargando, setCargando] = useState(true);
 
     useEffect(() => {
-        cargarUsuario();
-    }, [id]);
+        cargarUsuarios();
+    }, []);
 
-    const cargarUsuario = async () => {
+    const cargarUsuarios = async () => {
         try {
             const token = localStorage.getItem("token");
 
@@ -27,19 +33,20 @@ export default function UsuarioDetallePage() {
                 return;
             }
 
-            const res = await axios.get(`${API_URL}/usuarios/${id}`, {
+            const res = await axios.get(`${API_URL}/usuarios`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
 
-            setUsuario(res.data);
+            setUsuarios(res.data);
         } catch (error) {
-            console.error("Error cargando usuario:", error);
+            console.error("Error cargando usuarios:", error);
+        } finally {
+            setCargando(false);
         }
     };
 
-    // Función para pintar badge según estado
     const getCuotaBadge = (estado) => {
         switch (estado) {
             case "ACTIVA":
@@ -53,11 +60,11 @@ export default function UsuarioDetallePage() {
         }
     };
 
-    if (!usuario) {
+    if (cargando) {
         return (
             <div className="dashboard-container">
                 <div className="dashboard-card p-4 text-center">
-                    <h3>Cargando usuario...</h3>
+                    <h3>Cargando usuarios...</h3>
                 </div>
             </div>
         );
@@ -65,31 +72,52 @@ export default function UsuarioDetallePage() {
 
     return (
         <div className="dashboard-container-fluid">
-            <h1 className="fw-bold mb-4">Detalle del Usuario</h1>
+            <h1 className="fw-bold mb-4">Listado de Usuarios</h1>
 
             <div className="dashboard-card p-4">
-                <p><strong>Nombre:</strong> {usuario.nombre}</p>
-                <p><strong>Email:</strong> {usuario.email}</p>
-                <p><strong>Teléfono:</strong> {usuario.telefono || "No informado"}</p>
-                <p><strong>Sexo:</strong> {usuario.sexo || "No informado"}</p>
-
-                <p>
-                    <strong>Cuota:</strong>{" "}
-                    {usuario.estadoCuota
-                        ? getCuotaBadge(usuario.estadoCuota)
-                        : "No disponible"}
-                </p>
-
-                <p>
-                    <strong>Fecha de alta:</strong>{" "}
-                    {usuario.fechaAlta
-                        ? new Date(usuario.fechaAlta).toLocaleString()
-                        : "No disponible"}
-                </p>
-
-                <Link to="/admin/usuarios" className="btn btn-secondary mt-3">
-                    Volver
-                </Link>
+                {usuarios.length === 0 ? (
+                    <p>No hay usuarios registrados.</p>
+                ) : (
+                    <div className="table-responsive">
+                        <table className="table table-hover align-middle">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Teléfono</th>
+                                    <th>Sexo</th>
+                                    <th>Cuota</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {usuarios.map((usuario) => (
+                                    <tr key={usuario.id}>
+                                        <td>{usuario.id}</td>
+                                        <td>{usuario.nombre}</td>
+                                        <td>{usuario.email}</td>
+                                        <td>{usuario.telefono || "No informado"}</td>
+                                        <td>{usuario.sexo || "No informado"}</td>
+                                        <td>
+                                            {usuario.estadoCuota
+                                                ? getCuotaBadge(usuario.estadoCuota)
+                                                : "No disponible"}
+                                        </td>
+                                        <td>
+                                            <Link
+                                                to={`/admin/usuarios/${usuario.id}`}
+                                                className="btn btn-sm btn-primary"
+                                            >
+                                                Ver detalle
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </div>
         </div>
     );
