@@ -35,7 +35,7 @@ public class ActividadController {
 				.orElse(ResponseEntity.notFound().build());
 	}
 
-	// <-- Crea un nuevo coach -->
+	// <-- Crea una nuevaActividad -->
 	@PostMapping
 	public ResponseEntity<ActividadDTO> createActividad(@RequestBody ActividadDTO dto) {
 		Actividad actividad = actividadMapper.toEntity(dto);
