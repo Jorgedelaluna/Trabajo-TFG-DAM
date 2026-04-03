@@ -3,10 +3,6 @@
  *  PÁGINA ADMIN: UsuarioListaPage.jsx
  *
  *  Muestra el listado de todos los usuarios registrados.
- *  Funcionalidades:
- *    - Carga usuarios desde el backend
- *    - Muestra datos básicos en tabla
- *    - Permite ir al detalle de cada usuario por ID
  * ======================================================
  */
 
@@ -72,59 +68,48 @@ export default function UsuarioListaPage() {
 
     return (
         <div className="dashboard-container">
-            <div className="page-header-admin">
-                <h1 className="fw-bold">Gestión de Clases</h1>
-
-                <Link to="/admin/clases/nueva" className="btn btn-primary">
-                    + Nueva Clase
-                </Link>
+            <div className="page-header-admin page-header-left">
+                <h1 className="fw-bold">Listado de Usuarios</h1>
             </div>
 
             <div className="dashboard-card">
-                {clases.length === 0 ? (
-                    <p className="opacity-75 mb-0">No hay clases registradas.</p>
+                {usuarios.length === 0 ? (
+                    <p className="opacity-75 mb-0">No hay usuarios registrados.</p>
                 ) : (
                     <div className="table-responsive">
                         <table className="table table-dark table-hover align-middle dashboard-table mb-0">
                             <thead>
                                 <tr>
-                                    <th>Actividad</th>
-                                    <th>Coach</th>
-                                    <th>Fecha</th>
-                                    <th>Hora</th>
-                                    <th>Aforo</th>
-                                    <th className="text-end">Acciones</th>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Teléfono</th>
+                                    <th>Sexo</th>
+                                    <th>Cuota</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {clases.map((clase) => (
-                                    <tr key={clase.id}>
-                                        <td>{clase.actividadNombre}</td>
-                                        <td>{clase.coachNombre}</td>
-                                        <td>{new Date(clase.fechaHora).toLocaleDateString()}</td>
+                                {usuarios.map((usuario) => (
+                                    <tr key={usuario.id}>
+                                        <td>{usuario.id}</td>
+                                        <td>{usuario.nombre}</td>
+                                        <td>{usuario.email}</td>
+                                        <td>{usuario.telefono || "No informado"}</td>
+                                        <td>{usuario.sexo || "No informado"}</td>
                                         <td>
-                                            {new Date(clase.fechaHora).toLocaleTimeString([], {
-                                                hour: "2-digit",
-                                                minute: "2-digit",
-                                            })}
+                                            {usuario.estadoCuota
+                                                ? getCuotaBadge(usuario.estadoCuota)
+                                                : "No disponible"}
                                         </td>
-                                        <td>{clase.aforoMaximo}</td>
-
-                                        <td className="text-end">
+                                        <td>
                                             <Link
-                                                to={`/admin/clases/${clase.id}`}
-                                                className="btn btn-sm btn-warning me-2"
+                                                to={`/admin/usuarios/${usuario.id}`}
+                                                className="btn btn-sm btn-primary"
                                             >
-                                                Editar
+                                                Ver detalle
                                             </Link>
-
-                                            <button
-                                                className="btn btn-sm btn-danger"
-                                                onClick={() => eliminarClase(clase.id)}
-                                            >
-                                                Eliminar
-                                            </button>
                                         </td>
                                     </tr>
                                 ))}
@@ -134,4 +119,5 @@ export default function UsuarioListaPage() {
                 )}
             </div>
         </div>
-    );}
+    );
+}
