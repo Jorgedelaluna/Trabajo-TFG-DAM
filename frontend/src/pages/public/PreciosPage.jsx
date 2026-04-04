@@ -1,8 +1,8 @@
 /**
  * ======================================================
- *  PÁGINA PÚBLICA: Planes y Precios
- *  - Muestra los diferentes planes de suscripción
- *  - Página estática orientada a información comercial
+ *  PÃ�GINA PÃšBLICA: Planes y Precios
+ *  - Muestra los diferentes planes de suscripciÃ³n
+ *  - PÃ¡gina estÃ¡tica orientada a informaciÃ³n comercial
  *  - Simula un pago mostrando un banner de exito
  * ======================================================
  */
@@ -21,13 +21,13 @@ export default function PreciosPage() {
 
   /**
    * ======================================================
-   * Función que simula un pago y muestra un banner temporal
+   * FunciÃ³n que simula un pago y muestra un banner temporal
    * ======================================================
    */
   const simularPago = () => {
-    setMensajePago("✔ Pago realizado con éxito. Tu suscripción está activa.");
+    setMensajePago("âœ” Pago realizado con Ã©xito. Tu suscripciÃ³n estÃ¡ activa.");
 
-    // Ocultar el banner después de 4 segundos
+    // Ocultar el banner despuÃ©s de 4 segundos
     setTimeout(() => setMensajePago(""), 4000);
   };
 
@@ -57,7 +57,7 @@ export default function PreciosPage() {
         ====================================================== */}
         <div className="row g-4">
 
-          {/* PLAN BÁSICO */}
+          {/* PLAN BÃ�SICO */}
           <div className="col-md-4">
             <div className="precios-card">
               <div className="precios-icon">
@@ -74,7 +74,7 @@ export default function PreciosPage() {
                 <li>Seguimiento inicial</li>
               </ul>
 
-              {/* Botón que simula el pago */}
+              {/* BotÃ³n que simula el pago */}
               <button className="btn btn-primary w-100 mt-3" onClick={simularPago}>
                 Elegir Plan
               </button>
@@ -84,7 +84,7 @@ export default function PreciosPage() {
           {/* PLAN INTERMEDIO (DESTACADO) */}
           <div className="col-md-4">
             <div className="precios-card precios-popular-card">
-              <div className="precio-popular">Más Popular ⭐</div>
+              <div className="precio-popular">Más Popular â­�</div>
 
               <div className="precios-icon">
                 <FaFire />
@@ -100,7 +100,7 @@ export default function PreciosPage() {
                 <li>Plan de entrenamiento mensual</li>
               </ul>
 
-              {/* Botón que simula el pago */}
+              {/* BotÃ³n que simula el pago */}
               <button className="btn btn-warning w-100 mt-3 fw-bold" onClick={simularPago}>
                 Elegir Plan
               </button>
@@ -125,7 +125,7 @@ export default function PreciosPage() {
                 <li>Plan de entrenamiento mensual</li>
               </ul>
 
-              {/* Botón que simula el pago */}
+              {/* BotÃ³n que simula el pago */}
               <button className="btn btn-primary w-100 mt-3" onClick={simularPago}>
                 Elegir Plan
               </button>
@@ -139,7 +139,7 @@ export default function PreciosPage() {
         ====================================================== */}
         <div className="text-center mt-5">
           <a href="/registro" className="btn btn-primary btn-lg px-5">
-            ¡Empieza hoy!
+            !Empieza hoy!
           </a>
         </div>
 

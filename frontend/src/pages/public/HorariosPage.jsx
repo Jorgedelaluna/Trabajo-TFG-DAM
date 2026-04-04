@@ -1,8 +1,8 @@
 /**
  * ======================================================
- *  PÁGINA PÚBLICA: Horarios del Box
+ *  PÃ�GINA PÃšBLICA: Horarios del Box
  *  - Muestra los horarios generales y el horario semanal
- *  - Página estática orientada a información comercial
+ *  - PÃ¡gina estÃ¡tica orientada a informaciÃ³n comercial
  *  - Incluye tarjetas y un calendario semanal detallado
  * ======================================================
  */
@@ -26,7 +26,7 @@ export default function HorariosPage() {
         </div>
 
         {/* ======================================================
-            TARJETAS RESUMEN (Lunes-Viernes, Sábado, Domingo)
+            TARJETAS RESUMEN (Lunes-Viernes, SÃ¡bado, Domingo)
         ====================================================== */}
         <div className="row g-4">
 
@@ -53,7 +53,7 @@ export default function HorariosPage() {
             </div>
           </div>
 
-          {/* Sábado */}
+          {/* SÃ¡bado */}
           <div className="col-md-4">
             <div className="card horarios-card shadow h-100">
               <div className="card-body">
@@ -109,19 +109,19 @@ export default function HorariosPage() {
                 <div className="card-body">
                   <h5 className="horarios-day text-warning">Lunes</h5>
                   <ul className="horarios-list mt-3">
-                    <li>09:00 — CrossFit</li>
-                    <li>10:00 — Halterofilia</li>
-                    <li>11:00 — Endurance</li>
-                    <li>12:00 — Meditación & Mobility</li>
-                    <li>13:00 — Open Box</li>
-                    <li>14:00 — Gymnastics</li>
-                    <li>15:00 — CrossFit</li>
-                    <li>16:00 — Endurance</li>
-                    <li>17:00 — Halterofilia</li>
-                    <li>18:00 — CrossFit</li>
-                    <li>19:00 — Gymnastics</li>
-                    <li>20:00 — Open Box</li>
-                    <li>21:00 — CrossFit</li>
+                    <li>09:00 â€” CrossFit</li>
+                    <li>10:00 â€” Halterofilia</li>
+                    <li>11:00 â€” Endurance</li>
+                    <li>12:00 â€” Meditación & Mobility</li>
+                    <li>13:00 â€” Open Box</li>
+                    <li>14:00 â€” Gymnastics</li>
+                    <li>15:00 â€” CrossFit</li>
+                    <li>16:00 â€” Endurance</li>
+                    <li>17:00 â€” Halterofilia</li>
+                    <li>18:00 â€” CrossFit</li>
+                    <li>19:00 â€” Gymnastics</li>
+                    <li>20:00 â€” Open Box</li>
+                    <li>21:00 â€” CrossFit</li>
                   </ul>
                 </div>
               </div>
@@ -133,43 +133,43 @@ export default function HorariosPage() {
                 <div className="card-body">
                   <h5 className="horarios-day text-warning">Martes</h5>
                   <ul className="horarios-list mt-3">
-                    <li>09:00 — Gymnastics</li>
-                    <li>10:00 — CrossFit</li>
-                    <li>11:00 — Meditación & Mobility</li>
-                    <li>12:00 — Halterofilia</li>
-                    <li>13:00 — Endurance</li>
-                    <li>14:00 — Open Box</li>
-                    <li>15:00 — CrossFit</li>
-                    <li>16:00 — Gymnastics</li>
-                    <li>17:00 — Endurance</li>
-                    <li>18:00 — Halterofilia</li>
-                    <li>19:00 — CrossFit</li>
-                    <li>20:00 — Meditación & Mobility</li>
-                    <li>21:00 — Open Box</li>
+                    <li>09:00 â€” Gymnastics</li>
+                    <li>10:00 â€” CrossFit</li>
+                    <li>11:00 â€” MeditaciÃ³n & Mobility</li>
+                    <li>12:00 â€” Halterofilia</li>
+                    <li>13:00 â€” Endurance</li>
+                    <li>14:00 â€” Open Box</li>
+                    <li>15:00 â€” CrossFit</li>
+                    <li>16:00 â€” Gymnastics</li>
+                    <li>17:00 â€” Endurance</li>
+                    <li>18:00 â€” Halterofilia</li>
+                    <li>19:00 â€” CrossFit</li>
+                    <li>20:00 â€” MeditaciÃ³n & Mobility</li>
+                    <li>21:00 â€” Open Box</li>
                   </ul>
                 </div>
               </div>
             </div>
 
-            {/* Miércoles */}
+            {/* MiÃ©rcoles */}
             <div className="col-md-4">
               <div className="card horarios-card shadow h-100">
                 <div className="card-body">
                   <h5 className="horarios-day text-warning">Miércoles</h5>
                   <ul className="horarios-list mt-3">
-                    <li>09:00 — Endurance</li>
-                    <li>10:00 — CrossFit</li>
-                    <li>11:00 — Halterofilia</li>
-                    <li>12:00 — Gymnastics</li>
-                    <li>13:00 — Open Box</li>
-                    <li>14:00 — Meditación & Mobility</li>
-                    <li>15:00 — CrossFit</li>
-                    <li>16:00 — Endurance</li>
-                    <li>17:00 — Gymnastics</li>
-                    <li>18:00 — Halterofilia</li>
-                    <li>19:00 — CrossFit</li>
-                    <li>20:00 — Open Box</li>
-                    <li>21:00 — Meditación & Mobility</li>
+                    <li>09:00 â€” Endurance</li>
+                    <li>10:00 â€” CrossFit</li>
+                    <li>11:00 â€” Halterofilia</li>
+                    <li>12:00 â€” Gymnastics</li>
+                    <li>13:00 â€” Open Box</li>
+                    <li>14:00 â€” MeditaciÃ³n & Mobility</li>
+                    <li>15:00 â€” CrossFit</li>
+                    <li>16:00 â€” Endurance</li>
+                    <li>17:00 â€” Gymnastics</li>
+                    <li>18:00 â€” Halterofilia</li>
+                    <li>19:00 â€” CrossFit</li>
+                    <li>20:00 â€” Open Box</li>
+                    <li>21:00 â€” MeditaciÃ³n & Mobility</li>
                   </ul>
                 </div>
               </div>
@@ -181,19 +181,19 @@ export default function HorariosPage() {
                 <div className="card-body">
                   <h5 className="horarios-day text-warning">Jueves</h5>
                   <ul className="horarios-list mt-3">
-                    <li>09:00 — CrossFit</li>
-                    <li>10:00 — Endurance</li>
-                    <li>11:00 — Gymnastics</li>
-                    <li>12:00 — Halterofilia</li>
-                    <li>13:00 — Meditación & Mobility</li>
-                    <li>14:00 — Open Box</li>
-                    <li>15:00 — CrossFit</li>
-                    <li>16:00 — Halterofilia</li>
-                    <li>17:00 — Endurance</li>
-                    <li>18:00 — Gymnastics</li>
-                    <li>19:00 — CrossFit</li>
-                    <li>20:00 — Open Box</li>
-                    <li>21:00 — Meditación & Mobility</li>
+                    <li>09:00 â€” CrossFit</li>
+                    <li>10:00 â€” Endurance</li>
+                    <li>11:00 â€” Gymnastics</li>
+                    <li>12:00 â€” Halterofilia</li>
+                    <li>13:00 â€” MeditaciÃ³n & Mobility</li>
+                    <li>14:00 â€” Open Box</li>
+                    <li>15:00 â€” CrossFit</li>
+                    <li>16:00 â€” Halterofilia</li>
+                    <li>17:00 â€” Endurance</li>
+                    <li>18:00 â€” Gymnastics</li>
+                    <li>19:00 â€” CrossFit</li>
+                    <li>20:00 â€” Open Box</li>
+                    <li>21:00 â€” MeditaciÃ³n & Mobility</li>
                   </ul>
                 </div>
               </div>
@@ -205,34 +205,34 @@ export default function HorariosPage() {
                 <div className="card-body">
                   <h5 className="horarios-day text-warning">Viernes</h5>
                   <ul className="horarios-list mt-3">
-                    <li>09:00 — Halterofilia</li>
-                    <li>10:00 — CrossFit</li>
-                    <li>11:00 — Endurance</li>
-                    <li>12:00 — Gymnastics</li>
-                    <li>13:00 — Open Box</li>
-                    <li>14:00 — Meditación & Mobility</li>
-                    <li>15:00 — CrossFit</li>
-                    <li>16:00 — Endurance</li>
-                    <li>17:00 — Halterofilia</li>
-                    <li>18:00 — CrossFit</li>
-                    <li>19:00 — Gymnastics</li>
-                    <li>20:00 — Open Box</li>
-                    <li>21:00 — Meditación & Mobility</li>
+                    <li>09:00 â€” Halterofilia</li>
+                    <li>10:00 â€” CrossFit</li>
+                    <li>11:00 â€” Endurance</li>
+                    <li>12:00 â€” Gymnastics</li>
+                    <li>13:00 â€” Open Box</li>
+                    <li>14:00 â€” MeditaciÃ³n & Mobility</li>
+                    <li>15:00 â€” CrossFit</li>
+                    <li>16:00 â€” Endurance</li>
+                    <li>17:00 â€” Halterofilia</li>
+                    <li>18:00 â€” CrossFit</li>
+                    <li>19:00 â€” Gymnastics</li>
+                    <li>20:00 â€” Open Box</li>
+                    <li>21:00 â€” MeditaciÃ³n & Mobility</li>
                   </ul>
                 </div>
               </div>
             </div>
 
-            {/* Sábado */}
+            {/* SÃ¡bado */}
             <div className="col-md-4">
               <div className="card horarios-card shadow h-100">
                 <div className="card-body">
                   <h5 className="horarios-day text-warning">Sábado</h5>
                   <ul className="horarios-list mt-3">
-                    <li>10:00 — CrossFit (Especial)</li>
-                    <li>11:00 — Gymnastics (Especial)</li>
-                    <li>12:00 — Open Box (Especial)</li>
-                    <li>13:00 — CrossFit (Especial)</li>
+                    <li>10:00 â€” CrossFit (Especial)</li>
+                    <li>11:00 â€” Gymnastics (Especial)</li>
+                    <li>12:00 â€” Open Box (Especial)</li>
+                    <li>13:00 â€” CrossFit (Especial)</li>
                   </ul>
                 </div>
               </div>
@@ -256,7 +256,7 @@ export default function HorariosPage() {
         ====================================================== */}
         <div className="text-center mt-5">
           <a href="/registro" className="btn btn-primary btn-lg fw-bold px-5">
-            Reserva tu primera clase 💪
+            Reserva tu primera clase
           </a>
         </div>
 

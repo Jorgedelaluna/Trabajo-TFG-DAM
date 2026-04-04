@@ -141,7 +141,7 @@ export default function ActividadDetallePage() {
 
                     {/* Descripción */}
                     <div className="col-12">
-                        <label className="form-label">Descripción</label>
+                        <label className="form-label">Descripci�n</label>
                         <textarea
                             className="form-control"
                             rows="3"

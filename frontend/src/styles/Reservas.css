@@ -121,3 +121,35 @@
 .reserva-card .opacity-75 {
 	color: rgba(255, 255, 255, 0.75) !important;
 }
+
+/* =========================================
+   BOTÓN CANCELAR RESERVA (estilo agenda)
+========================================= */
+.cancelar-btn {
+	width: auto;
+	padding: 6px 12px;
+	border-radius: 999px;
+	font-size: 0.85rem;
+	transition: all 0.2s ease;
+}
+
+.cancelar-btn:hover {
+	background: rgba(220, 53, 69, 0.2);
+	border-color: #dc3545;
+	color: #fff;
+}
+
+/* Contenedor acción derecha */
+.clase-agenda-action {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 6px;
+}
+
+/* Badge reservada más elegante */
+.badge.bg-success {
+	background: rgba(25, 135, 84, 0.25) !important;
+	border: 1px solid rgba(25, 135, 84, 0.5);
+	color: #8fffca;
+}

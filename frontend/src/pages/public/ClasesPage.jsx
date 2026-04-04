@@ -106,7 +106,7 @@ export default function ClasesPage() {
                                 alt="MeditaciÃ³n & Mobility"
                             />
                             <div className="card-body">
-                                <h3 className="fw-bold">MeditaciÃ³n & Mobility</h3>
+                                <h3 className="fw-bold">Meditación & Mobility</h3>
                                 <p>
                                     Movilidad, flexibilidad y bienestar mental para prevenir lesiones.
                                 </p>
@@ -125,7 +125,7 @@ export default function ClasesPage() {
                             <div className="card-body">
                                 <h3 className="fw-bold">Open Box</h3>
                                 <p>
-                                    Espacio libre para entrenar por tu cuenta o practicar tÃ©cnica.
+                                    Espacio libre para entrenar por tu cuenta o practicar técnica.
                                 </p>
                             </div>
                         </div>
@@ -177,7 +177,7 @@ export default function ClasesPage() {
                             </tr>
                             <tr>
                                 <td>Meditación & Mobility</td>
-                                <td>RecuperaciÃ³n</td>
+                                <td>Recuperación</td>
                                 <td>60 min</td>
                                 <td>Baja</td>
                             </tr>
@@ -197,7 +197,7 @@ export default function ClasesPage() {
       ====================================================== */}
             <div className="text-center mt-5">
                 <a href="/registro" className="btn btn-primary btn-lg fw-bold px-5">
-                    Ãšnete ahora ðŸ’ª
+                    Ínscribete ahora ’ª
                 </a>
             </div>
 

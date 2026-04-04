@@ -5,17 +5,15 @@
    - Se usan variables CSS para mantener consistencia global.
 ========================================= */
 :root {
-  --brand-black: #0A0A0A;
-  --brand-yellow: #F2C200;
-  --brand-blue: #0D6EFD;
-
-  --grey-dark: #1A1A1A;
-  --grey-medium: #2E2E2E;
-  --grey-light: #F0F0F0;
-
-  --white: #FFFFFF;
-  --white-soft: #F8F8F8;
-  --yellow-soft: #FFD84D;
+	--brand-black: #0A0A0A;
+	--brand-yellow: #F2C200;
+	--brand-blue: #0D6EFD;
+	--grey-dark: #1A1A1A;
+	--grey-medium: #2E2E2E;
+	--grey-light: #F0F0F0;
+	--white: #FFFFFF;
+	--white-soft: #F8F8F8;
+	--yellow-soft: #FFD84D;
 }
 
 /* =========================================
@@ -24,12 +22,11 @@
    - Evita saturación visual
 ========================================= */
 body {
-  background:
-    linear-gradient(rgba(0,0,0,0.80), rgba(0,0,0,0.80)),
-    url("../assets/logo_crossfit_manager_app.png") center/cover no-repeat;
-  background-attachment: fixed;
-  background-color: #000;
-  color: var(--white);
+	background: linear-gradient(rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0.80)),
+		url("../assets/logo_crossfit_manager_app.png") center/cover no-repeat;
+	background-attachment: fixed;
+	background-color: #000;
+	color: var(--white);
 }
 
 /* =========================================
@@ -40,12 +37,12 @@ body {
    - Se mantiene siempre visible.
 ========================================= */
 .navbar-section {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(0,0,0,0.85);
-  border-bottom: 1px solid rgba(255,255,255,0.15);
-  z-index: 10;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.85);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+	z-index: 10;
 }
 
 /* =========================================
@@ -56,21 +53,33 @@ body {
    - fade-in-up: aparición con desplazamiento vertical.
 ========================================= */
 .fade-in {
-  animation: fadeIn 1.5s ease-in-out;
+	animation: fadeIn 1.5s ease-in-out;
 }
 
 .fade-in-up {
-  animation: fadeInUp 1.2s ease-in-out;
+	animation: fadeInUp 1.2s ease-in-out;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0 }
-  to { opacity: 1 }
+@
+keyframes fadeIn {from { opacity:0
+	
 }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px) }
-  to { opacity: 1; transform: translateY(0) }
+to {
+	opacity: 1
+}
+
+}
+@
+keyframes fadeInUp {from { opacity:0;
+	transform: translateY(20px)
+}
+
+to {
+	opacity: 1;
+	transform: translateY(0)
+}
+
 }
 
 /* =========================================
@@ -80,12 +89,12 @@ body {
    - Se aplican cuando el contenedor usa className="sidebar".
 ========================================= */
 .sidebar .nav-link {
-  padding: 10px;
-  border-radius: 5px;
+	padding: 10px;
+	border-radius: 5px;
 }
 
 .sidebar .nav-link:hover {
-  background: rgba(255, 255, 255, 0.1);
+	background: rgba(255, 255, 255, 0.1);
 }
 
 /* =========================================
@@ -95,19 +104,18 @@ body {
    - Fondo semitransparente + blur para estética moderna.
 ========================================= */
 .auth-section {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: transparent;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: transparent;
 }
 
 .auth-card {
-  width: 100%;
-  max-width: 420px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(8px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+	width: 100%;
+	max-width: 420px;
+	background: rgba(255, 255, 255, 0.08);
+	backdrop-filter: blur(8px);
+	border-radius: 16px;
+	border: 1px solid rgba(255, 255, 255, 0.15);
 }
-

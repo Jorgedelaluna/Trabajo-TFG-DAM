@@ -4,11 +4,11 @@
  * 
  *  Panel principal del administrador.
  *  Muestra:
- *    - Métricas globales del sistema (usuarios, clases, coaches)
- *    - Accesos rápidos a las secciones de gestión
+ *    - MÃ©tricas globales del sistema (usuarios, clases, coaches)
+ *    - Accesos rÃ¡pidos a las secciones de gestiÃ³n
  * 
  *  Las peticiones usan datos reales del backend.
- *  Si alguna falla, se controla el error para evitar caídas.
+ *  Si alguna falla, se controla el error para evitar caÃ­das.
  * ======================================================
  */
 
@@ -20,21 +20,21 @@ import { Link } from "react-router-dom";
 import "../../styles/Dashboard.css";
 
 export default function AdminDashboard() {
-  const { usuario, loading } = useAuth();
+    const { usuario, loading } = useAuth();
 
-  // Estados
-  const [usuarios, setUsuarios] = useState([]);
-  const [clases, setClases] = useState([]);
-  const [coaches, setCoaches] = useState([]);
+    // Estados
+    const [usuarios, setUsuarios] = useState([]);
+    const [clases, setClases] = useState([]);
+    const [coaches, setCoaches] = useState([]);
 
-  // Cargar datos solo cuando usuario está listo y es admin
-  useEffect(() => {
-    if (loading) return;
-    if (!usuario) return;
-    if (usuario.rol !== "ADMIN") return;
+    // Cargar datos solo cuando usuario estÃ¡ listo y es admin
+    useEffect(() => {
+        if (loading) return;
+        if (!usuario) return;
+        if (usuario.rol !== "ADMIN") return;
 
-    cargarDatos();
-  }, [loading, usuario]);
+        cargarDatos();
+    }, [loading, usuario]);
 
     /**
    * ============================================================
@@ -43,89 +43,89 @@ export default function AdminDashboard() {
    *  - Las rutas deben coincidir con el backend real
    * ============================================================
    */
-  const cargarDatos = async () => {
-    try {
-      const [usuariosData, clasesData, coachesData] = await Promise.all([
-        apiGet("/usuarios"),
-        apiGet("/clases"),
-        apiGet("/coaches")
-      ]);
+    const cargarDatos = async () => {
+        try {
+            const [usuariosData, clasesData, coachesData] = await Promise.all([
+                apiGet("/usuarios"),
+                apiGet("/clases"),
+                apiGet("/coaches")
+            ]);
 
-      setUsuarios(usuariosData);
-      setClases(clasesData);
-      setCoaches(coachesData);
+            setUsuarios(usuariosData);
+            setClases(clasesData);
+            setCoaches(coachesData);
 
-    } catch (error) {
-      console.error("Error cargando datos del dashboard:", error);
-    }
-  };
+        } catch (error) {
+            console.error("Error cargando datos del dashboard:", error);
+        }
+    };
 
-  // Render condicional
-  if (loading) return <p>Cargando...</p>;
-  if (!usuario) return <p>No autorizado</p>;
-  if (usuario.rol !== "ADMIN") return <p>No tienes permisos</p>;
+    // Render condicional
+    if (loading) return <p>Cargando...</p>;
+    if (!usuario) return <p>No autorizado</p>;
+    if (usuario.rol !== "ADMIN") return <p>No tienes permisos</p>;
 
-  return (
-    <div className="dashboard-container-fluid">
+    return (
+        <div className="dashboard-container-fluid">
 
-      <h1 className="fw-bold mb-4">Panel de Administración</h1>
+            <h1 className="fw-bold mb-4">Panel de Administración</h1>
 
-      {/* ============================================
-          TARJETAS DE MÉTRICAS
+            {/* ============================================
+          TARJETAS DE MÃ‰TRICAS
       ============================================ */}
-      <div className="row g-4 mb-4">
+            <div className="row g-4 mb-4">
 
-        <div className="col-md-4">
-          <div className="dashboard-card p-4 text-center">
-            <FaUsers className="dashboard-icon mb-2" />
-            <h3>{usuarios.length}</h3>
-            <p>Total de usuarios</p>
-          </div>
-        </div>
+                <div className="col-md-4">
+                    <div className="dashboard-card p-4 text-center">
+                        <FaUsers className="dashboard-icon mb-2" />
+                        <h3>{usuarios.length}</h3>
+                        <p>Total de usuarios</p>
+                    </div>
+                </div>
 
-        <div className="col-md-4">
-          <div className="dashboard-card p-4 text-center">
-            <FaCalendarAlt className="dashboard-icon mb-2" />
-            <h3>{clases.length}</h3>
-            <p>Clases programadas</p>
-          </div>
-        </div>
+                <div className="col-md-4">
+                    <div className="dashboard-card p-4 text-center">
+                        <FaCalendarAlt className="dashboard-icon mb-2" />
+                        <h3>{clases.length}</h3>
+                        <p>Clases programadas</p>
+                    </div>
+                </div>
 
-        <div className="col-md-4">
-          <div className="dashboard-card p-4 text-center">
-            <FaChalkboardTeacher className="dashboard-icon mb-2" />
-            <h3>{coaches.length}</h3>
-            <p>Coaches activos</p>
-          </div>
-        </div>
+                <div className="col-md-4">
+                    <div className="dashboard-card p-4 text-center">
+                        <FaChalkboardTeacher className="dashboard-icon mb-2" />
+                        <h3>{coaches.length}</h3>
+                        <p>Coaches activos</p>
+                    </div>
+                </div>
 
-      </div>
+            </div>
 
-      {/* ============================================
-          ACCESOS RÁPIDOS
+            {/* ============================================
+          ACCESOS RÃ�PIDOS
       ============================================ */}
-      <div className="dashboard-card p-4">
-        <h3 className="mb-3">
-          <FaUserShield /> Accesos rápidos
-        </h3>
+            <div className="dashboard-card p-4">
+                <h3 className="mb-3">
+                    <FaUserShield /> Accesos rápidos
+                </h3>
 
-        <div className="d-flex flex-wrap gap-3">
+                <div className="d-flex flex-wrap gap-3">
 
-          <Link to="/admin/usuarios" className="btn btn-primary">
-            Gestión de usuarios
-          </Link>
+                    <Link to="/admin/usuarios" className="btn btn-primary">
+                        Gestión de usuarios
+                    </Link>
 
-          <Link to="/admin/clases" className="btn btn-primary">
-            Gestión de clases
-          </Link>
+                    <Link to="/admin/clases" className="btn btn-primary">
+                        Gestión de clases
+                    </Link>
 
-          <Link to="/admin/coaches" className="btn btn-primary">
-            Gestión de coaches
-          </Link>
+                    <Link to="/admin/coaches" className="btn btn-primary">
+                        Gestión de coaches
+                    </Link>
+
+                </div>
+            </div>
 
         </div>
-      </div>
-
-    </div>
-  );
+    );
 }

@@ -27,7 +27,7 @@ export default function CancelarReservaButton({ reservaId, setReservas }) {
 
     return (
         <button
-            className="btn btn-danger mt-3 w-100 fw-bold"
+            className="btn btn-outline-danger btn-sm fw-bold cancelar-btn"
             onClick={cancelarReserva}
         >
             Cancelar reserva

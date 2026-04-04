@@ -48,7 +48,7 @@ export default function CoachListaPage() {
     return (
         <div className="dashboard-container-fluid">
 
-            <h1 className="fw-bold mb-4">Gestion de Coaches</h1>
+            <h1 className="fw-bold mb-4">Gestión de Coaches</h1>
 
             <div className="dashboard-card p-4">
 
