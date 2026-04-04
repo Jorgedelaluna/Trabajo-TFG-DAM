@@ -10,71 +10,69 @@
 import CancelarReservaButton from "./CancelarReservaButton";
 
 export default function ReservaCard({ reserva, setReservas }) {
+    const actividadNombre = reserva.claseNombre || "Actividad no definida";
+    const coachNombre = reserva.coachNombre || "Sin coach asignado";
+    const fechaHora = reserva.fechaHora;
 
-  // El backend devuelve un DTO plano, no un objeto clase completo.
-  // Por eso accedemos a los campos directamente desde reserva.
-  // Datos reales desde el backend
-  const clase = reserva.clase || {};
+    const estado =
+        typeof reserva.estado === "string"
+            ? reserva.estado
+            : reserva.estado?.name;
 
-  const actividadNombre =
-    clase.actividad?.nombre || "Actividad no definida";
+    const fechaValida = fechaHora ? new Date(fechaHora) : null;
 
-  const coachNombre =
-    clase.coach?.nombre || "Sin coach asignado";
+    const hora = fechaValida
+        ? fechaValida.toLocaleTimeString("es-ES", {
+            hour: "2-digit",
+            minute: "2-digit",
+        })
+        : "No disponible";
 
-  const fechaHora = clase.fechaHora;
-
-  const estado =
-    typeof reserva.estado === "string"
-      ? reserva.estado
-      : reserva.estado?.name;
-
-  return (
-    <div className="card reserva-card shadow">
-      <div className="card-body">
-
-        {/* Nombre de la actividad */}
-        <h4 className="text-light fw-bold">{actividadNombre}</h4>
-
-        {/* Fecha */}
-        <p className="text-light m-0">
-          <strong>Día:</strong>{" "}
-          {new Date(fechaHora).toLocaleDateString("es-ES", {
-            weekday: "long",
+    const fechaCorta = fechaValida
+        ? fechaValida.toLocaleDateString("es-ES", {
+            weekday: "short",
             day: "2-digit",
             month: "2-digit",
-            year: "numeric"
-          })}
-        </p>
+        })
+        : "No disponible";
 
-        {/* Hora */}
-        <p className="text-light m-0">
-          <strong>Hora:</strong>{" "}
-          {new Date(fechaHora).toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit"
-          })}
-        </p>
+    return (
+        <div className="dashboard-card reserva-card clase-item-card clase-agenda-card h-100">
+            <div className="clase-agenda-time">
+                <div className="clase-agenda-hour">{hora}</div>
+                <div className="clase-agenda-date">{fechaCorta}</div>
+            </div>
 
-        {/* Coach */}
-        <p className="text-light m-0">
-          <strong>Coach:</strong> {coachNombre}
-        </p>
+            <div className="clase-agenda-content">
+                <h4 className="mb-2">{actividadNombre}</h4>
 
-        {/* Estado */}
-        <p className="text-light opacity-75 mt-2">
-          Estado: <strong>{estado}</strong>
-        </p>
+                <p className="mb-1">
+                    <strong>Coach:</strong> {coachNombre}
+                </p>
 
-        {/* Botón cancelar reserva (solo si está inscrito) */}
-        {estado === "INSCRITO" && (
-          <CancelarReservaButton
-            reservaId={reserva.id}
-            setReservas={setReservas}
-          />
-        )}
+                <p className="mb-0 opacity-75">
+                    <strong>Estado:</strong> {estado}
+                </p>
+            </div>
 
-      </div>
-    </div>
-  );
+            <div className="clase-agenda-action">
+                {estado === "INSCRITO" ? (
+                    <>
+                        <span className="badge bg-success mb-2">Reservada</span>
+                        <CancelarReservaButton
+                            reservaId={reserva.id}
+                            setReservas={setReservas}
+                        />
+                    </>
+                ) : (
+                    <>
+                        <span className="badge bg-secondary mb-2">{estado}</span>
+                        <button className="btn btn-secondary btn-reservar" disabled>
+                            No disponible
+                        </button>
+                    </>
+                )}
+            </div>
+        </div>
+    );
 }

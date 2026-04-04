@@ -5,10 +5,9 @@
 
 /* Contenedor general de la sección */
 .reservas-section {
-  padding-top: 40px;
-  padding-bottom: 40px;
+	padding-top: 40px;
+	padding-bottom: 40px;
 }
-
 
 /* ======================================================
    TARJETAS DE CLASES DISPONIBLES (ListaClasesDia)
@@ -16,35 +15,33 @@
 
 /* Card principal que envuelve la lista de clases */
 .clases-card {
-  background: rgba(255, 255, 255, 0.08) !important; /* Transparencia */
-  backdrop-filter: blur(12px) !important;           /* Efecto glass */
-  border-radius: 14px !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  padding: 20px !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+	background: rgba(255, 255, 255, 0.08) !important;
+	backdrop-filter: blur(12px) !important;
+	border-radius: 14px !important;
+	border: 1px solid rgba(255, 255, 255, 0.15) !important;
+	padding: 20px !important;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .clases-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+	transform: translateY(-3px);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 
 /* Cada clase individual dentro de la lista */
 .clase-item {
-  background: rgba(255, 255, 255, 0.05) !important; /* Fondo translúcido */
-  backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  border-radius: 10px !important;
-  padding: 15px !important;
-  transition: background 0.2s ease, transform 0.2s ease;
+	background: rgba(255, 255, 255, 0.05) !important;
+	backdrop-filter: blur(10px) !important;
+	border: 1px solid rgba(255, 255, 255, 0.15) !important;
+	border-radius: 10px !important;
+	padding: 15px !important;
+	transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .clase-item:hover {
-  background: rgba(255, 255, 255, 0.12) !important;
-  transform: translateY(-2px);
+	background: rgba(255, 255, 255, 0.12) !important;
+	transform: translateY(-2px);
 }
-
-
 
 /* ======================================================
    CALENDARIO SEMANAL (CalendarioSemanal.jsx)
@@ -52,60 +49,75 @@
 
 /* Card que envuelve el calendario */
 .calendario-card {
-  background: rgba(255, 255, 255, 0.08); /* Transparencia */
-  backdrop-filter: blur(12px);
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 20px;
+	background: rgba(255, 255, 255, 0.08);
+	backdrop-filter: blur(12px);
+	border-radius: 14px;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	padding: 20px;
 }
 
 /* UL del calendario — anulamos estilos de Bootstrap */
 .calendario-list {
-  background: transparent !important;
-  border: none !important;
-  padding: 0;
+	background: transparent !important;
+	border: none !important;
+	padding: 0;
 }
 
 /* Cada día del calendario */
 .calendario-item {
-  background: rgba(255, 255, 255, 0.05) !important;
-  backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  color: #fff !important;
-  border-radius: 10px !important;
-  margin-bottom: 10px;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+	background: rgba(255, 255, 255, 0.05) !important;
+	backdrop-filter: blur(10px) !important;
+	border: 1px solid rgba(255, 255, 255, 0.15) !important;
+	color: #fff !important;
+	border-radius: 10px !important;
+	margin-bottom: 10px;
+	cursor: pointer;
+	transition: background 0.2s ease, transform 0.2s ease;
 }
 
 /* Hover elegante */
 .calendario-item:hover {
-  background: rgba(255, 255, 255, 0.12) !important;
-  transform: translateY(-2px);
+	background: rgba(255, 255, 255, 0.12) !important;
+	transform: translateY(-2px);
 }
 
 /* Día seleccionado */
 .calendario-item.active {
-  background: rgba(255, 255, 255, 0.25) !important;
-  font-weight: bold;
+	background: rgba(255, 255, 255, 0.25) !important;
+	font-weight: bold;
 }
-
-
 
 /* ======================================================
    TARJETAS DE RESERVAS (MisReservasPage)
 ====================================================== */
-
 .reserva-card {
-  background: rgba(255, 255, 255, 0.08); /* Transparencia */
-  backdrop-filter: blur(12px);
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 20px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+	background: rgba(255, 255, 255, 0.08) !important;
+	backdrop-filter: blur(12px) !important;
+	border-radius: 14px !important;
+	border: 1px solid rgba(255, 255, 255, 0.15) !important;
+	padding: 20px !important;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	color: #fff !important;
+	box-shadow: none !important;
 }
 
 .reserva-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+	transform: translateY(-3px);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Fuerza estilo oscuro incluso si Bootstrap mete .card o .card-body */
+.reserva-card, .reserva-card.card, .reserva-card .card-body {
+	background: transparent !important;
+	color: #fff !important;
+	border: none !important;
+}
+
+.reserva-card h4, .reserva-card h5, .reserva-card p, .reserva-card span,
+	.reserva-card strong, .reserva-card small {
+	color: #fff !important;
+}
+
+.reserva-card .opacity-75 {
+	color: rgba(255, 255, 255, 0.75) !important;
 }
