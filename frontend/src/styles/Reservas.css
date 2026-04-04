@@ -127,16 +127,31 @@
 ========================================= */
 .cancelar-btn {
 	width: auto;
-	padding: 6px 12px;
-	border-radius: 999px;
+	min-width: 150px;
+	padding: 8px 14px;
+	border-radius: 10px;
 	font-size: 0.85rem;
-	transition: all 0.2s ease;
+	font-weight: 700;
+	align-self: flex-end;
+	border-width: 1px;
+	transition: background 0.2s ease, color 0.2s ease, border-color 0.2s
+		ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .cancelar-btn:hover {
-	background: rgba(220, 53, 69, 0.2);
+	background: rgba(220, 53, 69, 0.18);
 	border-color: #dc3545;
 	color: #fff;
+	box-shadow: 0 6px 16px rgba(220, 53, 69, 0.18);
+	transform: translateY(-1px);
+}
+
+.cancelar-btn:focus {
+	box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.2);
+}
+
+.cancelar-btn:active {
+	transform: translateY(0);
 }
 
 /* Contenedor acción derecha */
@@ -144,12 +159,25 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
-	gap: 6px;
+	justify-content: center;
+	gap: 8px;
 }
 
 /* Badge reservada más elegante */
 .badge.bg-success {
 	background: rgba(25, 135, 84, 0.25) !important;
 	border: 1px solid rgba(25, 135, 84, 0.5);
-	color: #8fffca;
+	color: #8fffca !important;
+}
+
+/* Responsive */
+@media ( max-width : 992px) {
+	.clase-agenda-action {
+		align-items: stretch;
+	}
+	.cancelar-btn {
+		width: 100%;
+		min-width: 0;
+		align-self: stretch;
+	}
 }
