@@ -1,3 +1,19 @@
+/**
+ * ======================================================
+ *  PÁGINA PRIVADA: ClasesUsuarioPage.jsx
+ * 
+ *  Muestra todas las clases disponibles para el usuario.
+ *  Funcionalidades principales:
+ *    - Filtrar clases por fecha mediante un input type="date"
+ *    - Agrupar clases por di­a de la semana en un accordion
+ *    - Permitir reservar una clase (se guarda en el backend)
+ *    - Actualizar automaticamente MisReservas al reservar
+ * 
+ *  Esta pagina es clave para la experiencia del usuario,
+ *  ya que centraliza la busqueda y reserva de clases.
+ * ======================================================
+ */
+
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import "../../styles/ClasesUsuario.css";

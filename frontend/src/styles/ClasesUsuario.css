@@ -7,89 +7,126 @@
    CONTENEDOR GENERAL
 ====================================================== */
 .clases-usuario-container {
-	padding: 20px;
+  padding: 20px;
 }
 
 /* ======================================================
    ACORDEÓN DE CLASES
 ====================================================== */
 .custom-dashboard-accordion {
-	background: transparent;
+  background: transparent;
 }
 
 .custom-accordion-item {
-	background: transparent;
-	border: none;
+  background: transparent;
+  border: none;
 }
 
 .custom-accordion-button {
-	background: rgba(255, 255, 255, 0.08) !important;
-	color: white !important;
-	border: 1px solid rgba(255, 255, 255, 0.12) !important;
-	border-radius: 12px !important;
-	box-shadow: none !important;
-	font-weight: 700;
-	text-transform: capitalize;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  font-weight: 700;
+  text-transform: capitalize;
 }
 
 .custom-accordion-button:not(.collapsed) {
-	background: rgba(255, 255, 255, 0.12) !important;
-	color: white !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: white !important;
 }
 
 .custom-accordion-button:focus {
-	box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .custom-accordion-button::after {
-	filter: brightness(0) invert(1);
+  filter: brightness(0) invert(1);
 }
 
 .custom-accordion-body {
-	padding: 16px 0 0 0;
-	background: transparent;
+  padding: 16px 0 0 0;
+  background: transparent;
 }
 
 /* ======================================================
    TARJETAS DE CLASE DENTRO DEL ACORDEÓN
 ====================================================== */
+.clase-item-card {
+  color: white;
+}
+
 .clase-item-card h4 {
-	font-weight: 700;
-	margin-bottom: 10px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.clase-item-card p,
+.clase-item-card span,
+.clase-item-card strong {
+  color: white;
 }
 
 .clase-item-card svg {
-	margin-right: 6px;
+  margin-right: 6px;
+}
+
+.clase-item-card .opacity-75 {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.clase-item-card .badge.bg-info {
+  background: rgba(13, 202, 240, 0.85) !important;
+  color: #111 !important;
 }
 
 /* ======================================================
    BOTÓN RESERVAR
 ====================================================== */
 .btn-reservar {
-	width: 100%;
-	margin-top: 10px;
-	font-weight: bold;
-	padding: 10px;
-	border-radius: 10px;
+  width: 100%;
+  margin-top: 10px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 /* ======================================================
    MENSAJE DE ÉXITO / INFO
 ====================================================== */
 .clases-usuario-alert.alert-info {
-	background: rgba(0, 123, 255, 0.2);
-	border: 1px solid rgba(0, 123, 255, 0.4);
-	color: white;
-	backdrop-filter: blur(6px);
+  background: rgba(0, 123, 255, 0.2);
+  border: 1px solid rgba(0, 123, 255, 0.4);
+  color: white;
+  backdrop-filter: blur(6px);
 }
 
 /* ======================================================
    TARJETAS DE RESERVAS
 ====================================================== */
 .reserva-card {
-	background: rgba(255, 255, 255, 0.08);
-	backdrop-filter: blur(10px);
-	border-radius: 15px;
-	border: 1px solid rgba(255, 255, 255, 0.15);
-	color: white;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+@media (max-width: 768px) {
+  .custom-accordion-body {
+    padding-top: 12px;
+  }
+
+  .clase-item-card h4 {
+    font-size: 1.1rem;
+  }
+
+  .btn-reservar {
+    padding: 9px;
+  }
 }
