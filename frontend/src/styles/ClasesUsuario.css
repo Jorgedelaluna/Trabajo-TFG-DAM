@@ -11,17 +11,21 @@
 }
 
 /* ======================================================
-   ACORDEÓN DE CLASES
+   ACORDEÓN DE CLASES (INTEGRADO EN TEMA GLASS)
 ====================================================== */
 .custom-dashboard-accordion {
   background: transparent;
 }
 
+/* Item general */
 .custom-accordion-item {
-  background: transparent;
-  border: none;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 14px;
+  overflow: hidden;
 }
 
+/* Botón del acordeón */
 .custom-accordion-button {
   background: rgba(255, 255, 255, 0.08) !important;
   color: white !important;
@@ -30,6 +34,7 @@
   box-shadow: none !important;
   font-weight: 700;
   text-transform: capitalize;
+  backdrop-filter: blur(6px);
 }
 
 .custom-accordion-button:not(.collapsed) {
@@ -41,42 +46,54 @@
   box-shadow: none !important;
 }
 
+/* Icono flecha */
 .custom-accordion-button::after {
   filter: brightness(0) invert(1);
 }
 
+/* BODY del accordion (AQUÍ estaba el blanco) */
 .custom-accordion-body {
+  background: transparent !important;
   padding: 16px 0 0 0;
-  background: transparent;
+}
+
+/* Collapse container */
+.accordion-collapse {
+  background: transparent !important;
 }
 
 /* ======================================================
-   TARJETAS DE CLASE DENTRO DEL ACORDEÓN
+   TARJETAS DE CLASE (contenido interno)
 ====================================================== */
 .clase-item-card {
   color: white;
 }
 
+/* Título */
 .clase-item-card h4 {
   font-weight: 700;
   margin-bottom: 10px;
   color: white;
 }
 
+/* Texto general */
 .clase-item-card p,
 .clase-item-card span,
 .clase-item-card strong {
   color: white;
 }
 
+/* Iconos */
 .clase-item-card svg {
   margin-right: 6px;
 }
 
+/* Texto secundario */
 .clase-item-card .opacity-75 {
   color: rgba(255, 255, 255, 0.75) !important;
 }
 
+/* Badge coach */
 .clase-item-card .badge.bg-info {
   background: rgba(13, 202, 240, 0.85) !important;
   color: #111 !important;
@@ -94,7 +111,7 @@
 }
 
 /* ======================================================
-   MENSAJE DE ÉXITO / INFO
+   MENSAJE DE ÉXITO / ERROR
 ====================================================== */
 .clases-usuario-alert.alert-info {
   background: rgba(0, 123, 255, 0.2);
@@ -104,7 +121,7 @@
 }
 
 /* ======================================================
-   TARJETAS DE RESERVAS
+   TARJETAS DE RESERVAS (si reutilizas)
 ====================================================== */
 .reserva-card {
   background: rgba(255, 255, 255, 0.08);
