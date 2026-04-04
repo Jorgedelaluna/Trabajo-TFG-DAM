@@ -164,15 +164,18 @@ export default function ClasesUsuarioPage() {
                         .sort((a, b) => new Date(a.fechaHora) - new Date(b.fechaHora))
                         .map((clase) => {
                             const fecha = new Date(clase.fechaHora);
+
                             const hora = fecha.toLocaleTimeString("es-ES", {
                                 hour: "2-digit",
                                 minute: "2-digit",
                             });
+
                             const fechaCorta = fecha.toLocaleDateString("es-ES", {
                                 weekday: "short",
                                 day: "2-digit",
                                 month: "2-digit",
                             });
+
                             const reservada = clasesReservadas.has(clase.id);
 
                             return (
@@ -181,8 +184,13 @@ export default function ClasesUsuarioPage() {
                                     className="dashboard-card clase-item-card clase-agenda-card mb-3"
                                 >
                                     <div className="clase-agenda-time">
-                                        <div className="clase-agenda-hour">{hora}</div>
-                                        <div className="clase-agenda-date">{fechaCorta}</div>
+                                        <div className="clase-agenda-hour">
+                                            <FaClock className="me-2" />
+                                            {hora}
+                                        </div>
+                                        <div className="clase-agenda-date">
+                                            {fechaCorta}
+                                        </div>
                                     </div>
 
                                     <div className="clase-agenda-content">
