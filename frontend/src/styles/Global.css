@@ -107,15 +107,27 @@ body {
 	padding: 20px;
 }
 
-.auth-card {
+/* Forzar estilo glass sobre Bootstrap */
+.auth-card,
+.auth-card.card {
 	width: 100%;
 	max-width: 420px;
-	background: rgba(255, 255, 255, 0.08);
-	backdrop-filter: blur(8px);
-	border-radius: 16px;
-	border: 1px solid rgba(255, 255, 255, 0.15);
-	color: white;
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+	background: rgba(255, 255, 255, 0.08) !important;
+	backdrop-filter: blur(8px) !important;
+	-webkit-backdrop-filter: blur(8px) !important;
+	border-radius: 16px !important;
+	border: 1px solid rgba(255, 255, 255, 0.15) !important;
+	color: white !important;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Asegurar color de textos dentro de la card */
+.auth-card h3,
+.auth-card p,
+.auth-card label,
+.auth-card span,
+.auth-card .form-label {
+	color: white !important;
 }
 
 /* =========================================
@@ -126,7 +138,9 @@ body {
 }
 
 /* Inputs dark estilo dashboard */
-.login-input {
+.login-input,
+.login-input.form-control,
+.login-input.form-control-lg {
 	background: rgba(255, 255, 255, 0.08) !important;
 	border: 1px solid rgba(255, 255, 255, 0.15) !important;
 	color: white !important;
@@ -135,7 +149,7 @@ body {
 }
 
 .login-input::placeholder {
-	color: rgba(255, 255, 255, 0.6);
+	color: rgba(255, 255, 255, 0.6) !important;
 }
 
 .login-input:focus {
@@ -154,7 +168,7 @@ body {
    BOTÓN PRINCIPAL
 ========================================= */
 .login-submit-btn {
-	border-radius: 12px;
+	border-radius: 12px !important;
 	font-weight: 700;
 	transition: all 0.2s ease;
 }
@@ -193,3 +207,41 @@ body {
 		transform: rotate(360deg);
 	}
 }
+
+/* =========================================
+   ALERTAS
+========================================= */
+.login-error-alert {
+	background: rgba(220, 53, 69, 0.18) !important;
+	border: 1px solid rgba(220, 53, 69, 0.35) !important;
+	color: white !important;
+	backdrop-filter: blur(6px);
+}
+
+.login-success-alert {
+	background: rgba(25, 135, 84, 0.18) !important;
+	border: 1px solid rgba(25, 135, 84, 0.35) !important;
+	color: #b9ffd9 !important;
+	backdrop-filter: blur(6px);
+}
+
+/* =========================================
+   LINKS
+========================================= */
+.auth-card a {
+	text-decoration: none;
+}
+
+.auth-card a:hover {
+	text-decoration: underline;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+@media (max-width: 576px) {
+	.auth-card,
+	.auth-card.card {
+		max-width: 100%;
+		border-radius: 14px !important;
+	}}
