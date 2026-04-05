@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-04-03T22:57:12+0200",
+    date = "2026-04-04T16:43:38+0200",
     comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251118-1623, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
@@ -21,14 +21,14 @@ public class UsuarioMapperImpl implements UsuarioMapper {
 
         UsuarioDTO usuarioDTO = new UsuarioDTO();
 
-        usuarioDTO.setId( usuario.getId() );
-        usuarioDTO.setNombre( usuario.getNombre() );
         usuarioDTO.setEmail( usuario.getEmail() );
         usuarioDTO.setEstadoCuota( usuario.getEstadoCuota() );
-        usuarioDTO.setRol( usuario.getRol() );
         usuarioDTO.setFechaAlta( usuario.getFechaAlta() );
-        usuarioDTO.setTelefono( usuario.getTelefono() );
+        usuarioDTO.setId( usuario.getId() );
+        usuarioDTO.setNombre( usuario.getNombre() );
+        usuarioDTO.setRol( usuario.getRol() );
         usuarioDTO.setSexo( usuario.getSexo() );
+        usuarioDTO.setTelefono( usuario.getTelefono() );
 
         return usuarioDTO;
     }
@@ -41,11 +41,11 @@ public class UsuarioMapperImpl implements UsuarioMapper {
 
         Usuario usuario = new Usuario();
 
+        usuario.setEmail( dto.getEmail() );
         usuario.setId( dto.getId() );
         usuario.setNombre( dto.getNombre() );
-        usuario.setEmail( dto.getEmail() );
-        usuario.setTelefono( dto.getTelefono() );
         usuario.setSexo( dto.getSexo() );
+        usuario.setTelefono( dto.getTelefono() );
 
         return usuario;
     }
@@ -56,9 +56,9 @@ public class UsuarioMapperImpl implements UsuarioMapper {
             return;
         }
 
-        usuario.setNombre( dto.getNombre() );
         usuario.setEmail( dto.getEmail() );
-        usuario.setTelefono( dto.getTelefono() );
+        usuario.setNombre( dto.getNombre() );
         usuario.setSexo( dto.getSexo() );
+        usuario.setTelefono( dto.getTelefono() );
     }
 }
