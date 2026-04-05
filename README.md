@@ -13,9 +13,9 @@ Desarrollar una aplicación de gestión para un gimnasio de CrossFit que facilit
 - [x] Analizar los requisitos funcionales y técnicos necesarios para la gestión de un gimnasio de CrossFit.
 - [x] Diseñar la base de datos y la arquitectura del sistema.
 - [x] Implementar la aplicación utilizando tecnologías modernas.
-- [ ] Realizar pruebas funcionales y de usabilidad.
-- [ ] Evaluar la mejora de eficiencia frente al sistema manual actual.
-- [ ] Mejorar la experiencia de Usuario e interfaz de la aplicación.
+- [x] Realizar pruebas funcionales y de usabilidad.
+- [x] Evaluar la mejora de eficiencia frente al sistema manual actual.
+- [x] Mejorar la experiencia de Usuario e interfaz de la aplicación.
 
 ### Desarrollo de Entidades para el Back End y la Base de datos
 
